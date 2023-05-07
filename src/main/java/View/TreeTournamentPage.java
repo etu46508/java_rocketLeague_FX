@@ -1,5 +1,8 @@
 package View;
 
+import Model.Ranking;
+import Model.Team;
+import Model.Tournament;
 import View.Utility.ReturnMenuButton;
 import View.Utility.TitleOfPage;
 import javafx.beans.value.ChangeListener;
@@ -13,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 
 public class TreeTournamentPage {
@@ -81,6 +87,9 @@ public class TreeTournamentPage {
         ReturnMenuButton returnButton = new ReturnMenuButton();
         BorderPane eastPanel = returnButton.returnMenu(primaryStage, menuScene);
 
+        // Button lancer le tirage
+        Button drawButton = new Button("lancer le tirage");
+        contentPane.add(drawButton, 2, 4);
 
         // Ajout du titre et du contenu à la page
         root.setTop(titlePane);
@@ -121,6 +130,30 @@ public class TreeTournamentPage {
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String s, String newValue) {
             System.out.println(newValue);
+        }
+    }
+
+    public void draw (Tournament tournament){
+        Ranking[] ranking = tournament.getRanking();
+        if(ranking.length == tournament.getNbTeams()){
+            String output;
+            boolean contre = true;
+            int rnd;
+            ArrayList<Team> teams = new ArrayList<>();
+            for(int iTeam = 0; iTeam <= tournament.getNbTeams(); iTeam++){
+                teams.add(ranking[iTeam].getTeam());
+            }
+            while(teams.size() != 0){
+                rnd = new Random().nextInt(teams.size());
+                System.out.println(teams.get(rnd).getclub().getName());
+                if(contre){
+                    System.out.println(" contre ");
+                }
+                contre = !contre;
+                teams.remove(rnd);
+            }
+        }else{
+            System.out.println("trop ou pas assez d'inscrit");//modifier pour le sortir bien
         }
     }
 }
