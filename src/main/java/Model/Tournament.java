@@ -1,6 +1,8 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Tournament {
     private String wording;
@@ -129,4 +131,26 @@ public class Tournament {
         this.wording = wording;
     }
 
+    public void draw (){
+        if(ranking.length == nbTeams){
+            String output;
+            boolean contre = true;
+            int rnd;
+            ArrayList<Team> teams = new ArrayList<>();
+            for(int iTeam = 0; iTeam <= nbTeams; iTeam++){
+                teams.add(ranking[iTeam].getTeam());
+            }
+            while(teams.size() != 0){
+                rnd = new Random().nextInt(teams.size());
+                System.out.println(teams.get(rnd).getclub().getName());
+                if(contre){
+                    System.out.println(" contre ");
+                }
+                contre = !contre;
+                teams.remove(rnd);
+            }
+        }else{
+            System.out.println("trop ou pas assez d'inscrit");//modifier pour le sortir bien
+        }
+    }
 }

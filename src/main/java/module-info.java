@@ -1,8 +1,9 @@
-module view.projetjavafxv0 {
+module View {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
-    opens view.projetjavafxv0 to javafx.fxml;
-    exports view.projetjavafxv0;
+    opens View to javafx.fxml;
+    exports View;
 }
