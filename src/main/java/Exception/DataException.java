@@ -1,14 +1,12 @@
 package Exception;
 
 
-import View.Utility.ExceptionDisplay;
-
 public class DataException extends Exception{
     private String message;
 
     public DataException() {
         this.message = getMessage();
-        ExceptionDisplay display = new ExceptionDisplay(message);
+       //ExceptionDisplay display = new ExceptionDisplay(message);
     }
 
 

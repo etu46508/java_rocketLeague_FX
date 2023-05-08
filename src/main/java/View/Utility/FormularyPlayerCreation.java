@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class FormularyPlayerCreation {
-    private TextField pseudoTextField,surnameTextField, nameTextField,nationalityTextField;
+    private TextField pseudoTextField,surnameAndNameTextField,nationalityTextField;
     private Stage formularyStage;
     private ComboBox<Integer> yearComboBox,monthComboBox,dayComboBox;
     private CheckBox keybordButton;
@@ -30,17 +30,15 @@ public class FormularyPlayerCreation {
         pseudoTextField = new TextField();
         formularyLayout.addRow(0, pseudoLabel, pseudoTextField);
 
-        Label surnameLabel = new Label("Surname:");
-        surnameTextField = new TextField();
-        formularyLayout.addRow(1, surnameLabel, surnameTextField);
+        Label surnameAndNameLabel = new Label("Surname and name :");
+        surnameAndNameTextField = new TextField();
+        formularyLayout.addRow(1, surnameAndNameLabel, surnameAndNameTextField);
 
-        Label nameLabel = new Label("Name :");
-        nameTextField = new TextField();
-        formularyLayout.addRow(2, nameLabel, nameTextField);
+
 
         Label nationalityLabel = new Label("Nationality :");
         nationalityTextField = new TextField();
-        formularyLayout.addRow(3, nationalityLabel, nationalityTextField);
+        formularyLayout.addRow(2, nationalityLabel, nationalityTextField);
 
         var years = new ArrayList<Integer>();
         for (int year = LocalDate.now().getYear()-16; year >= 1950; year--) {
@@ -61,25 +59,25 @@ public class FormularyPlayerCreation {
         Label yearLabel = new Label("Year :");
         yearComboBox = new ComboBox<>();
         yearComboBox.getItems().addAll(years);
-        formularyLayout.add(yearLabel,0,4);
-        formularyLayout.add(yearComboBox,1,4);
+        formularyLayout.add(yearLabel,0,3);
+        formularyLayout.add(yearComboBox,1,3);
 
         Label monthLabel = new Label("Month :");
         monthComboBox = new ComboBox<>();
         monthComboBox.getItems().addAll(months);
-        formularyLayout.add(monthLabel,2,4);
-        formularyLayout.add(monthComboBox,3,4);
+        formularyLayout.add(monthLabel,2,3);
+        formularyLayout.add(monthComboBox,3,3);
 
         Label dayLabel = new Label("Day :");
         dayComboBox = new ComboBox<>();
         dayComboBox.getItems().addAll(days);
-        formularyLayout.add(dayLabel,4,4);
-        formularyLayout.add(dayComboBox,5,4);
+        formularyLayout.add(dayLabel,4,3);
+        formularyLayout.add(dayComboBox,5,3);
 
         Label playWithKaybord = new Label("Play with keybord : ");
         keybordButton = new CheckBox();
-        formularyLayout.add(playWithKaybord,0,5);
-        formularyLayout.add(keybordButton,1,5);
+        formularyLayout.add(playWithKaybord,0,4);
+        formularyLayout.add(keybordButton,1,4);
 
 
         Button validerButton = new Button("Valider");
@@ -102,12 +100,11 @@ public class FormularyPlayerCreation {
 
     private void validerformulary() {
         pseudoTextField.setStyle("-fx-border-color: transparent;");
-        surnameTextField.setStyle("-fx-border-color: transparent;");
-        nameTextField.setStyle("-fx-border-color: transparent;" );
+        surnameAndNameTextField.setStyle("-fx-border-color: transparent;");
         nationalityTextField.setStyle("-fx-border-color: transparent;" );
         String pseudo = pseudoTextField.getText();
-        String surname = surnameTextField.getText();
-        String name = nameTextField.getText();
+        String surnameAndName = surnameAndNameTextField.getText();
+
         String nationality = nationalityTextField.getText();
         Integer year = yearComboBox.getValue();
         Integer  month = monthComboBox.getValue();
@@ -126,14 +123,9 @@ public class FormularyPlayerCreation {
             pseudoTextField.setStyle("-fx-border-color: red;");
             formularyError = true;
         }
-        if (!surname.matches("[a-zA-Z]+") && surnameTextField != null) {
-            fieldEmpty.append("Error : the surname field isn't valid.\n");
-            surnameTextField.setStyle("-fx-border-color: red;");
-            formularyError = true;
-        }
-        if (!name.matches("[a-zA-Z]+") && nameTextField != null) {
-            fieldEmpty.append("Error : the name field isn't valid.\n");
-            nameTextField.setStyle("-fx-border-color: red;" );
+        if (!surnameAndName.matches("^[a-zA-ZÀ-ÖØ-öø-ſ]+(?:-[a-zA-ZÀ-ÖØ-öø-ſ]+)?(?: [a-zA-ZÀ-ÖØ-öø-ſ]+(?:-[a-zA-ZÀ-ÖØ-öø-ſ]+)?)*$") && surnameAndNameTextField != null) {
+            fieldEmpty.append("Error : the surnameAndName field isn't valid.\n");
+            surnameAndNameTextField.setStyle("-fx-border-color: red;");
             formularyError = true;
         }
         if (!nationality.matches("[a-zA-Z]+") && nationalityTextField != null) {
@@ -147,7 +139,7 @@ public class FormularyPlayerCreation {
         }
         if(!formularyError){
             var dateOfBirth = LocalDate.of(year, month, day);
-            System.out.println("Player : "+pseudo+" du name de :"+name+" "+surname+" né le " + dateOfBirth +(keybordBit ==1? " et est un joueur Clavier Souris":""));
+            System.out.println("Player : "+pseudo+" du nom de : "+surnameAndName+" né le " + dateOfBirth +(keybordBit ==1? " et est un joueur Clavier Souris":""));
             formularyStage.close();
         }else{
             System.out.println(fieldEmpty.toString());
@@ -166,5 +158,5 @@ public class FormularyPlayerCreation {
         }
     }
 
-    }
+}
 

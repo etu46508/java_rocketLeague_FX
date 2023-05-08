@@ -1,54 +1,38 @@
 package Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Player {
     private String pseudo;
     private String name;
-    private LocalDate birthday;
+    private Date birthday;
     private String nationality;
-    private String yearWorldChampion;
+    private Integer yearWorldChampion;
     private boolean playKeyboard;
-    private String streetAndNumber;
     private Locality home;
     private Team actualTeam;
 
-    public Player(String pseudo, String name, LocalDate birthday, String nationality, boolean playKeyboard, String streetAndNumber, Locality home, Team actualTeam){
-        setBirthday(birthday);
-        setHome(home);
-        setName(name);
+
+    public Player(String pseudo, String name, Date birthday, String nationality, int playKeyboard, Integer yearWorldChampion, Locality home, Team actualTeam){
         setPseudo(pseudo);
+        setName(name);
+        setBirthday(birthday);
         setNationality(nationality);
         setPlayKeyboard(playKeyboard);
-        setStreetAndNumber(streetAndNumber);
-        setActualTeam(actualTeam);
-        yearWorldChampion = "";
-    }
-    public Player(String pseudo, String name, LocalDate birthday, String nationality, boolean playKeyboard, String yearWorldChampion, String streetAndNumber, Locality home, Team actualTeam){
-        setBirthday(birthday);
-        setHome(home);
-        setName(name);
-        setPseudo(pseudo);
-        setNationality(nationality);
-        setPlayKeyboard(playKeyboard);
-        setStreetAndNumber(streetAndNumber);
-        setActualTeam(actualTeam);
         setYearWorldChampion(yearWorldChampion);
+        setHome(home);
+        setActualTeam(actualTeam);
     }
+
+
 
     public boolean isPlayKeyboard() {
         return playKeyboard;
     }
 
-    public void setStreetAndNumber(String streetAndNumber) {
-        this.streetAndNumber = streetAndNumber;
-    }
 
-    public String getStreetAndNumber() {
-        return streetAndNumber;
-    }
-
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -68,7 +52,7 @@ public class Player {
         return pseudo;
     }
 
-    public String getYearWorldChampion() {
+    public Integer getYearWorldChampion() {
         return yearWorldChampion;
     }
 
@@ -80,7 +64,7 @@ public class Player {
         this.actualTeam = actualTeam;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -96,15 +80,18 @@ public class Player {
         this.nationality = nationality;
     }
 
-    public void setPlayKeyboard(boolean playKeyboard) {
-        this.playKeyboard = playKeyboard;
+    public void setPlayKeyboard(int playKeyboard) {
+        if(playKeyboard == 1){
+            this.playKeyboard = true;
+        }
+        this.playKeyboard = false;
     }
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
 
-    public void setYearWorldChampion(String yearWorldChampion) {
+    public void setYearWorldChampion(Integer yearWorldChampion) {
         this.yearWorldChampion = yearWorldChampion;
     }
 

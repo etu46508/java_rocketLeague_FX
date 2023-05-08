@@ -1,31 +1,28 @@
 package Model;
 
 public class Team {
-    private String initialsClub;
+    private Integer number;
     private String nameCoach;
     private Club club;
     private Player [] players;
 
-    public Team(Club club, String nameCoach, boolean is2v2){
-        setclub(club);
+
+    public Team(Integer number, String nameCoach,Club club){
         setNameCoach(nameCoach);
-        setInitialsClub(is2v2);
-        if(is2v2){
-            players = new Player[2];
-        }else{
-            players = new Player[3];
-        }
-    }
-    public Team(Club club, String nameCoach, boolean is2v2, Player[] player){
         setclub(club);
-        setNameCoach(nameCoach);
-        setInitialsClub(is2v2);
-        setPlayers(player);
+        players = new Player[3];
     }
 
+    public Integer getNumber() {
+        return number;
+    }
 
-    public String getInitialsClub() {
-        return initialsClub;
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public Club getclub() {
@@ -44,9 +41,6 @@ public class Team {
         this.players = players;
     }
 
-    public void setInitialsClub(boolean is2v2) {
-        initialsClub = club + (is2v2 ? "2v2" : "3v3");
-    }
 
     public void setclub(Club club) {
         this.club = club;

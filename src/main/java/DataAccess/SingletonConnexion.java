@@ -8,7 +8,8 @@ public class SingletonConnexion   {
 
     private SingletonConnexion()throws DataException {
         try {
-            singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "Robinou2");
+            singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "Boulettedu13");
+            System.out.println("Succes");
         } catch (SQLException exception) {
             throw new DataException();
         }

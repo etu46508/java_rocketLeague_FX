@@ -3,17 +3,28 @@ package Model;
 import java.util.Date;
 
 public class Club {
+    private Integer serialNumber;
     private String name;
     private String CEO;
     private Date creationDate;
 
-    public Club(String name, String CEO, Date date){
+    public Club(Integer serialNumber,String name, String CEO, Date date){
+        setSerialNumber(serialNumber);
         setName(name);
         setCEO(CEO);
         setCreationDate(date);
     }
 
     //region getters & setters
+
+    public void setSerialNumber(Integer serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public Integer getSerialNumber() {
+        return serialNumber;
+    }
+
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
     public String getCEO() {return CEO;}
