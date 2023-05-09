@@ -145,7 +145,7 @@ public class TreeTournamentPage {
             }
             while(teams.size() != 0){
                 rnd = new Random().nextInt(teams.size());
-                System.out.println(teams.get(rnd).getclub().getName());
+                System.out.println(teams.get(rnd).getClub().getName());
                 if(contre){
                     System.out.println(" contre ");
                 }

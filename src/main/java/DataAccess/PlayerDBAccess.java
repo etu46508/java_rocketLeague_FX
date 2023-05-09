@@ -7,19 +7,41 @@ import Exception.PlayerException;
 import Exception.DataException;
 import Exception.DeletePlayerException;
 import Exception.UpdateException;
+import Exception.AddPlayerException;
 import Model.Team;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class PlayerDBAccess implements PlayerDAO {
-    private Connection connection;
+    private final Connection connection;
     public PlayerDBAccess ()throws DataException {
         connection = SingletonConnexion.getInstance();
     }
 
-    public Player getAPLayer() throws Exception{
+    public Player getAPLayer(String playerPseudo) throws Exception{
+        Player player;
+        try{
+            String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionhsip,"+
+                    "loc.number,loc.number, cityName,postalCode,country," +
+                    "team, wordingTeam, nameCoach," +
+                    "club.serialNumber,name,CEO,creationDate  "+
+                    "FROM Player player  " +
+                    "INNER JOIN Locality loc on player.home = loc.cityName " +
+                    "INNER JOIN Team team ON player.team = team.number" +
+                    "INNER JOIN Club club ON club.serialNumber = team.club" +
+                    "WHERE pseudo = ?";
 
-        return null;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, playerPseudo);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            player = createPlayer(data);
+
+        }catch (SQLException exception){
+            throw new PlayerException();
+
+        }
+        return player;
     }
 
     public ArrayList<Player> getAllPLayer() throws Exception{
@@ -31,7 +53,7 @@ public class PlayerDBAccess implements PlayerDAO {
                     "team, wordingTeam, nameCoach," +
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
-                    "INNER JOIN Locality loc on driver.home = loc.cityName " +
+                    "INNER JOIN Locality loc on player.home = loc.cityName " +
                     "INNER JOIN Team team ON player.team = team.number" +
                     "INNER JOIN Club club ON club.serialNumber = team.club" +
                     "order by player.team";
@@ -57,11 +79,44 @@ public class PlayerDBAccess implements PlayerDAO {
         return null;
     }
 
-    @Override
 
 
-    public void addPlayer(Player player) throws Exception{
 
+    public void addPlayer(Player player) throws AddPlayerException {
+    try{
+        String sql = "INSERT INTO Player(pseudo,firstNameLastName,birthdate,nationality,playKeybord,yearWorldchampionhsi,home,team )values(?,?,?,?,?,?,?,?)";
+        PreparedStatement statement = SingletonConnexion.getInstance().prepareStatement(sql);
+
+        statement.setString(1,player.getPseudo());
+        statement.setString(2,player.getName());
+        statement.setDate(3,new java.sql.Date(player.getBirthday().getDate()));
+        statement.setString(4,player.getNationality());
+        statement.setByte(5, (byte) (player.isPlayKeyboard()?1:0));
+        if(player.getYearWorldChampion() == null){
+            statement.setNull(6,Types.DECIMAL);
+        }else{
+            statement.setInt(6,player.getYearWorldChampion());
+        }
+        if(player.getHome() == null){
+            statement.setNull(7,Types.VARCHAR);
+        }else{
+            statement.setString(7,player.getHome().getWording());
+        }
+        if(player.getActualTeam() == null){
+            statement.setNull(8,Types.INTEGER);
+        }else{
+            statement.setInt(8,player.getActualTeam().getNumber());
+        }
+
+
+
+
+        statement.executeUpdate();
+        System.out.println("Player ajouté SAH");
+    }catch (Exception exception){
+        throw new AddPlayerException(player);
+
+    }
     }
 
     public void deletePlayer(String pseudoPlayer) throws Exception{
@@ -113,15 +168,31 @@ public class PlayerDBAccess implements PlayerDAO {
                     data.getString(2),
                     birthdate,
                     data.getString(4),
-                    data.getByte(5),
+                    (int) data.getByte(5),
                     data.getInt(6),
                     new Locality(data.getInt(8),data.getString(7),data.getString(9),data.getInt(10)),
-                    new Team(data.getInt(11),data.getString(12),
-                            new Club(data.getInt(14),data.getString(15), data.getString(16),creationDate)));
+                    new Team(data.getInt(11),data.getString(12),data.getString(13), new Club(data.getInt(14),data.getString(15), data.getString(16),creationDate)));
 
         }catch (SQLException exception){
         throw new SQLException();
     }
         return player;
+    }
+
+    public ArrayList<String> getAllPseudo() throws Exception{
+        ArrayList<String> playersPseudo = new ArrayList<String>();
+
+        try{
+            String sql = "Select pseudo FROM Player";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+            while(data.next()){
+                playersPseudo.add(data.getString(1));
+            }
+
+        }catch (SQLException exception) {
+            throw new SQLException();
+        }
+        return playersPseudo;
     }
 }

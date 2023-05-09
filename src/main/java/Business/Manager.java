@@ -24,4 +24,21 @@ public class Manager {
         unofficialTournamentAccess = new UnofficialTournamentDBAccess();
         rankingAccess = new RankingDBAccess();
     }
+
+
+
+    public void addPlayer(Player player) throws Exception{
+        playerAccess.addPlayer(player);
+    }
+
+    public ArrayList<String> getAllPseudo() throws Exception{
+        ArrayList<String> playerPseudo = playerAccess.getAllPseudo();
+        return playerPseudo;
+    }
+
+    public Player getAPLayer(String playerPseudo) throws Exception{
+        Player player = playerAccess.getAPLayer(playerPseudo);
+        return player;
+    }
+
 }

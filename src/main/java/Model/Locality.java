@@ -12,6 +12,11 @@ public class Locality {
         setPostalCode(postalCode);
         setWording(wording);
     }
+    public Locality(String wording, String country, int postalCode){
+        setCountry(country);
+        setPostalCode(postalCode);
+        setWording(wording);
+    }
 
     public void setNumber(Integer number){
         this.number = number;

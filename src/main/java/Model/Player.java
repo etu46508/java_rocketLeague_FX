@@ -4,17 +4,16 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class Player {
-    private String pseudo;
-    private String name;
+    private String pseudo,name,localityName;
     private Date birthday;
     private String nationality;
-    private Integer yearWorldChampion;
+    private Integer yearWorldChampion,teamNum;
     private boolean playKeyboard;
     private Locality home;
     private Team actualTeam;
 
 
-    public Player(String pseudo, String name, Date birthday, String nationality, int playKeyboard, Integer yearWorldChampion, Locality home, Team actualTeam){
+    public Player(String pseudo, String name, Date birthday, String nationality, Integer playKeyboard, Integer yearWorldChampion, Locality home, Team actualTeam){
         setPseudo(pseudo);
         setName(name);
         setBirthday(birthday);
@@ -24,7 +23,6 @@ public class Player {
         setHome(home);
         setActualTeam(actualTeam);
     }
-
 
 
     public boolean isPlayKeyboard() {
@@ -93,6 +91,14 @@ public class Player {
 
     public void setYearWorldChampion(Integer yearWorldChampion) {
         this.yearWorldChampion = yearWorldChampion;
+    }
+
+    public void setTeamNum(Integer teamNum) {
+        this.teamNum = teamNum;
+    }
+
+    public Integer getTeamNum() {
+        return teamNum;
     }
 
 }

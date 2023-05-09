@@ -2,15 +2,30 @@ package Model;
 
 public class Team {
     private Integer number;
+    private String wordingTeam;
     private String nameCoach;
     private Club club;
     private Player [] players;
 
 
-    public Team(Integer number, String nameCoach,Club club){
+    public Team(Integer number, String wordingTeam,String nameCoach,Club club){
+        setNumber(number);
+        setWordingTeam(wordingTeam);
+        setClub(club);
         setNameCoach(nameCoach);
-        setclub(club);
         players = new Player[3];
+    }
+
+    public void setWordingTeam(String wordingTeam) {
+        this.wordingTeam = wordingTeam;
+    }
+
+    public String getWordingTeam() {
+        return wordingTeam;
+    }
+
+    public Club getClub() {
+        return club;
     }
 
     public Integer getNumber() {
@@ -25,9 +40,6 @@ public class Team {
         this.club = club;
     }
 
-    public Club getclub() {
-        return club;
-    }
 
     public String getNameCoach() {
         return nameCoach;
@@ -42,9 +54,7 @@ public class Team {
     }
 
 
-    public void setclub(Club club) {
-        this.club = club;
-    }
+
 
     public void setNameCoach(String nameCoach) {
         this.nameCoach = nameCoach;

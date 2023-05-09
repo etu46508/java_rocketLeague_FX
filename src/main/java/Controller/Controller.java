@@ -10,4 +10,18 @@ public class Controller {
     public Controller() throws DataException {
         manager = new Manager();
     }
+
+    public void addPlayer(Player player) throws Exception{
+        manager.addPlayer(player);
+    }
+
+    public ArrayList<String> getAllPseudo() throws Exception{
+        ArrayList<String> playerPseudo = manager.getAllPseudo();
+        return playerPseudo;
+    }
+
+    public Player getAPLayer(String playerPseudo) throws Exception{
+        Player player = manager.getAPLayer(playerPseudo);
+        return player;
+    }
 }
