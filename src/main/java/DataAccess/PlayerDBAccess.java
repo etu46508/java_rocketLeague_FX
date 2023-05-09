@@ -21,8 +21,9 @@ public class PlayerDBAccess implements PlayerDAO {
     public Player getAPLayer(String playerPseudo) throws Exception{
         Player player;
         try{
+
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionhsip,"+
-                    "loc.number,loc.number, cityName,postalCode,country," +
+                    "loc.number, cityName,postalCode,country," +
                     "team, wordingTeam, nameCoach," +
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
@@ -39,7 +40,6 @@ public class PlayerDBAccess implements PlayerDAO {
 
         }catch (SQLException exception){
             throw new PlayerException();
-
         }
         return player;
     }
@@ -49,7 +49,7 @@ public class PlayerDBAccess implements PlayerDAO {
         try{
             Player player;
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionhsip,"+
-                    "loc.number,loc.number, cityName,postalCode,country," +
+                    "loc.number, cityName,postalCode,country," +
                     "team, wordingTeam, nameCoach," +
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
