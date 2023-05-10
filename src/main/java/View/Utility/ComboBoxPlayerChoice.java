@@ -65,14 +65,28 @@ public class ComboBoxPlayerChoice {
         playerComboBox.setOnAction(event -> validationButton.setDisable(false));
 
         if(Objects.equals(nextOpen, "update")){
-            FormularyPlayerCreation formularyUpdate = new FormularyPlayerCreation();
             validationButton.setOnAction(event -> {
                 try {
+                    FormularyPlayerCreation formularyUpdate = new FormularyPlayerCreation();
                     formularyUpdate.openFormularyUpdate(primaryStage,playerComboBox.getValue());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             });
+        }
+        if(Objects.equals(nextOpen, "delete")){
+            validationButton.setOnAction(event -> {
+                try {
+                    VerificationPlayerDeletion verification = new VerificationPlayerDeletion();
+                    verification.openWindowVerification(primaryStage,playerComboBox.getValue());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        }
+        if(Objects.equals(nextOpen, "read")){
+            System.out.println("read");
         }
 
 
@@ -85,7 +99,7 @@ public class ComboBoxPlayerChoice {
 
         Scene choicePlayerScene = new Scene(pageLayout);
         choicePlayerStage.initModality(Modality.APPLICATION_MODAL);
-
+        choicePlayerStage.setTitle("Combo box player");
         choicePlayerStage.setScene(choicePlayerScene);
         choicePlayerStage.initOwner(primaryStage);
         choicePlayerStage.showAndWait();

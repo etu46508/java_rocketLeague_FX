@@ -1,7 +1,6 @@
 package Model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class Player {
     private String pseudo,name,homeName;
@@ -117,8 +116,10 @@ public class Player {
     public void setPlayKeyboard(int bitKeyboard) {
         if(bitKeyboard == 1){
             this.playKeyboard = true;
+        }else{
+            this.playKeyboard = false;
         }
-        this.playKeyboard = false;
+
     }
 
     public Boolean getPlayKeyboard(){
@@ -146,5 +147,10 @@ public class Player {
 
     public String getHomeName() {
         return homeName;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

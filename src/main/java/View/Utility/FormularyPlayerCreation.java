@@ -26,6 +26,7 @@ public class FormularyPlayerCreation {
     private Integer keyboardBit;
     private final Controller controller;
     private final ArrayList<Integer> years,months,days;
+    private ComboBox<String> localitiesComboBox, teamComboBox;
 
     public FormularyPlayerCreation() throws DataException {
         controller = new Controller();
@@ -45,7 +46,7 @@ public class FormularyPlayerCreation {
     }
 
 
-    public void openFormularyAdd(Stage primaryStage) {
+    public void openFormularyAdd(Stage primaryStage) throws Exception {
 
         GridPane formularyLayout = new GridPane();
         formularyLayout.setAlignment(Pos.CENTER);
@@ -53,31 +54,21 @@ public class FormularyPlayerCreation {
         formularyLayout.setVgap(20);
         formularyLayout.setPadding(new Insets(20));
 
-
-        //
         Label pseudoLabel = new Label("Pseudo :");
         pseudoTextField = new TextField();
         formularyLayout.addRow(0, pseudoLabel, pseudoTextField);
-
-
 
         Label surnameAndNameLabel = new Label("Surname and name :");
         surnameAndNameTextField = new TextField();
         formularyLayout.addRow(1, surnameAndNameLabel, surnameAndNameTextField);
 
-
         Label nationalityLabel = new Label("Nationality :");
         nationalityTextField = new TextField();
         formularyLayout.addRow(2, nationalityLabel, nationalityTextField);
 
-
-        // Créer les ComboBox pour l'année, le mois et le jour
-        // activation des comboBox
-
         Label yearLabel = new Label("Year :");
         yearComboBox = new ComboBox<>();
         yearComboBox.getItems().addAll(years);
-
 
         formularyLayout.add(yearLabel,0,3);
         formularyLayout.add(yearComboBox,1,3);
@@ -86,14 +77,12 @@ public class FormularyPlayerCreation {
         monthComboBox = new ComboBox<>();
         monthComboBox.getItems().addAll(months);
 
-
         formularyLayout.add(monthLabel,2,3);
         formularyLayout.add(monthComboBox,3,3);
 
         Label dayLabel = new Label("Day :");
         dayComboBox = new ComboBox<>();
         dayComboBox.getItems().addAll(days);
-
 
         formularyLayout.add(dayLabel,4,3);
         formularyLayout.add(dayComboBox,5,3);
@@ -105,24 +94,30 @@ public class FormularyPlayerCreation {
 
         Label localityHome = new Label("Town of residence : ");
         formularyLayout.add(localityHome,0,5);
+        localitiesComboBox = new ComboBox<>();
+        localitiesComboBox.getItems().addAll(controller.getAllNameLocalities());
+        formularyLayout.add(localitiesComboBox,1,5);
 
         Label team = new Label("Team : ");
         formularyLayout.add(team,0,6);
 
-
         Button validerButton = new Button("Valider");
+
+        Button returnButton = new Button("Return");
+        returnButton.setOnAction(e -> formularyStage.close());
+        formularyLayout.add(returnButton,10,10);
+
         validerButton.setOnAction(e -> {
             try {
-                validationformulary();
+                Player newPlayer = validationformulary();
+                controller.addPlayer(newPlayer);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
         });
         formularyLayout.add(validerButton,0,10);
 
-        Button returnButton = new Button("Return");
-        returnButton.setOnAction(e -> formularyStage.close());
-        formularyLayout.add(returnButton,10,10);
+
 
         Scene formularyScene = new Scene(formularyLayout);
         formularyStage = new Stage();
@@ -138,7 +133,7 @@ public class FormularyPlayerCreation {
 
     
 
-    private void validationformulary() throws Exception {
+    private Player validationformulary(){
         pseudoTextField.setStyle("-fx-border-color: transparent;");
         surnameAndNameTextField.setStyle("-fx-border-color: transparent;");
         nationalityTextField.setStyle("-fx-border-color: transparent;");
@@ -146,9 +141,11 @@ public class FormularyPlayerCreation {
         String surnameAndName = surnameAndNameTextField.getText();
 
         String nationality = nationalityTextField.getText();
+        String locality = localitiesComboBox.getValue();
         Integer year = yearComboBox.getValue();
         Integer month = monthComboBox.getValue();
         Integer day = dayComboBox.getValue();
+
 
         StringBuilder fieldEmpty = new StringBuilder();
         boolean formularyError = false;
@@ -177,16 +174,22 @@ public class FormularyPlayerCreation {
             fieldEmpty.append("Error : the birthdate isn't valid.\n");
             formularyError = true;
         }
+        if(locality == null){
+            fieldEmpty.append("Error : the locality isn't valid.\n");
+            formularyError = true;
+        }
         if (!formularyError) {
-
             Date dateOfBirth = new Date(year.intValue(), month.intValue(), day.intValue());
             System.out.println("Player : " + pseudo + " du nom de : " + surnameAndName + " né le " + dateOfBirth + (keyboardBit == 1 ? " et est un joueur Clavier Souris" : ""));
-            Player newPlayer = new Player(pseudo, surnameAndName, dateOfBirth, nationality, keyboardBit, null,"Bruxelles",null);
-            controller.addPlayer(newPlayer);
-
+            Player newPlayer = new Player(pseudo, surnameAndName, dateOfBirth, nationality, keyboardBit, null,locality,null);
             formularyStage.close();
+            return newPlayer;
+
+        }else{
+            System.out.println(fieldEmpty.toString());
+            return null;
         }
-        System.out.println(fieldEmpty.toString());
+
 
     }
 
@@ -203,27 +206,20 @@ public class FormularyPlayerCreation {
         Label pseudoLabel = new Label("Pseudo :");
         pseudoTextField = new TextField();
         formularyLayout.addRow(0, pseudoLabel, pseudoTextField);
-        pseudoTextField.setText(playerSquelette.getPseudo());
 
 
         Label surnameAndNameLabel = new Label("Surname and name :");
         surnameAndNameTextField = new TextField();
         formularyLayout.addRow(1, surnameAndNameLabel, surnameAndNameTextField);
-        surnameAndNameTextField.setText(playerSquelette.getName());
+
 
         Label nationalityLabel = new Label("Nationality :");
         nationalityTextField = new TextField();
         formularyLayout.addRow(2, nationalityLabel, nationalityTextField);
-        nationalityTextField.setText(playerSquelette.getNationality());
-
-
-        // Créer les ComboBox pour l'année, le mois et le jour
-        // activation des comboBox
 
         Label yearLabel = new Label("Year :");
         yearComboBox = new ComboBox<>();
         yearComboBox.getItems().addAll(years);
-        //yearComboBox.setValue(player.getYearOfBirth());
 
         formularyLayout.add(yearLabel,0,3);
         formularyLayout.add(yearComboBox,1,3);
@@ -231,7 +227,6 @@ public class FormularyPlayerCreation {
         Label monthLabel = new Label("Month :");
         monthComboBox = new ComboBox<>();
         monthComboBox.getItems().addAll(months);
-        //monthComboBox.setValue(player.getMonthOfBirth());
 
         formularyLayout.add(monthLabel,2,3);
         formularyLayout.add(monthComboBox,3,3);
@@ -239,29 +234,36 @@ public class FormularyPlayerCreation {
         Label dayLabel = new Label("Day :");
         dayComboBox = new ComboBox<>();
         dayComboBox.getItems().addAll(days);
-        //dayComboBox.setValue(player.getDayOfBirth());
 
         formularyLayout.add(dayLabel,4,3);
         formularyLayout.add(dayComboBox,5,3);
-
 
         Label playWithKeyboard = new Label("Play with keyboard : ");
         keyboardButton = new CheckBox();
         formularyLayout.add(playWithKeyboard,0,4);
         formularyLayout.add(keyboardButton,1,4);
-        keyboardButton.setSelected(playerSquelette.getPlayKeyboard());
 
         Label localityHome = new Label("Town of residence : ");
         formularyLayout.add(localityHome,0,5);
+        localitiesComboBox = new ComboBox<>();
+        localitiesComboBox.getItems().addAll(controller.getAllNameLocalities());
+        formularyLayout.add(localitiesComboBox,1,5);
 
         Label team = new Label("Team : ");
         formularyLayout.add(team,0,6);
 
 
         Button validerButton = new Button("Valider");
+
+        Button returnButton = new Button("Return");
+        returnButton.setOnAction(e -> formularyStage.close());
+        formularyLayout.add(returnButton,10,10);
+
         validerButton.setOnAction(e -> {
             try {
-                validationformulary();
+                Player newPlayer = validationformulary();
+                controller.updatePlayer(newPlayer,pseudoPlayer);
+
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -269,9 +271,11 @@ public class FormularyPlayerCreation {
         formularyLayout.add(validerButton,0,10);
 
 
-        Button returnButton = new Button("Return");
-        returnButton.setOnAction(e -> formularyStage.close());
-        formularyLayout.add(returnButton,10,10);
+
+        pseudoTextField.setText(playerSquelette.getPseudo());
+        surnameAndNameTextField.setText(playerSquelette.getName());
+        nationalityTextField.setText(playerSquelette.getNationality());
+        keyboardButton.setSelected(playerSquelette.getPlayKeyboard());
 
 
         Scene formularyScene = new Scene(formularyLayout);

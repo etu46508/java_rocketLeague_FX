@@ -70,10 +70,30 @@ public class PagePlayerCRUD  {
                 throw new RuntimeException(e);
             }
         });
-        ComboBoxPlayerChoice choicePlayer = new ComboBoxPlayerChoice();
+
+
+        button2.setOnAction(event -> {
+            try {
+                ComboBoxPlayerChoice choicePlayer = new ComboBoxPlayerChoice();
+                choicePlayer.openChoicePlayer(primaryStage,"read");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         button3.setOnAction(event -> {
             try {
+                ComboBoxPlayerChoice choicePlayer = new ComboBoxPlayerChoice();
                 choicePlayer.openChoicePlayer(primaryStage,"update");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        button4.setOnAction(event -> {
+            try {
+                ComboBoxPlayerChoice choicePlayer = new ComboBoxPlayerChoice();
+                choicePlayer.openChoicePlayer(primaryStage,"delete");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -88,8 +108,4 @@ public class PagePlayerCRUD  {
         button.setStyle("-fx-background-color: darkgrey; -fx-text-fill: white; -fx-border-color: black; -fx-font-size: 20px");
         return button;
     }
-
-
-
-
 }

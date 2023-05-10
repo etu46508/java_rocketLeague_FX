@@ -3,8 +3,7 @@ import Business.Manager;
 import Model.*;
 import Exception.DataException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+
 public class Controller {
     private final Manager manager;
     public Controller() throws DataException {
@@ -23,7 +22,18 @@ public class Controller {
         return manager.getAPLayer(playerPseudo);
     }
 
+    public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
+        manager.updatePlayer(player,pseudoPlayer);
+    }
     public void deletePlayer(String pseudoPlayer) throws Exception{
         manager.deletePlayer(pseudoPlayer);
     }
+
+
+    public ArrayList<String> getAllNameLocalities() throws Exception{
+        return manager.getAllNameLocalities();
+
+    }
+
+
 }

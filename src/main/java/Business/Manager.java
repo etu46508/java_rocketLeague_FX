@@ -4,8 +4,6 @@ import DataAccess.*;
 import Model.*;
 import Exception.DataException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 public class Manager {
     private  final LocalityDAO localityAccess;
     private final ClubDAO clubAccess;
@@ -38,8 +36,19 @@ public class Manager {
     public Player getAPLayer(String playerPseudo) throws Exception{
         return playerAccess.getAPLayer(playerPseudo);
     }
+
+
+    public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
+        playerAccess.updatePlayer(player,pseudoPlayer);
+    }
+
     public void deletePlayer(String pseudoPlayer) throws Exception{
         playerAccess.deletePlayer(pseudoPlayer);
+    }
+
+
+    public ArrayList<String> getAllNameLocalities() throws Exception{
+        return localityAccess.getAllNameLocalities();
     }
 
 }
