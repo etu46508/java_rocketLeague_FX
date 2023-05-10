@@ -63,7 +63,13 @@ public class PagePlayerCRUD  {
 
         // ajout au bouton
         FormularyPlayerCreation formulary = new FormularyPlayerCreation();
-        button1.setOnAction(event -> formulary. openFormulary(primaryStage,null));
+        button1.setOnAction(event -> {
+            try {
+                formulary. openFormulary(primaryStage,"");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         button3.setOnAction(event -> {
             try {

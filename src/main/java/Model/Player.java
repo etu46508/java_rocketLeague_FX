@@ -8,6 +8,7 @@ public class Player {
     private Date birthday;
     private String nationality;
     private Integer yearWorldChampion,teamNum;
+    private int dayOfBirth,monthOfBirth,yearOfBirth;
     private boolean playKeyboard;
     private Locality home;
     private Team actualTeam;
@@ -33,9 +34,6 @@ public class Player {
         setHomeName(homeName);
         setTeamNum(teamNum);
     }
-
-
-
 
     public boolean isPlayKeyboard() {
         return playKeyboard;
@@ -75,6 +73,33 @@ public class Player {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+        setDayOfBirth(birthday.getDay());
+        setMonthOfBirth(birthday.getMonth());
+        setYearOfBirth(birthday.getYear());
+    }
+
+    public void setDayOfBirth(Integer dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public void setMonthOfBirth(Integer monthOfBirth) {
+        this.monthOfBirth = monthOfBirth;
+    }
+
+    public void setYearOfBirth(Integer yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public int getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public int getMonthOfBirth() {
+        return monthOfBirth;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
     public void setHome(Locality home) {

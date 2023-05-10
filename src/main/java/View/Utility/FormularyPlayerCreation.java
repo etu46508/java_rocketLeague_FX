@@ -17,6 +17,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import Exception.DataException;
 
 
@@ -30,8 +32,8 @@ public class FormularyPlayerCreation {
     private String pseudoPlayer;
     private Player player;
     private Controller controller;
-
     private ArrayList<Integer> years,months,days;
+    private Player playerSquelette;
     public FormularyPlayerCreation() throws DataException {
         controller = new Controller();
 
@@ -50,9 +52,9 @@ public class FormularyPlayerCreation {
     }
 
 
-    public void  openFormulary(Stage primaryStage,String pseudoPlayer) {
-        if(pseudoPlayer == null){
-
+    public void  openFormulary(Stage primaryStage,String pseudoPlayer) throws Exception {
+        if(!Objects.equals(pseudoPlayer, "")){
+            playerSquelette = controller.getAPLayer(pseudoPlayer);
         }
         GridPane formularyLayout = new GridPane();
         formularyLayout.setAlignment(Pos.CENTER);
@@ -61,19 +63,27 @@ public class FormularyPlayerCreation {
         formularyLayout.setPadding(new Insets(20));
 
         Label pseudoLabel = new Label("Pseudo :");
-        pseudoTextField = new TextField();
+        if(playerSquelette != null){
+            pseudoTextField = new TextField(playerSquelette.getPseudo());
+        }else{
+            pseudoTextField = new TextField();
+        }
+
         formularyLayout.addRow(0, pseudoLabel, pseudoTextField);
 
         Label surnameAndNameLabel = new Label("Surname and name :");
+        if(playerSquelette != null){
+            surnameAndNameTextField = new TextField(playerSquelette.getPseudo());
+        }
         surnameAndNameTextField = new TextField();
         formularyLayout.addRow(1, surnameAndNameLabel, surnameAndNameTextField);
 
-
-
         Label nationalityLabel = new Label("Nationality :");
+        if(playerSquelette != null){
+            nationalityTextField = new TextField(playerSquelette.getNationality());
+        }
         nationalityTextField = new TextField();
         formularyLayout.addRow(2, nationalityLabel, nationalityTextField);
-
 
 
         // Créer les ComboBox pour l'année, le mois et le jour
@@ -82,18 +92,30 @@ public class FormularyPlayerCreation {
         Label yearLabel = new Label("Year :");
         yearComboBox = new ComboBox<>();
         yearComboBox.getItems().addAll(years);
+        if(playerSquelette != null){
+            yearComboBox.setValue(player.getYearOfBirth());
+        }
+
         formularyLayout.add(yearLabel,0,3);
         formularyLayout.add(yearComboBox,1,3);
 
         Label monthLabel = new Label("Month :");
         monthComboBox = new ComboBox<>();
         monthComboBox.getItems().addAll(months);
+        if(playerSquelette != null){
+            monthComboBox.setValue(player.getMonthOfBirth());
+        }
+
         formularyLayout.add(monthLabel,2,3);
         formularyLayout.add(monthComboBox,3,3);
 
         Label dayLabel = new Label("Day :");
         dayComboBox = new ComboBox<>();
         dayComboBox.getItems().addAll(days);
+        if(playerSquelette != null){
+            dayComboBox.setValue(player.getDayOfBirth());
+        }
+
         formularyLayout.add(dayLabel,4,3);
         formularyLayout.add(dayComboBox,5,3);
 
@@ -160,15 +182,27 @@ public class FormularyPlayerCreation {
 
 
             Button returnButton = new Button("Return");
-            validationButton.setOnAction(e ->
-                    openFormulary(choicePlayerStage,playerComboBox.getSelectionModel().getSelectedItem()));
+
+        returnButton.setOnAction(e -> choicePlayerStage.close());
+        validationButton.setOnAction(e ->
+        {
+            try {
+                String pseudoPlayer = playerComboBox.getSelectionModel().getSelectedItem();
+                FormularyPlayerCreation formularyUpdate = new FormularyPlayerCreation();
+                System.out.println(playerComboBox.getSelectionModel().getSelectedItem());
+                formularyUpdate.openFormulary(primaryStage,pseudoPlayer);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
 
             buttonLayout.setRight(returnButton);
             buttonLayout.setLeft(validationButton);
 
             pageLayout.setTop(comboBoxLayout);
             pageLayout.setBottom(buttonLayout);
-            returnButton.setOnAction(e -> choicePlayerStage.close());
+
 
 
             Scene choicePlayerScene = new Scene(pageLayout);
@@ -178,6 +212,8 @@ public class FormularyPlayerCreation {
             choicePlayerStage.setScene(choicePlayerScene);
             choicePlayerStage.initOwner(primaryStage);
             choicePlayerStage.showAndWait();
+
+
 
 
 
@@ -257,7 +293,6 @@ public class FormularyPlayerCreation {
         Button validationButton;
         private PlayerComboBoxListener(Button validationButton){
             this.validationButton = validationButton;
-
         }
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String s, String value) {
