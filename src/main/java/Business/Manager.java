@@ -38,5 +38,8 @@ public class Manager {
     public Player getAPLayer(String playerPseudo) throws Exception{
         return playerAccess.getAPLayer(playerPseudo);
     }
+    public void deletePlayer(String pseudoPlayer) throws Exception{
+        playerAccess.deletePlayer(pseudoPlayer);
+    }
 
 }

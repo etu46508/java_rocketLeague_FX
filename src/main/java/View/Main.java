@@ -16,34 +16,44 @@ public class Main {
         Connection singletonConnexion;
         StringBuilder playersPseudo;
         ArrayList<String> players;
-        Controller controller ;
-        Player player;
+        Controller controller;
+        //Player player;
         try {
             controller = new Controller();
             /*
             playersPseudo = new StringBuilder();
-            Date birth = new Date(2002,4,5);
-            controller.addPlayer(new Player("LeTysme","Leonard robin",birth,"belge",0,2002,new Locality("Andenne","Belgique",5350),new Team(1,"agagg","azgaga",new Club(1,"Vitality","neo",birth))));
 
             players = controller.getAllPseudo();
             for (String player : players) {
                 playersPseudo.append(player);
-                */
+            }
+            */
 
+            /*
+            Date birth = new Date(2002, 4, 5);
+            controller.addPlayer(new Player("LeTysme", "Leonard robin", birth, "belge", 0, 2002, "Paris",1));
+            */
+
+            /*
             String pseudoPlayer = "FlamE";
             System.out.println(pseudoPlayer);
             player = controller.getAPLayer(pseudoPlayer);
 
             System.out.println(player.getName());
-            }catch (Exception e) {
+             */
+
+            controller.deletePlayer("LeTysme");
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+}
 
 
-        }
+
         //System.out.println(playersPseudo.toString());
 
-}
+
 
 //singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "Boulettedu13");
  //       System.out.println("Succes");

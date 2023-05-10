@@ -22,4 +22,8 @@ public class Controller {
     public Player getAPLayer(String playerPseudo) throws Exception{
         return manager.getAPLayer(playerPseudo);
     }
+
+    public void deletePlayer(String pseudoPlayer) throws Exception{
+        manager.deletePlayer(pseudoPlayer);
+    }
 }

@@ -1,26 +1,20 @@
 package Model;
 
 public class Locality {
-    private Integer number;
+
     private String wording;
     private String country;
     private int postalCode;
 
-    public Locality(Integer number,String wording,int postalCode,String country){
-        setNumber(number);
-        setCountry(country);
-        setPostalCode(postalCode);
-        setWording(wording);
-    }
-    public Locality(String wording, String country, int postalCode){
+    public Locality(String wording,int postalCode,String country){
+
         setCountry(country);
         setPostalCode(postalCode);
         setWording(wording);
     }
 
-    public void setNumber(Integer number){
-        this.number = number;
-    }
+
+
     public void setWording(String wording) {
         this.wording = wording;
     }
@@ -44,8 +38,6 @@ public class Locality {
     public String getCountry() {
         return country;
     }
-
-    public Integer getNumber() {return number;}
 
 
 }
