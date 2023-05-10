@@ -1,9 +1,6 @@
 package View.Utility;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,19 +18,19 @@ import java.util.Objects;
 import Controller.Controller;
 import Exception.DataException;
 public class ComboBoxPlayerChoice {
-    private Controller controller;
+    private final Controller controller;
     Stage choicePlayerStage;
-
-    private String pseudoPlayer;
     private ComboBox<String> playerComboBox;
     public ComboBoxPlayerChoice() throws DataException {
         controller = new Controller();
+        choicePlayerStage = new Stage();
 
     }
 
 
 
-    public void openChoicePlayer(Stage primaryStage) throws Exception {
+    public void openChoicePlayer(Stage primaryStage,String nextOpen) throws Exception {
+
         ArrayList<String> pseudoPlayers = controller.getAllPseudo();
 
         BorderPane pageLayout = new BorderPane();
@@ -45,7 +42,7 @@ public class ComboBoxPlayerChoice {
         comboBoxLayout.setPadding(new Insets(20));
 
         Label pseudoChoice = new Label("Choose the player : ");
-        ComboBox<Object> playerComboBox = new ComboBox<>();
+        playerComboBox = new ComboBox<>();
         playerComboBox.getItems().addAll(pseudoPlayers);
         playerComboBox.getSelectionModel().select("");
 
@@ -56,15 +53,8 @@ public class ComboBoxPlayerChoice {
         Button validationButton = new Button("Validation");
         validationButton.setDisable(true);
 
-        PlayerComboBoxListener playerComboBoxListener = new PlayerComboBoxListener(validationButton);
-        //playerComboBox.valueProperty().addListener(playerComboBoxListener);
-
-        //ValidationButtonListener validationButtonListener = new ValidationButtonListener(primaryStage,playerComboBox.getSelectionModel().getSelectedItem());
-        // validationButton.setOnAction(validationButtonListener);
-
         Button returnButton = new Button("Return");
 
-        returnButton.setOnAction(event -> choicePlayerStage.close());
 
         buttonLayout.setRight(returnButton);
         buttonLayout.setLeft(validationButton);
@@ -72,45 +62,39 @@ public class ComboBoxPlayerChoice {
         pageLayout.setTop(comboBoxLayout);
         pageLayout.setBottom(buttonLayout);
 
+        playerComboBox.setOnAction(event -> validationButton.setDisable(false));
+
+        if(Objects.equals(nextOpen, "update")){
+            FormularyPlayerCreation formularyUpdate = new FormularyPlayerCreation();
+            validationButton.setOnAction(event -> {
+                try {
+                    formularyUpdate.openFormularyUpdate(primaryStage,playerComboBox.getValue());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+
+
+        returnButton.setOnAction(event -> choicePlayerStage.close());
+
+        System.out.println(playerComboBox.getSelectionModel().getSelectedItem());
+
+
+
         Scene choicePlayerScene = new Scene(pageLayout);
-        choicePlayerStage = new Stage();
         choicePlayerStage.initModality(Modality.APPLICATION_MODAL);
 
         choicePlayerStage.setScene(choicePlayerScene);
         choicePlayerStage.initOwner(primaryStage);
         choicePlayerStage.showAndWait();
-    }
 
-    private class ValidationButtonListener implements EventHandler<ActionEvent> {
-        private Stage primaryStage;
-        private String pseudoPlayer;
-        private FormularyPlayerCreation formularyUpdate;
 
-        public ValidationButtonListener(Stage primaryStage,String pseudoPlayer) throws DataException {
-            this.primaryStage = primaryStage;
-            this.pseudoPlayer = pseudoPlayer;
-            this.formularyUpdate = new FormularyPlayerCreation();
-        }
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            try {
-                formularyUpdate.openFormularyUpdate(primaryStage,playerComboBox.getSelectionModel().getSelectedItem());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
-    private class PlayerComboBoxListener implements ChangeListener<String> {
-        Button validationButton;
-        private PlayerComboBoxListener(Button validationButton){
-            this.validationButton = validationButton;
-        }
-        @Override
-        public void changed(ObservableValue<? extends String> observableValue, String s, String value) {
-            if(!Objects.equals(value, "")){
-                validationButton.setDisable(false);
-            }
-        }
+
+
+
     }
 }
+

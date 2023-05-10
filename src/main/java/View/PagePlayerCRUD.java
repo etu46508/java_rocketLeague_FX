@@ -23,8 +23,6 @@ public class PagePlayerCRUD  {
         StackPane titlePane = title.createTitle("Interface CRUD", 40,"page");
 
 
-
-
         // Création du espace bouton
         GridPane contentPane = new GridPane();
         contentPane.setAlignment(Pos.CENTER);
@@ -75,7 +73,7 @@ public class PagePlayerCRUD  {
         ComboBoxPlayerChoice choicePlayer = new ComboBoxPlayerChoice();
         button3.setOnAction(event -> {
             try {
-                choicePlayer.openChoicePlayer(primaryStage);
+                choicePlayer.openChoicePlayer(primaryStage,"update");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

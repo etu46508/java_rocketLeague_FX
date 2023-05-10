@@ -1,25 +1,19 @@
 package View.Utility;
 
 import Controller.Controller;
-import DataAccess.PlayerDBAccess;
-import Model.Locality;
 import Model.Player;
-import Model.Team;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 import Exception.DataException;
 
@@ -30,34 +24,28 @@ public class FormularyPlayerCreation {
     private ComboBox<Integer> yearComboBox,monthComboBox,dayComboBox;
     private CheckBox keyboardButton;
     private Integer keyboardBit;
-    private String pseudoPlayer;
-    private Player player;
-    private Controller controller;
-    private ArrayList<Integer> years,months,days;
-    private Player playerSquelette;
+    private final Controller controller;
+    private final ArrayList<Integer> years,months,days;
+
     public FormularyPlayerCreation() throws DataException {
         controller = new Controller();
 
-        this.years = new ArrayList<Integer>();
+        this.years = new ArrayList<>();
         for (int year = 2023-16; year >= 1950; year--) {
             years.add(year);
         }
-        this.months = new ArrayList<Integer>();
+        this.months = new ArrayList<>();
         for (int month = 1; month <= 12; month++) {
             months.add(month);
         }
-        this.days = new ArrayList<Integer>();
+        this.days = new ArrayList<>();
         for (int day = 1; day <= 31; day++) {
             days.add(day);
         }
     }
 
 
-    public void openFormularyAdd(Stage primaryStage) throws Exception {
-        if(!pseudoPlayer.isEmpty()){
-            playerSquelette = controller.getAPLayer(pseudoPlayer);
-            System.out.println(player.getName());
-        }
+    public void openFormularyAdd(Stage primaryStage) {
 
         GridPane formularyLayout = new GridPane();
         formularyLayout.setAlignment(Pos.CENTER);
@@ -65,13 +53,13 @@ public class FormularyPlayerCreation {
         formularyLayout.setVgap(20);
         formularyLayout.setPadding(new Insets(20));
 
+
+        //
         Label pseudoLabel = new Label("Pseudo :");
         pseudoTextField = new TextField();
         formularyLayout.addRow(0, pseudoLabel, pseudoTextField);
 
-        if(playerSquelette != null  ){
-            pseudoTextField.setText(playerSquelette.getPseudo());
-        }
+
 
         Label surnameAndNameLabel = new Label("Surname and name :");
         surnameAndNameTextField = new TextField();
@@ -81,9 +69,7 @@ public class FormularyPlayerCreation {
         Label nationalityLabel = new Label("Nationality :");
         nationalityTextField = new TextField();
         formularyLayout.addRow(2, nationalityLabel, nationalityTextField);
-        if(playerSquelette != null  ){
-            nationalityTextField.setText(playerSquelette.getNationality());
-        }
+
 
         // Créer les ComboBox pour l'année, le mois et le jour
         // activation des comboBox
@@ -91,9 +77,7 @@ public class FormularyPlayerCreation {
         Label yearLabel = new Label("Year :");
         yearComboBox = new ComboBox<>();
         yearComboBox.getItems().addAll(years);
-        if(playerSquelette != null){
-            yearComboBox.setValue(player.getYearOfBirth());
-        }
+
 
         formularyLayout.add(yearLabel,0,3);
         formularyLayout.add(yearComboBox,1,3);
@@ -101,9 +85,7 @@ public class FormularyPlayerCreation {
         Label monthLabel = new Label("Month :");
         monthComboBox = new ComboBox<>();
         monthComboBox.getItems().addAll(months);
-        if(playerSquelette != null){
-            monthComboBox.setValue(player.getMonthOfBirth());
-        }
+
 
         formularyLayout.add(monthLabel,2,3);
         formularyLayout.add(monthComboBox,3,3);
@@ -111,9 +93,7 @@ public class FormularyPlayerCreation {
         Label dayLabel = new Label("Day :");
         dayComboBox = new ComboBox<>();
         dayComboBox.getItems().addAll(days);
-        if(playerSquelette != null){
-            dayComboBox.setValue(player.getDayOfBirth());
-        }
+
 
         formularyLayout.add(dayLabel,4,3);
         formularyLayout.add(dayComboBox,5,3);
@@ -171,14 +151,14 @@ public class FormularyPlayerCreation {
         Integer day = dayComboBox.getValue();
 
         StringBuilder fieldEmpty = new StringBuilder();
-        Boolean formularyError = false;
+        boolean formularyError = false;
 
         if (keyboardButton.isSelected()) {
             keyboardBit = 1;
         } else {
             keyboardBit = 0;
         }
-        if (!pseudo.matches("[\\w\\d\\s\\S]+") && pseudo != null) {
+        if (!pseudo.matches("[\\w\\d\\s\\S]+")) {
             fieldEmpty.append("Error : the pseudo field isn't valid.\n");
             pseudoTextField.setStyle("-fx-border-color: red;");
             formularyError = true;
@@ -201,17 +181,18 @@ public class FormularyPlayerCreation {
 
             Date dateOfBirth = new Date(year.intValue(), month.intValue(), day.intValue());
             System.out.println("Player : " + pseudo + " du nom de : " + surnameAndName + " né le " + dateOfBirth + (keyboardBit == 1 ? " et est un joueur Clavier Souris" : ""));
-            Player newPlayer = new Player(pseudo, surnameAndName, dateOfBirth, nationality, keyboardBit, 0, (Locality) null, (Team) null);
+            Player newPlayer = new Player(pseudo, surnameAndName, dateOfBirth, nationality, keyboardBit, null,"Bruxelles",null);
             controller.addPlayer(newPlayer);
 
             formularyStage.close();
         }
+        System.out.println(fieldEmpty.toString());
 
     }
 
     public void openFormularyUpdate(Stage primaryStage,String pseudoPlayer) throws Exception {
 
-        playerSquelette = controller.getAPLayer(pseudoPlayer);
+        Player playerSquelette = controller.getAPLayer(pseudoPlayer);
 
         GridPane formularyLayout = new GridPane();
         formularyLayout.setAlignment(Pos.CENTER);

@@ -22,8 +22,8 @@ public class Menu extends Application {
     private ResearchPage pageResearch;
 
 
-    public void start(Stage primaryStage) throws Exception{
-        this.primaryStage = primaryStage;
+    public void start(Stage primaryStage){
+        this.primaryStage = new Stage();
         primaryStage.setTitle("Programme Java");
 
         BorderPane root = new BorderPane();
