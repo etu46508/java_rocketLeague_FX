@@ -28,10 +28,16 @@ public class TreeTournamentPage {
     private RadioButton team4, team8, team16;
     private Label zoneTextNbTeam;
     private ComboBox tournamentComboBox;
+    private BorderPane root;
+    private Button drawButton;
+
+    public TreeTournamentPage (Stage primaryStage, Scene menuScene) throws Exception {
+            this.start(primaryStage, menuScene);
+    }
 
     public void start(Stage primaryStage, Scene menuScene) throws Exception {
         this.primaryStage = primaryStage;
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
 
         // Création titre Page
         TitleOfPage title = new TitleOfPage();
@@ -45,7 +51,7 @@ public class TreeTournamentPage {
         contentPane.setVgap(30);
         contentPane.setHgap(30);
 
-
+        /*
         // Création choix nombre de team
         teamGroup = new ToggleGroup();
         team4 = new RadioButton("4 teams");
@@ -59,14 +65,14 @@ public class TreeTournamentPage {
         team4.setToggleGroup(teamGroup);
         team8.setToggleGroup(teamGroup);
         team16.setToggleGroup(teamGroup);
-
-        RadioButtonListener radioButtonListener = new RadioButtonListener();
+*/
+        //RadioButtonListener radioButtonListener = new RadioButtonListener();
 
         zoneTextNbTeam = new Label();
         zoneTextNbTeam.setStyle("-fx-font-size:15");
-        team4.selectedProperty().addListener(radioButtonListener);
-        team8.selectedProperty().addListener(radioButtonListener);
-        team16.selectedProperty().addListener(radioButtonListener);
+        //team4.selectedProperty().addListener(radioButtonListener);
+        //team8.selectedProperty().addListener(radioButtonListener);
+        //team16.selectedProperty().addListener(radioButtonListener);
 
         // création comboBox
         tournamentComboBox = new ComboBox<>();
@@ -76,10 +82,10 @@ public class TreeTournamentPage {
         tournamentComboBox.valueProperty().addListener(comboboxListener);
 
         // Ajout  au contenu
-        contentPane.add(team4, 2, 2);
-        contentPane.add(team8, 3, 2);
-        contentPane.add(team16, 4, 2);
-        contentPane.add(zoneTextNbTeam, 5, 2);
+        //contentPane.add(team4, 2, 2);
+        //contentPane.add(team8, 3, 2);
+        //contentPane.add(team16, 4, 2);
+        //contentPane.add(zoneTextNbTeam, 5, 2);
         contentPane.add(tournamentComboBox,1,4);
 
 
@@ -88,8 +94,15 @@ public class TreeTournamentPage {
         BorderPane eastPanel = returnButton.returnMenu(primaryStage, menuScene);
 
         // Button lancer le tirage
-        Button drawButton = new Button("lancer le tirage");
+        drawButton = new Button("lancer le tirage");
         contentPane.add(drawButton, 2, 4);
+        drawButton.setOnAction(event -> {
+            try {
+                draw((Tournament)tournamentComboBox.getSelectionModel().getSelectedItem());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         // Ajout du titre et du contenu à la page
         root.setTop(titlePane);
@@ -113,7 +126,7 @@ public class TreeTournamentPage {
         return label;
     }
 
-    private class RadioButtonListener implements ChangeListener<Boolean> {
+    /*private class RadioButtonListener implements ChangeListener<Boolean> {
         @Override
         public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
             if (team4.isSelected() && newValue) {
@@ -125,7 +138,7 @@ public class TreeTournamentPage {
             }
 
         }
-    }
+    }*/
     private class ComboboxListener implements ChangeListener<String> {
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String s, String newValue) {
@@ -133,27 +146,34 @@ public class TreeTournamentPage {
         }
     }
 
+
     public void draw (Tournament tournament){
         Ranking[] ranking = tournament.getRanking();
         if(ranking.length == tournament.getNbTeams()){
-            String output;
+            GridPane drawPane = new GridPane();
+            drawPane.setAlignment(Pos.BOTTOM_LEFT);
+            drawPane.setVgap(50);
+            drawPane.setHgap(150);
             boolean contre = true;
             int rnd;
             ArrayList<Team> teams = new ArrayList<>();
             for(int iTeam = 0; iTeam <= tournament.getNbTeams(); iTeam++){
                 teams.add(ranking[iTeam].getTeam());
             }
+            int iTeam = 1;
             while(teams.size() != 0){
                 rnd = new Random().nextInt(teams.size());
-                System.out.println(teams.get(rnd).getClub().getName());
+                Label teamLabel = new Label(teams.get(rnd).getClub().getName());
                 if(contre){
-                    System.out.println(" contre ");
+                    drawPane.add(teamLabel, 0, iTeam);
+                }else{
+                    drawPane.add(teamLabel, 1, iTeam);
                 }
-                contre = !contre;
                 teams.remove(rnd);
             }
+            root.setBottom(drawPane);
         }else{
-            System.out.println("trop ou pas assez d'inscrit");//modifier pour le sortir bien
+            zoneTextNbTeam.setText("Le nombre d'équipe inscrite à ce tournois n'est pas suffisant");
         }
     }
 }

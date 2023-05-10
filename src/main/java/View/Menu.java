@@ -91,10 +91,9 @@ public class Menu extends Application {
                 throw new RuntimeException(e);
             }
         });
-        pageRandomizer = new TreeTournamentPage();
         buttonTree.setOnAction(event -> {
             try {
-                pageRandomizer.start(primaryStage,menuScene);
+                pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
