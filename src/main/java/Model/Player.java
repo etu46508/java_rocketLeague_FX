@@ -114,13 +114,16 @@ public class Player {
         this.nationality = nationality;
     }
 
-    public void setPlayKeyboard(int playKeyboard) {
-        if(playKeyboard == 1){
+    public void setPlayKeyboard(int bitKeyboard) {
+        if(bitKeyboard == 1){
             this.playKeyboard = true;
         }
         this.playKeyboard = false;
     }
 
+    public Boolean getPlayKeyboard(){
+        return playKeyboard;
+    }
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }

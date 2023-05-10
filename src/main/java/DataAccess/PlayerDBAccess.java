@@ -130,9 +130,7 @@ public class PlayerDBAccess implements PlayerDAO {
             statement.setString(1,pseudoPlayer);
             statement.executeUpdate();
 
-
             System.out.println("Player supprimé");
-
 
         }catch (SQLException exception){
             throw new DeletePlayerException();

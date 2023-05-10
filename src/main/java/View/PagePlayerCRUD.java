@@ -1,5 +1,6 @@
 package View;
 
+import View.Utility.ComboBoxPlayerChoice;
 import View.Utility.ReturnMenuButton;
 import View.Utility.TitleOfPage;
 import View.Utility.FormularyPlayerCreation;
@@ -65,15 +66,16 @@ public class PagePlayerCRUD  {
         FormularyPlayerCreation formulary = new FormularyPlayerCreation();
         button1.setOnAction(event -> {
             try {
-                formulary. openFormulary(primaryStage,"");
+
+                formulary.openFormularyAdd(primaryStage);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
-
+        ComboBoxPlayerChoice choicePlayer = new ComboBoxPlayerChoice();
         button3.setOnAction(event -> {
             try {
-                formulary.openChoicePlayer(primaryStage);
+                choicePlayer.openChoicePlayer(primaryStage);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
