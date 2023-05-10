@@ -57,10 +57,10 @@ public class ComboBoxPlayerChoice {
         validationButton.setDisable(true);
 
         PlayerComboBoxListener playerComboBoxListener = new PlayerComboBoxListener(validationButton);
-        playerComboBox.valueProperty().addListener(playerComboBoxListener);
+        //playerComboBox.valueProperty().addListener(playerComboBoxListener);
 
-        ValidationButtonListener validationButtonListener = new ValidationButtonListener(primaryStage,playerComboBox.getSelectionModel().getSelectedItem());
-        validationButton.setOnAction(validationButtonListener);
+        //ValidationButtonListener validationButtonListener = new ValidationButtonListener(primaryStage,playerComboBox.getSelectionModel().getSelectedItem());
+        // validationButton.setOnAction(validationButtonListener);
 
         Button returnButton = new Button("Return");
 
