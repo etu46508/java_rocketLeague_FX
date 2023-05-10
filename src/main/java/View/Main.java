@@ -31,6 +31,7 @@ public class Main {
                 */
 
             String pseudoPlayer = "FlamE";
+            System.out.println(pseudoPlayer);
             player = controller.getAPLayer(pseudoPlayer);
 
             System.out.println(player.getName());

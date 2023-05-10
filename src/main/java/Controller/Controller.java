@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 public class Controller {
-    private Manager manager;
+    private final Manager manager;
     public Controller() throws DataException {
         manager = new Manager();
     }
@@ -16,12 +16,10 @@ public class Controller {
     }
 
     public ArrayList<String> getAllPseudo() throws Exception{
-        ArrayList<String> playerPseudo = manager.getAllPseudo();
-        return playerPseudo;
+        return manager.getAllPseudo();
     }
 
     public Player getAPLayer(String playerPseudo) throws Exception{
-        Player player = manager.getAPLayer(playerPseudo);
-        return player;
+        return manager.getAPLayer(playerPseudo);
     }
 }

@@ -19,7 +19,7 @@ public class PlayerDBAccess implements PlayerDAO {
     }
 
     public Player getAPLayer(String playerPseudo) throws Exception{
-        Player player;
+        Player player = null;
         try{
 
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionhsip,"+
@@ -28,34 +28,40 @@ public class PlayerDBAccess implements PlayerDAO {
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
                     "INNER JOIN Locality loc on player.home = loc.cityName " +
-                    "INNER JOIN Team team ON player.team = team.number" +
-                    "INNER JOIN Club club ON club.serialNumber = team.club" +
+                    "INNER JOIN Team team ON player.team = team.number " +
+                    "INNER JOIN Club club ON club.serialNumber = team.club " +
                     "WHERE pseudo = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
+
             statement.setString(1, playerPseudo);
+
             ResultSet data = statement.executeQuery();
+
             data.next();
             player = createPlayer(data);
 
-        }catch (SQLException exception){
+        }catch (SQLException e){
+            throw new Exception();
+        }catch (Exception e){
             throw new PlayerException();
         }
         return player;
     }
 
+
     public ArrayList<Player> getAllPLayer() throws Exception{
         ArrayList<Player> players = new ArrayList<>();
         try{
             Player player;
-            String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionhsip,"+
-                    "loc.number, cityName,postalCode,country," +
+            String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionhsip, "+
+                    "loc.number, cityName,postalCode,country, " +
                     "team, wordingTeam, nameCoach," +
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
                     "INNER JOIN Locality loc on player.home = loc.cityName " +
-                    "INNER JOIN Team team ON player.team = team.number" +
-                    "INNER JOIN Club club ON club.serialNumber = team.club" +
+                    "INNER JOIN Team team ON player.team = team.number " +
+                    "INNER JOIN Club club ON club.serialNumber = team.club " +
                     "order by player.team";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -83,40 +89,40 @@ public class PlayerDBAccess implements PlayerDAO {
 
 
     public void addPlayer(Player player) throws AddPlayerException {
-    try{
-        String sql = "INSERT INTO Player(pseudo,firstNameLastName,birthdate,nationality,playKeybord,yearWorldchampionhsi,home,team )values(?,?,?,?,?,?,?,?)";
-        PreparedStatement statement = SingletonConnexion.getInstance().prepareStatement(sql);
+        try{
+            String sql = "INSERT INTO Player(pseudo,firstNameLastName,birthdate,nationality,playKeybord,yearWorldchampionhsi,home,team )values(?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = SingletonConnexion.getInstance().prepareStatement(sql);
 
-        statement.setString(1,player.getPseudo());
-        statement.setString(2,player.getName());
-        statement.setDate(3,new java.sql.Date(player.getBirthday().getDate()));
-        statement.setString(4,player.getNationality());
-        statement.setByte(5, (byte) (player.isPlayKeyboard()?1:0));
-        if(player.getYearWorldChampion() == null){
-            statement.setNull(6,Types.DECIMAL);
-        }else{
-            statement.setInt(6,player.getYearWorldChampion());
+            statement.setString(1,player.getPseudo());
+            statement.setString(2,player.getName());
+            statement.setDate(3,new java.sql.Date(player.getBirthday().getDate()));
+            statement.setString(4,player.getNationality());
+            statement.setByte(5, (byte) (player.isPlayKeyboard()?1:0));
+            if(player.getYearWorldChampion() == null){
+                statement.setNull(6,Types.DECIMAL);
+            }else{
+                statement.setInt(6,player.getYearWorldChampion());
+            }
+            if(player.getHome() == null){
+                statement.setNull(7,Types.VARCHAR);
+            }else{
+                statement.setString(7,player.getHome().getWording());
+            }
+            if(player.getActualTeam() == null){
+                statement.setNull(8,Types.INTEGER);
+            }else{
+                statement.setInt(8,player.getActualTeam().getNumber());
+            }
+
+
+
+
+            statement.executeUpdate();
+            System.out.println("Player ajouté SAH");
+        }catch (Exception exception){
+            throw new AddPlayerException(player);
+
         }
-        if(player.getHome() == null){
-            statement.setNull(7,Types.VARCHAR);
-        }else{
-            statement.setString(7,player.getHome().getWording());
-        }
-        if(player.getActualTeam() == null){
-            statement.setNull(8,Types.INTEGER);
-        }else{
-            statement.setInt(8,player.getActualTeam().getNumber());
-        }
-
-
-
-
-        statement.executeUpdate();
-        System.out.println("Player ajouté SAH");
-    }catch (Exception exception){
-        throw new AddPlayerException(player);
-
-    }
     }
 
     public void deletePlayer(String pseudoPlayer) throws Exception{
@@ -170,12 +176,12 @@ public class PlayerDBAccess implements PlayerDAO {
                     data.getString(4),
                     (int) data.getByte(5),
                     data.getInt(6),
-                    new Locality(data.getInt(8),data.getString(7),data.getString(9),data.getInt(10)),
+                    new Locality(data.getInt(7),data.getString(8),data.getInt(9),data.getString(10)),
                     new Team(data.getInt(11),data.getString(12),data.getString(13), new Club(data.getInt(14),data.getString(15), data.getString(16),creationDate)));
 
         }catch (SQLException exception){
-        throw new SQLException();
-    }
+            throw new SQLException();
+        }
         return player;
     }
 

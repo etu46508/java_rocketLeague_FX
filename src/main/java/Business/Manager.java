@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 public class Manager {
-    private LocalityDAO localityAccess;
-    private ClubDAO clubAccess;
-    private TeamDAO teamAccess;
-    private PlayerDAO playerAccess;
-    private TournamentDAO tournamentAccess;
-    private UnofficialTournamentDAO unofficialTournamentAccess;
-    private RankingDAO rankingAccess;
+    private  final LocalityDAO localityAccess;
+    private final ClubDAO clubAccess;
+    private final TeamDAO teamAccess;
+    private final PlayerDAO playerAccess;
+    private final TournamentDAO tournamentAccess;
+    private final UnofficialTournamentDAO unofficialTournamentAccess;
+    private final RankingDAO rankingAccess;
 
     public Manager() throws DataException{
         localityAccess = new LocalityDBAccess();
@@ -32,13 +32,11 @@ public class Manager {
     }
 
     public ArrayList<String> getAllPseudo() throws Exception{
-        ArrayList<String> playerPseudo = playerAccess.getAllPseudo();
-        return playerPseudo;
+        return playerAccess.getAllPseudo();
     }
 
     public Player getAPLayer(String playerPseudo) throws Exception{
-        Player player = playerAccess.getAPLayer(playerPseudo);
-        return player;
+        return playerAccess.getAPLayer(playerPseudo);
     }
 
 }

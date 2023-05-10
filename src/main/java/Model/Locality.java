@@ -6,7 +6,7 @@ public class Locality {
     private String country;
     private int postalCode;
 
-    public Locality(Integer number,String wording, String country, int postalCode){
+    public Locality(Integer number,String wording,int postalCode,String country){
         setNumber(number);
         setCountry(country);
         setPostalCode(postalCode);

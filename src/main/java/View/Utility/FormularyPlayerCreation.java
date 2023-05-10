@@ -27,8 +27,8 @@ public class FormularyPlayerCreation {
     private ComboBox<String> playerComboBox;
     private CheckBox keybordButton;
     private Integer keybordBit;
+    private String pseudoPlayer;
     private Player player;
-    private PlayerDBAccess playerDBAccess;
     private Controller controller;
 
     private ArrayList<Integer> years,months,days;
@@ -50,7 +50,10 @@ public class FormularyPlayerCreation {
     }
 
 
-    public void openFormularyAdd(Stage primaryStage) {
+    public void  openFormulary(Stage primaryStage,String pseudoPlayer) {
+        if(pseudoPlayer == null){
+
+        }
         GridPane formularyLayout = new GridPane();
         formularyLayout.setAlignment(Pos.CENTER);
         formularyLayout.setHgap(20);
@@ -125,8 +128,8 @@ public class FormularyPlayerCreation {
     }
 
 
-    public void openChoicePlayerUpdate(Stage primaryStage) throws Exception {
-            ArrayList<String> pseudoPlayer = controller.getAllPseudo();
+    public void openChoicePlayer(Stage primaryStage) throws Exception {
+            ArrayList<String> pseudoPlayers = controller.getAllPseudo();
 
             BorderPane pageLayout = new BorderPane();
 
@@ -138,19 +141,27 @@ public class FormularyPlayerCreation {
 
             Label pseudoChoice = new Label("Choose the player : ");
             playerComboBox = new ComboBox<>();
-            playerComboBox.getItems().addAll(pseudoPlayer);
-            playerComboBox.getSelectionModel().select("");
+            playerComboBox.getItems().addAll(pseudoPlayers);
+            pseudoPlayer = "";
+            playerComboBox.getSelectionModel().select(pseudoPlayer);
+
 
             comboBoxLayout.add(pseudoChoice,0,0);
             comboBoxLayout.add(playerComboBox,1,0);
 
-            BorderPane buttonLayout = new BorderPane();
 
+            BorderPane buttonLayout = new BorderPane();
             Button validationButton = new Button("Validation");
+            validationButton.setDisable(true);
+
+
+            PlayerComboBoxListener playerComboBoxListener = new PlayerComboBoxListener(validationButton);
+            playerComboBox.valueProperty().addListener(playerComboBoxListener);
 
 
             Button returnButton = new Button("Return");
-            validationButton.setOnAction(e -> openFormularyUpdate(choicePlayerStage,playerComboBox.getValue()));
+            validationButton.setOnAction(e ->
+                    openFormulary(choicePlayerStage,playerComboBox.getSelectionModel().getSelectedItem()));
 
             buttonLayout.setRight(returnButton);
             buttonLayout.setLeft(validationButton);
@@ -225,85 +236,9 @@ public class FormularyPlayerCreation {
 
     }
 
-    private void openFormularyUpdate(Stage choicePlayerStage,String pseudoPlayer){
-        try {
-            player = controller.getAPLayer(pseudoPlayer);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
 
-        GridPane formularyLayout = new GridPane();
-        formularyLayout.setAlignment(Pos.CENTER);
-        formularyLayout.setHgap(20);
-        formularyLayout.setVgap(20);
-        formularyLayout.setPadding(new Insets(20));
 
-        Label pseudoLabel = new Label("Pseudo :");
-        pseudoTextField = new TextField(player.getPseudo());
-        formularyLayout.addRow(0, pseudoLabel, pseudoTextField);
-
-        Label surnameAndNameLabel = new Label("Surname and name :");
-        surnameAndNameTextField = new TextField(player.getName());
-        formularyLayout.addRow(1, surnameAndNameLabel, surnameAndNameTextField);
-
-        Label nationalityLabel = new Label("Nationality :");
-        nationalityTextField = new TextField(player.getNationality());
-        formularyLayout.addRow(2, nationalityLabel, nationalityTextField);
-
-
-        // Créer les ComboBox pour l'année, le mois et le jour
-        // activation des comboBox
-
-        Label yearLabel = new Label("Year :");
-        yearComboBox = new ComboBox<>();
-        yearComboBox.getItems().addAll(years);
-        yearComboBox.setValue(player.getBirthday().getYear());
-        formularyLayout.add(yearLabel,0,3);
-        formularyLayout.add(yearComboBox,1,3);
-
-        Label monthLabel = new Label("Month :");
-        monthComboBox = new ComboBox<>();
-        monthComboBox.getItems().addAll(months);
-        monthComboBox.setValue(player.getBirthday().getMonth());
-        formularyLayout.add(monthLabel,2,3);
-        formularyLayout.add(monthComboBox,3,3);
-
-        Label dayLabel = new Label("Day :");
-        dayComboBox = new ComboBox<>();
-        dayComboBox.getItems().addAll(days);
-        dayComboBox.setValue(player.getBirthday().getDay());
-        formularyLayout.add(dayLabel,4,3);
-        formularyLayout.add(dayComboBox,5,3);
-
-        Label playWithKaybord = new Label("Play with keybord : ");
-        keybordButton = new CheckBox();
-        if(player.isPlayKeyboard()){keybordButton.setSelected(true);}
-        formularyLayout.add(playWithKaybord,0,4);
-        formularyLayout.add(keybordButton,1,4);
-
-        Button validerButton = new Button("Valider");
-        formularyLayout.add(validerButton,0,10);
-
-        Button returnButton = new Button("Return");
-        formularyLayout.add(validerButton,10,10);
-
-        Scene formularyScene = new Scene(formularyLayout);
-        choicePlayerStage.setTitle("formulary update");
-        choicePlayerStage.setScene(formularyScene);
-        choicePlayerStage.show();
-
-        returnButton.setOnAction(e -> choicePlayerStage.close());
-
-        validerButton.setOnAction(e -> {
-            try {
-                validerformulary();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-    }
 
 
 
@@ -314,6 +249,20 @@ public class FormularyPlayerCreation {
                 keybordBit = 1;
             }else{
                 keybordBit = 0;
+            }
+        }
+    }
+
+    private class PlayerComboBoxListener implements ChangeListener<String>{
+        Button validationButton;
+        private PlayerComboBoxListener(Button validationButton){
+            this.validationButton = validationButton;
+
+        }
+        @Override
+        public void changed(ObservableValue<? extends String> observableValue, String s, String value) {
+            if(value != ""){
+                validationButton.setDisable(false);
             }
         }
     }
