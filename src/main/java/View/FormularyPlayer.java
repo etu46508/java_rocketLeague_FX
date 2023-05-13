@@ -1,4 +1,4 @@
-package View.Utility;
+package View;
 
 import Controller.Controller;
 import Model.Player;
@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-import Exception.DataException;
-
-
 public class FormularyPlayer {
     private final Controller controller;
     private final ArrayList<Integer> years,months,days, yearWorldChampionshipFull;
@@ -26,7 +23,7 @@ public class FormularyPlayer {
     private CheckBox keyboardButton;
     private ComboBox<String> localitiesComboBox, teamsAvailableComboBox;
 
-    public FormularyPlayer() throws DataException {
+    public FormularyPlayer() throws Exception {
         controller = new Controller();
 
         this.years = new ArrayList<>();
@@ -45,8 +42,6 @@ public class FormularyPlayer {
         for (int year = LocalDate.now().getYear(); year >= 2016; year--) {
             yearWorldChampionshipFull.add(year);
         }
-
-
     }
 
 
@@ -138,14 +133,13 @@ public class FormularyPlayer {
                 yearWorldChampionComboBox.setValue(null);
             }
 
-
             localitiesComboBox.setValue(player.getHome().getWording());
             if(player.getTeam().getWordingTeam() != null){
                 teamsAvailableComboBox.setValue(player.getTeam().getWordingTeam());
+                teamsAvailableComboBox.getItems().add(player.getTeam().getWordingTeam());
             }else{
                 teamsAvailableComboBox.setValue("<none>");
             }
-
 
             validerButton.setOnAction(e -> {
                 try {
@@ -187,6 +181,7 @@ public class FormularyPlayer {
         pseudoTextField.setStyle("-fx-border-color: transparent;");
         surnameAndNameTextField.setStyle("-fx-border-color: transparent;");
         nationalityTextField.setStyle("-fx-border-color: transparent;");
+
         String pseudo = pseudoTextField.getText();
         String surnameAndName = surnameAndNameTextField.getText();
         String nationality = nationalityTextField.getText();

@@ -1,6 +1,8 @@
-package View.Utility;
+package View;
 
 
+import View.Utility.PlayerSheetDisplay;
+import View.Utility.VerificationPlayerDeletion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,17 +13,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
 import Controller.Controller;
-import Exception.DataException;
+
+
 public class ComboBoxPlayerChoice {
     private final Controller controller;
     Stage choicePlayerStage;
     private ComboBox<String> playerComboBox;
-    public ComboBoxPlayerChoice() throws DataException {
+    public ComboBoxPlayerChoice() throws Exception {
         controller = new Controller();
         choicePlayerStage = new Stage();
 
@@ -30,11 +31,9 @@ public class ComboBoxPlayerChoice {
 
 
     public void openChoicePlayer(Stage primaryStage,String nextOpen) throws Exception {
-
         ArrayList<String> pseudoPlayers = controller.getAllPseudo();
 
         BorderPane pageLayout = new BorderPane();
-
         GridPane comboBoxLayout = new GridPane();
         comboBoxLayout.setAlignment(Pos.CENTER);
         comboBoxLayout.setHgap(20);
@@ -57,7 +56,6 @@ public class ComboBoxPlayerChoice {
 
         buttonLayout.setRight(returnButton);
         buttonLayout.setLeft(validationButton);
-
         pageLayout.setTop(comboBoxLayout);
         pageLayout.setBottom(buttonLayout);
 
@@ -94,12 +92,8 @@ public class ComboBoxPlayerChoice {
             });
         }
 
-
-
         returnButton.setOnAction(event -> choicePlayerStage.close());
-
         System.out.println(playerComboBox.getSelectionModel().getSelectedItem());
-
 
 
         Scene choicePlayerScene = new Scene(pageLayout);
@@ -108,12 +102,6 @@ public class ComboBoxPlayerChoice {
         choicePlayerStage.setScene(choicePlayerScene);
         choicePlayerStage.initOwner(primaryStage);
         choicePlayerStage.showAndWait();
-
-
-
-
-
-
     }
 }
 

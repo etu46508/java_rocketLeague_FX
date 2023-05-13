@@ -10,6 +10,7 @@ public class TitleOfPage {
 
     public StackPane createTitle(String text,String type){
         StackPane titlePane = new StackPane();
+
         Label title = new Label(text);
 
         if(type.equals("menu")){
@@ -30,8 +31,11 @@ public class TitleOfPage {
             title.setStyle("-fx-text-fill: black;");
         } else if (type.equals("player display")) {
             titlePane.setPrefHeight(30);
-        }
+            titlePane.setAlignment(Pos.CENTER);
+            title.setStyle("-fx-font-size: 36; -fx-font-weight: bold;");
 
+        }
+        titlePane.getChildren().add(title);
 
         return titlePane;
     }

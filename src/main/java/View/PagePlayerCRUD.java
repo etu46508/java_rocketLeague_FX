@@ -1,9 +1,7 @@
 package View;
 
-import View.Utility.ComboBoxPlayerChoice;
 import View.Utility.ReturnMenuButton;
 import View.Utility.TitleOfPage;
-import View.Utility.FormularyPlayer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

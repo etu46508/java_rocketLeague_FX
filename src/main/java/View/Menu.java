@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 
 
-
 public class Menu  {
 
     private Scene menuScene;
@@ -22,26 +21,21 @@ public class Menu  {
 
 
     public void start(){
-
         BorderPane root = new BorderPane();
 
-        // Création du titre "Menu"
         TitleOfPage title = new TitleOfPage();
         StackPane titlePane = title.createTitle("Programme Gestion Rocket League","menu");
 
-        // Création du espace bouton
         GridPane contentPane = new GridPane();
         contentPane.setAlignment(Pos.CENTER);
         contentPane.setVgap(50);
         contentPane.setHgap(50);
 
-        // Création des boutons
         Button button1 = createButton("Page 1");
         Button buttonPageResearch = createButton("Research");
         Button butttonPagePlayer = createButton("Player");
         Button buttonTree = createButton("Tournament tree");
 
-        // Ajout des boutons au contenu
         contentPane.add(button1, 0, 0);
         contentPane.add(buttonPageResearch, 1, 0);
         contentPane.add(butttonPagePlayer, 0, 1);
@@ -55,13 +49,11 @@ public class Menu  {
         southPanel.setRight(image);
 
 
-        // Ajout du titre et du contenu à la page
         root.setTop(titlePane);
         root.setCenter(contentPane);
         root.setBottom(southPanel);
 
 
-        // Création de la scène Menu et affichage de la fenêtre
         menuScene = new Scene(root, 1000, 800);
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Programme Java");
@@ -69,7 +61,6 @@ public class Menu  {
         primaryStage.setScene(menuScene);
         primaryStage.show();
 
-        // Création des événements de clic pour les boutons
 
         pageResearch = new ResearchPage();
         buttonPageResearch.setOnAction(event -> {

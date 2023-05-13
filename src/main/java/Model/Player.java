@@ -2,7 +2,6 @@ package Model;
 
 import java.time.LocalDate;
 import java.time.Period;
-
 import static java.time.LocalDate.now;
 
 public class Player {
@@ -139,17 +138,20 @@ public class Player {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder("Player : "+ getPseudo() +"\n");
+        output.append("- Surname and name  : "+ getName() +"\n");
         output.append("- Age : "+ getAge() +"\n");
         output.append("- Birthdate : "+ getBirthdate() +"\n");
         output.append("- Nationality : "+ getNationality() +" and resides in "+ getHome().getWording()+"\n");
         if(getYearWorldChampion() != 0){
             output.append("- Last victory in the world championship : "+ getYearWorldChampion() +"\n");
         }
-        if(getTeam() != null){
-            output.append("- Play with the team : : "+ getTeam().getWordingTeam() +" in the club : "+ getTeam().getClub().getName()+"\n");
+        if(getTeam().getWordingTeam()!= null){
+            output.append("- Play with the team : "+ getTeam().getWordingTeam() +" in the club : "+ getTeam().getClub().getName()+"\n");
+        }else{
+            output.append("- He isn't in a team at the moment  \n");
         }
         if(getPlayKeyboard()){
-            output.append("- He is is one of the few keyboard players "+ getBirthdate() +"\n");
+            output.append("- He is is one of the few keyboard players \n");
         }
         return output.toString();
     }
