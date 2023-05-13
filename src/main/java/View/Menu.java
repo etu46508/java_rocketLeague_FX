@@ -1,7 +1,6 @@
 package View;
 
 import View.Utility.TitleOfPage;
-import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,26 +13,21 @@ import javafx.stage.Stage;
 
 
 
-public class Menu extends Application {
-    private Stage primaryStage;
+public class Menu  {
+
     private Scene menuScene;
     private PagePlayerCRUD player;
     private TreeTournamentPage pageRandomizer;
     private ResearchPage pageResearch;
 
 
-    public void start(Stage primaryStage){
-        this.primaryStage = new Stage();
-        primaryStage.setTitle("Programme Java");
+    public void start(){
 
         BorderPane root = new BorderPane();
-
 
         // Création du titre "Menu"
         TitleOfPage title = new TitleOfPage();
         StackPane titlePane = title.createTitle("Programme Gestion Rocket League", 40,"menu");
-
-
 
         // Création du espace bouton
         GridPane contentPane = new GridPane();
@@ -69,6 +63,9 @@ public class Menu extends Application {
 
         // Création de la scène Menu et affichage de la fenêtre
         menuScene = new Scene(root, 1000, 800);
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Programme Java");
+
         primaryStage.setScene(menuScene);
         primaryStage.show();
 
@@ -100,8 +97,6 @@ public class Menu extends Application {
         });
 
     }
-
-
     private Button createButton(String text) {
         Button button = new Button(text);
         button.setPrefSize(200, 100);
@@ -109,9 +104,5 @@ public class Menu extends Application {
         return button;
     }
 
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
 

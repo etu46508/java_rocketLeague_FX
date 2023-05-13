@@ -35,6 +35,7 @@ public class VerificationPlayerDeletion {
         yesButton.setOnAction(event -> {
             try {
                 controller.deletePlayer(pseudoPlayer);
+                primaryStage.close();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

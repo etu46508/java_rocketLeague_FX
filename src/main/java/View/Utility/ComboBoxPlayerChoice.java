@@ -55,7 +55,6 @@ public class ComboBoxPlayerChoice {
 
         Button returnButton = new Button("Return");
 
-
         buttonLayout.setRight(returnButton);
         buttonLayout.setLeft(validationButton);
 
@@ -67,8 +66,8 @@ public class ComboBoxPlayerChoice {
         if(Objects.equals(nextOpen, "update")){
             validationButton.setOnAction(event -> {
                 try {
-                    FormularyPlayerCreation formularyUpdate = new FormularyPlayerCreation();
-                    formularyUpdate.openFormularyUpdate(primaryStage,playerComboBox.getValue());
+                    FormularyPlayer formularyUpdate = new FormularyPlayer();
+                    formularyUpdate.openFormulary(primaryStage,playerComboBox.getValue());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

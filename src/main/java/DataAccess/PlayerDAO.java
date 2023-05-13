@@ -7,19 +7,19 @@ import java.util.ArrayList;
 
 public interface PlayerDAO {
 
-    public Player getAPLayer(String playerPseudo) throws Exception;
-    public ArrayList<Player> getAllPLayer() throws Exception;
+    Player getAPLayer(String playerPseudo) throws Exception;
+    ArrayList<Player> getAllPLayer() throws Exception;
 
-    public ArrayList<Player> getPlayerInTeam(int numTeam) throws Exception;
+    ArrayList<Player> getPlayerInTeam(int numTeam) throws Exception;
 
-    public void addPlayer(Player player) throws Exception;
-    public void deletePlayer(String pseudoPlayer) throws Exception;
+    void addPlayer(Player player) throws Exception;
+    void deletePlayer(String pseudoPlayer) throws Exception;
 
-    public void updatePlayer(Player player,String pseudoPlayer) throws Exception;
-    public void addPlayerToTeam(int numTeam);
-    public ArrayList<String> getAllPseudo() throws Exception;
-
-    public Player createPlayer(ResultSet data) throws Exception;
+    void updatePlayer(Player player,String pseudoPlayer) throws Exception;
+    void addPlayerToTeam(int numTeam);
+    ArrayList<String> getAllPseudo() throws Exception;
+    ArrayList<Integer> getYearFilledOfWorldChampions() throws Exception;
+    Player createPlayer(ResultSet data) throws Exception;
 
 
 

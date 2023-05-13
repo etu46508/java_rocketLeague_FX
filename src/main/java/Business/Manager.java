@@ -37,7 +37,6 @@ public class Manager {
         return playerAccess.getAPLayer(playerPseudo);
     }
 
-
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
         playerAccess.updatePlayer(player,pseudoPlayer);
     }
@@ -45,10 +44,23 @@ public class Manager {
     public void deletePlayer(String pseudoPlayer) throws Exception{
         playerAccess.deletePlayer(pseudoPlayer);
     }
+    public ArrayList<Integer> getYearFilledOfWorldChampions() throws Exception{
+        return playerAccess.getYearFilledOfWorldChampions();
+    }
 
 
     public ArrayList<String> getAllNameLocalities() throws Exception{
         return localityAccess.getAllNameLocalities();
+    }
+
+
+
+    public ArrayList<String> getTeamsAvailable(){
+        return teamAccess.getTeamsAvailable();
+    }
+
+    public Integer getTeamNumber (String wordingTeam){
+        return teamAccess.getTeamNumber(wordingTeam);
     }
 
 }

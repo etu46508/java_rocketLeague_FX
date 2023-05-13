@@ -28,11 +28,21 @@ public class Controller {
     public void deletePlayer(String pseudoPlayer) throws Exception{
         manager.deletePlayer(pseudoPlayer);
     }
+    public ArrayList<Integer> getYearFilledOfWorldChampions() throws Exception{
+        return manager.getYearFilledOfWorldChampions();
+    }
 
 
     public ArrayList<String> getAllNameLocalities() throws Exception{
         return manager.getAllNameLocalities();
+    }
 
+
+    public ArrayList<String> getTeamAvailable(){
+        return manager.getTeamsAvailable();
+    }
+    public Integer getTeamNumber (String wordingTeam){
+        return manager.getTeamNumber(wordingTeam);
     }
 
 
