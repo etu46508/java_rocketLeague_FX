@@ -18,7 +18,7 @@ public class PagePlayerCRUD  {
     public void start(Stage primaryStage, Scene menuScene) throws Exception {
         BorderPane root = new BorderPane();
         TitleOfPage title = new TitleOfPage();
-        StackPane titlePane = title.createTitle("Interface CRUD", 40,"page");
+        StackPane titlePane = title.createTitle("Interface CRUD","secondary page");
 
         GridPane contentPane = new GridPane();
         contentPane.setAlignment(Pos.CENTER);

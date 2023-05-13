@@ -1,32 +1,35 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.Period;
+
+import static java.time.LocalDate.now;
 
 public class Player {
     private String pseudo,name,homeName;
-    private LocalDate birthday;
+    private LocalDate birthdate;
     private String nationality;
     private Integer yearWorldChampion,teamNum;
     private int dayOfBirth,monthOfBirth,yearOfBirth;
     private boolean playKeyboard;
     private Locality home;
-    private Team actualTeam;
+    private Team team;
 
 
-    public Player(String pseudo, String name, LocalDate birthday, String nationality, Integer playKeyboard, Integer yearWorldChampion, Locality home, Team actualTeam){
+    public Player(String pseudo, String name, LocalDate birthdate, String nationality, Integer playKeyboard, Integer yearWorldChampion, Locality home, Team team){
         setPseudo(pseudo);
         setName(name);
-        setBirthday(birthday);
+        setBirthdate(birthdate);
         setNationality(nationality);
         setPlayKeyboard(playKeyboard);
         setYearWorldChampion(yearWorldChampion);
         setHome(home);
-        setActualTeam(actualTeam);
+        setTeam(team);
     }
-    public Player(String pseudo, String name, LocalDate birthday, String nationality, Integer playKeyboard, Integer yearWorldChampion, String homeName, Integer teamNum){
+    public Player(String pseudo, String name, LocalDate birthdate, String nationality, Integer playKeyboard, Integer yearWorldChampion, String homeName, Integer teamNum){
         setPseudo(pseudo);
         setName(name);
-        setBirthday(birthday);
+        setBirthdate(birthdate);
         setNationality(nationality);
         setPlayKeyboard(playKeyboard);
         setYearWorldChampion(yearWorldChampion);
@@ -50,14 +53,14 @@ public class Player {
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-        setDayOfBirth(birthday.getDayOfMonth());
-        setMonthOfBirth(birthday.getMonthValue());
-        setYearOfBirth(birthday.getYear());
+    public void setBirthdate(LocalDate Birthdate) {
+        this.birthdate = Birthdate;
+        setDayOfBirth(Birthdate.getDayOfMonth());
+        setMonthOfBirth(Birthdate.getMonthValue());
+        setYearOfBirth(Birthdate.getYear());
     }
     public int getDayOfBirth() {
         return dayOfBirth;
@@ -77,7 +80,9 @@ public class Player {
     public void setYearOfBirth(Integer yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
     }
-
+    public int getAge(){
+        return Period.between(birthdate,now()).getYears();
+    }
 
     public String getNationality() {
         return nationality;
@@ -117,11 +122,11 @@ public class Player {
         this.homeName = homeName;
     }
 
-    public Team getActualTeam() {
-        return actualTeam;
+    public Team getTeam() {
+        return team;
     }
-    public void setActualTeam(Team actualTeam) {
-        this.actualTeam = actualTeam;
+    public void setTeam(Team team) {
+        this.team = team;
     }
     public Integer getTeamNum() {
         return teamNum;
@@ -131,12 +136,21 @@ public class Player {
     }
 
 
-
-
-
-
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder output = new StringBuilder("Player : "+ getPseudo() +"\n");
+        output.append("- Age : "+ getAge() +"\n");
+        output.append("- Birthdate : "+ getBirthdate() +"\n");
+        output.append("- Nationality : "+ getNationality() +" and resides in "+ getHome().getWording()+"\n");
+        if(getYearWorldChampion() != 0){
+            output.append("- Last victory in the world championship : "+ getYearWorldChampion() +"\n");
+        }
+        if(getTeam() != null){
+            output.append("- Play with the team : : "+ getTeam().getWordingTeam() +" in the club : "+ getTeam().getClub().getName()+"\n");
+        }
+        if(getPlayKeyboard()){
+            output.append("- He is is one of the few keyboard players "+ getBirthdate() +"\n");
+        }
+        return output.toString();
     }
 }

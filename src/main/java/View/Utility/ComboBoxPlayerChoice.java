@@ -85,7 +85,13 @@ public class ComboBoxPlayerChoice {
 
         }
         if(Objects.equals(nextOpen, "read")){
-            System.out.println("read");
+            validationButton.setOnAction(event -> {
+                try {
+                    PlayerSheetDisplay display = new PlayerSheetDisplay(playerComboBox.getValue());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
 
 

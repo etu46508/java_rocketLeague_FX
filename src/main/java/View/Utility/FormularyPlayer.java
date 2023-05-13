@@ -112,13 +112,9 @@ public class FormularyPlayer {
         teamsAvailableComboBox = new ComboBox<>();
         teamsAvailableComboBox.getItems().add(0,"<none>");
         teamsAvailableComboBox.getItems().addAll(controller.getTeamAvailable());
-
-
         formularyLayout.add(teamsAvailableComboBox,1,7);
 
         Button validerButton = new Button("Valider");
-
-
         formularyLayout.add(validerButton,0,10);
 
         Button returnButton = new Button("Return");
@@ -144,8 +140,8 @@ public class FormularyPlayer {
 
 
             localitiesComboBox.setValue(player.getHome().getWording());
-            if(player.getActualTeam().getWordingTeam() != null){
-                teamsAvailableComboBox.setValue(player.getActualTeam().getWordingTeam());
+            if(player.getTeam().getWordingTeam() != null){
+                teamsAvailableComboBox.setValue(player.getTeam().getWordingTeam());
             }else{
                 teamsAvailableComboBox.setValue("<none>");
             }

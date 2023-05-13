@@ -97,7 +97,7 @@ public class PlayerDBAccess implements PlayerDAO {
 
             statement.setString(1,player.getPseudo());
             statement.setString(2,player.getName());
-            statement.setDate(3, java.sql.Date.valueOf(player.getBirthday()));
+            statement.setDate(3, java.sql.Date.valueOf(player.getBirthdate()));
             statement.setString(4,player.getNationality());
             statement.setByte(5, (byte) (player.isPlayKeyboard()?1:0));
             if(player.getYearWorldChampion() == null){
@@ -106,7 +106,7 @@ public class PlayerDBAccess implements PlayerDAO {
                 statement.setInt(6,player.getYearWorldChampion());
             }
                 statement.setString(7,player.getHomeName());
-            if(player.getActualTeam() == null){
+            if(player.getTeam() == null){
                 statement.setNull(8,Types.INTEGER);
             }else{
                 statement.setInt(8,player.getTeamNum());
@@ -143,7 +143,7 @@ public class PlayerDBAccess implements PlayerDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,player.getPseudo());
             statement.setString(2,player.getName());
-            statement.setDate(3, java.sql.Date.valueOf(player.getBirthday()));
+            statement.setDate(3, java.sql.Date.valueOf(player.getBirthdate()));
             statement.setString(4,player.getNationality());
             statement.setByte(5, (byte) (player.isPlayKeyboard()?1:0));
 

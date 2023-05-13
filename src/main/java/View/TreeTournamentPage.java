@@ -41,7 +41,7 @@ public class TreeTournamentPage {
 
         // Création titre Page
         TitleOfPage title = new TitleOfPage();
-        StackPane titlePane = title.createTitle("Randomizer of tournament tree", 40,"page");
+        StackPane titlePane = title.createTitle("Randomizer of tournament tree","secondary page");
 
 
 

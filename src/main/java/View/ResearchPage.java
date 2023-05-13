@@ -20,7 +20,7 @@ public class ResearchPage {
 
         // Création titre Page
         TitleOfPage title = new TitleOfPage();
-        StackPane titlePane = title.createTitle("Research", 40,"page");
+        StackPane titlePane = title.createTitle("Research","secondary page");
 
 
 

@@ -27,7 +27,7 @@ public class Menu  {
 
         // Création du titre "Menu"
         TitleOfPage title = new TitleOfPage();
-        StackPane titlePane = title.createTitle("Programme Gestion Rocket League", 40,"menu");
+        StackPane titlePane = title.createTitle("Programme Gestion Rocket League","menu");
 
         // Création du espace bouton
         GridPane contentPane = new GridPane();
