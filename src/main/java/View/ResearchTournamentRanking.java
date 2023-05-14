@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import View.Utility.TitleOfPage;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -12,9 +13,10 @@ public class ResearchTournamentRanking {
     private final ComboBox<String> monthComboBox,tournamentComboBox;
 
 
-
     public ResearchTournamentRanking(Stage primaryStage) throws Exception {
         controller = new Controller();
+
+        TitleOfPage titlePane = new TitleOfPage();
 
         ArrayList<String> months = new ArrayList<>(Arrays.asList(
                 "January", "February", "March", "April", "May", "June", "July",
@@ -37,6 +39,10 @@ public class ResearchTournamentRanking {
             tournamentComboBox.getItems().addAll(tournaments);
             tournamentComboBox.setDisable(false);
         });
+
+
+
+
 
     }
 }
