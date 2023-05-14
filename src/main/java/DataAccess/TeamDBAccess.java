@@ -19,8 +19,8 @@ public class TeamDBAccess implements TeamDAO{
         try{
             String sql = "SELECT team.wordingTeam " +
                     "FROM team " +
-                    "LEFT JOIN player ON team.number = player.team " +
-                    "GROUP BY Team.number " +
+                    "LEFT JOIN player ON team.serialNumber = player.team " +
+                    "GROUP BY Team.serialNumber " +
                     "HAVING count(player.team) < 3 OR count(player.team) IS NULL ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class TeamDBAccess implements TeamDAO{
     public Integer getTeamNumber (String wordingTeam){
         Integer teamNumber;
         try{
-            String sql = "SELECT number FROM team WHERE wordingTeam = ?";
+            String sql = "SELECT serialNumber FROM team WHERE wordingTeam = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, wordingTeam);
             ResultSet data = statement.executeQuery();

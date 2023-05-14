@@ -29,7 +29,7 @@ public class PlayerDBAccess implements PlayerDAO {
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
                     "INNER JOIN Locality loc on player.home = loc.cityName " +
-                    "LEFT JOIN Team team ON player.team = team.number " +
+                    "LEFT JOIN Team team ON player.team = team.serialNumber " +
                     "LEFT JOIN Club club ON club.serialNumber = team.club " +
                     "WHERE pseudo = ?";
 
@@ -61,7 +61,7 @@ public class PlayerDBAccess implements PlayerDAO {
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
                     "INNER JOIN Locality loc on player.home = loc.cityName " +
-                    "LEFT JOIN Team team ON player.team = team.number " +
+                    "LEFT JOIN Team team ON player.team = team.serialNumber " +
                     "LEFT JOIN Club club ON club.serialNumber = team.club " +
                     "order by player.team";
 
