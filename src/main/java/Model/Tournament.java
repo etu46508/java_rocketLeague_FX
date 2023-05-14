@@ -7,55 +7,24 @@ import java.util.Random;
 public class Tournament {
     private String wording;
     private LocalDate StartDate;
-    private LocalDate departureHours;
+    private Integer departureHour;
     private int nbTeams;
     private Locality location;
     private String streetAndNumber;
     private int nbSeats;
     private Ranking [] ranking;
 
-    public Tournament(String wording, LocalDate startDate, LocalDate departureHours, int nbTeams, Locality location, String streetAndNumber, Ranking[] ranking){
+    public Tournament(String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSeats,Locality location){
         setWording(wording);
-        setDepartureHours(departureHours);
-        setStartDate(startDate);
-        setNbTeams(nbTeams);
-        setLocation(location);
-        setStreetAndNumber(streetAndNumber);
-        setRanking(ranking);
-        nbSeats = -1;
-    }
-
-    public Tournament(String wording, LocalDate startDate, LocalDate departureHours, int nbTeams, Locality location, String streetAndNumber, int nbSeats, Ranking[] ranking){
-        setWording(wording);
-        setDepartureHours(departureHours);
+        setDepartureHour(departureHour);
         setStartDate(startDate);
         setNbTeams(nbTeams);
         setLocation(location);
         setStreetAndNumber(streetAndNumber);
         setNbSeats(nbSeats);
-        setRanking(ranking);
     }
 
-    public Tournament(String wording, LocalDate startDate, LocalDate departureHours, int nbTeams, Locality location, String streetAndNumber, int nbSeats){
-        setWording(wording);
-        setDepartureHours(departureHours);
-        setStartDate(startDate);
-        setNbTeams(nbTeams);
-        setLocation(location);
-        setStreetAndNumber(streetAndNumber);
-        setNbSeats(nbSeats);
-        ranking = new Ranking[nbTeams];
-    }
 
-    public Tournament(String wording, LocalDate startDate, LocalDate departureHours, int nbTeams, Locality location, int nbSeats){
-        setWording(wording);
-        setDepartureHours(departureHours);
-        setStartDate(startDate);
-        setNbTeams(nbTeams);
-        setNbSeats(nbSeats);
-        setLocation(location);
-        streetAndNumber = "";
-    }
 
     public int getNbTeams() {
         return nbTeams;
@@ -65,8 +34,12 @@ public class Tournament {
         return nbSeats;
     }
 
-    public LocalDate getDepartureHours() {
-        return departureHours;
+    public Integer getDepartureHour() {
+        return departureHour;
+    }
+
+    public void setDepartureHour(Integer departureHour) {
+        this.departureHour = departureHour;
     }
 
     public LocalDate getStartDate() {
@@ -95,9 +68,6 @@ public class Tournament {
         }
     }
 
-    public void setDepartureHours(LocalDate departureHours) {
-        this.departureHours = departureHours;
-    }
 
     public void setLocation(Locality location) {
         this.location = location;

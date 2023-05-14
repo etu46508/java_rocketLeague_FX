@@ -63,4 +63,17 @@ public class Manager {
         return teamAccess.getTeamNumber(wordingTeam);
     }
 
+
+
+    public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
+        return tournamentAccess.getTournementOfAMonth(numMonth);
+    }
+
+    public ArrayList<Tournament>  getAllTournament () throws Exception{
+        return tournamentAccess.getAllTournament();
+    }
+
+
+
+
 }

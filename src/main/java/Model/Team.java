@@ -1,11 +1,14 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Team {
     private Integer number;
     private String wordingTeam;
     private String nameCoach;
     private Club club;
-    private Player [] players;
+    private ArrayList<Player> playersTeam;
 
 
     public Team(Integer number, String wordingTeam,String nameCoach,Club club){
@@ -13,7 +16,14 @@ public class Team {
         setWordingTeam(wordingTeam);
         setClub(club);
         setNameCoach(nameCoach);
-        players = new Player[3];
+        playersTeam = new ArrayList<>();
+    }
+    public Team(Integer number, String wordingTeam,String nameCoach,Club club,Player... players){
+        setNumber(number);
+        setWordingTeam(wordingTeam);
+        setClub(club);
+        setNameCoach(nameCoach);
+        setPlayers(players);
     }
 
     public void setWordingTeam(String wordingTeam) {
@@ -45,15 +55,13 @@ public class Team {
         return nameCoach;
     }
 
-    public Player[] getPlayers() {
-        return players;
+    public ArrayList<Player> getPlayersOfTeam() {
+        return playersTeam;
     }
 
     public void setPlayers(Player[] players) {
-        this.players = players;
+        Collections.addAll(this.playersTeam, players);
     }
-
-
 
 
     public void setNameCoach(String nameCoach) {
@@ -63,7 +71,7 @@ public class Team {
     public String toString(){
         StringBuilder output = new StringBuilder();
         output.append("L'équipe ").append(club.getName()).append(" a pour Coach ").append(nameCoach).append("\nLes joureurs actuels sont :\n");
-        for(Player player : players){
+        for(Player player : playersTeam){
             output.append("-").append(player.getPseudo()).append("\n");
         }
         return output.toString();
