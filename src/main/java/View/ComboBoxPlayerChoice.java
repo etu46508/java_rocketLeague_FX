@@ -21,18 +21,16 @@ import Controller.Controller;
 
 public class ComboBoxPlayerChoice {
     private final Controller controller;
-    private Stage choicePlayerStage;
     private ComboBox<String> playerComboBox;
-    private Scene choicePlayerScene;
+
     public ComboBoxPlayerChoice() throws Exception {
         controller = new Controller();
-        choicePlayerStage = new Stage();
-
     }
 
 
 
     public void openChoicePlayer(Stage primaryStage,String nextOpen) throws Exception {
+        Stage choicePlayerStage = new Stage();
         ArrayList<String> pseudoPlayers = controller.getAllPseudo();
 
         BorderPane pageLayout = new BorderPane();
@@ -55,7 +53,7 @@ public class ComboBoxPlayerChoice {
         validationButton.setDisable(true);
 
         ButtonFactory buttonFactory = new ButtonFactory();
-        Button returnButton = buttonFactory.buttonCreation(choicePlayerStage,choicePlayerScene,"close page");
+        Button returnButton = buttonFactory.buttonCreation(choicePlayerStage,null,"close page");
 
 
         playerComboBox.setOnAction(event -> validationButton.setDisable(false));
@@ -98,7 +96,6 @@ public class ComboBoxPlayerChoice {
         pageLayout.setBottom(buttonLayout);
 
         Scene choicePlayerScene = new Scene(pageLayout);
-
 
         choicePlayerStage.initModality(Modality.APPLICATION_MODAL);
         choicePlayerStage.setTitle("Combo box player");

@@ -48,6 +48,7 @@ public class FormularyPlayer {
 
 
     public void openFormulary(Stage primaryStage,String pseudoPlayer) throws Exception {
+        formularyStage = new Stage();
 
         GridPane formularyLayout = new GridPane();
         formularyLayout.setAlignment(Pos.CENTER);
@@ -168,7 +169,7 @@ public class FormularyPlayer {
         }
 
         Scene formularyScene = new Scene(formularyLayout);
-        formularyStage = new Stage();
+
         formularyStage.setTitle("formulary add");
         formularyStage.initModality(Modality.APPLICATION_MODAL);
 

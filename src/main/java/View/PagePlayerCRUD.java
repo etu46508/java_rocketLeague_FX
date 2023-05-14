@@ -1,6 +1,6 @@
 package View;
 
-import View.Utility.ReturnMenuButton;
+import View.Utility.ButtonFactory;
 import View.Utility.TitleOfPage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,10 +23,11 @@ public class PagePlayerCRUD  {
         contentPane.setVgap(50);
         contentPane.setHgap(50);
 
-        Button button1 = createButton("Create a Player");
-        Button button2 = createButton("Read a Player");
-        Button button3 = createButton("Update a Player");
-        Button button4 = createButton("Delete a Player");
+        ButtonFactory buttonFactory = new ButtonFactory();
+        Button button1 = buttonFactory.buttonCreation(null,null,"next page","Create a Player");
+        Button button2 = buttonFactory.buttonCreation(null,null,"next page","Read a Player");
+        Button button3 = buttonFactory.buttonCreation(null,null,"next page","Update a Player");
+        Button button4 = buttonFactory.buttonCreation(null,null,"next page","Delete a Player");
 
         contentPane.add(button1, 0, 0);
         contentPane.add(button2, 0, 1);
@@ -36,8 +37,9 @@ public class PagePlayerCRUD  {
         BorderPane centerPanel = new BorderPane();
         centerPanel.setLeft(contentPane);
 
-        ReturnMenuButton returnButton = new ReturnMenuButton();
-        BorderPane eastPanel = returnButton.returnMenu(primaryStage, menuScene);
+        Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
+        BorderPane eastPanel = new BorderPane();
+        eastPanel.setRight(returnButton);
 
         root.setTop(titlePane);
         root.setCenter(centerPanel);
@@ -85,13 +87,6 @@ public class PagePlayerCRUD  {
             }
         });
 
-
     }
 
-    private Button createButton(String text) {
-        Button button = new Button(text);
-        button.setPrefSize(200, 100);
-        button.setStyle("-fx-background-color: darkgrey; -fx-text-fill: white; -fx-border-color: black; -fx-font-size: 20px");
-        return button;
-    }
 }

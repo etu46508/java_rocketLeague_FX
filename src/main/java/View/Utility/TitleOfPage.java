@@ -10,7 +10,6 @@ public class TitleOfPage {
 
     public StackPane createTitle(String text,String type){
         StackPane titlePane = new StackPane();
-
         Label title = new Label(text);
 
         if(type.equals("menu")){

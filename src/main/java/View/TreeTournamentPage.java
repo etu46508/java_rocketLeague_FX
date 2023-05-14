@@ -3,7 +3,7 @@ package View;
 import Model.Ranking;
 import Model.Team;
 import Model.Tournament;
-import View.Utility.ReturnMenuButton;
+import View.Utility.ButtonFactory;
 import View.Utility.TitleOfPage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -90,8 +90,10 @@ public class TreeTournamentPage {
 
 
         // Button retour au menu
-        ReturnMenuButton returnButton = new ReturnMenuButton();
-        BorderPane eastPanel = returnButton.returnMenu(primaryStage, menuScene);
+        ButtonFactory buttonFactory = new ButtonFactory();
+        Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
+        BorderPane eastPanel = new BorderPane();
+        eastPanel.setRight(returnButton);
 
         // Button lancer le tirage
         drawButton = new Button("lancer le tirage");
