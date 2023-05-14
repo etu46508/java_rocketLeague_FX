@@ -2,6 +2,7 @@ package View;
 
 import Controller.Controller;
 import Model.Player;
+import View.Utility.ButtonFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ public class FormularyPlayer {
     private final ArrayList<Integer> years,months,days, yearWorldChampionshipFull;
     private TextField pseudoTextField,surnameAndNameTextField,nationalityTextField;
     private Stage formularyStage;
+    private Scene formularyScene;
     private ComboBox<Integer> yearComboBox,monthComboBox,dayComboBox,yearWorldChampionComboBox;
     private CheckBox keyboardButton;
     private ComboBox<String> localitiesComboBox, teamsAvailableComboBox;
@@ -112,8 +114,8 @@ public class FormularyPlayer {
         Button validerButton = new Button("Valider");
         formularyLayout.add(validerButton,0,10);
 
-        Button returnButton = new Button("Return");
-        returnButton.setOnAction(e -> formularyStage.close());
+        ButtonFactory buttonFactory = new ButtonFactory();
+        Button returnButton = buttonFactory.buttonCreation(formularyStage,formularyScene,"close page");
         formularyLayout.add(returnButton,10,10);
 
 

@@ -1,6 +1,7 @@
 package View;
 
 
+import View.Utility.ButtonFactory;
 import View.Utility.PlayerSheetDisplay;
 import View.Utility.VerificationPlayerDeletion;
 import javafx.geometry.Insets;
@@ -20,8 +21,9 @@ import Controller.Controller;
 
 public class ComboBoxPlayerChoice {
     private final Controller controller;
-    Stage choicePlayerStage;
+    private Stage choicePlayerStage;
     private ComboBox<String> playerComboBox;
+    private Scene choicePlayerScene;
     public ComboBoxPlayerChoice() throws Exception {
         controller = new Controller();
         choicePlayerStage = new Stage();
@@ -52,12 +54,9 @@ public class ComboBoxPlayerChoice {
         Button validationButton = new Button("Validation");
         validationButton.setDisable(true);
 
-        Button returnButton = new Button("Return");
+        ButtonFactory buttonFactory = new ButtonFactory();
+        Button returnButton = buttonFactory.buttonCreation(choicePlayerStage,choicePlayerScene,"close page");
 
-        buttonLayout.setRight(returnButton);
-        buttonLayout.setLeft(validationButton);
-        pageLayout.setTop(comboBoxLayout);
-        pageLayout.setBottom(buttonLayout);
 
         playerComboBox.setOnAction(event -> validationButton.setDisable(false));
 
@@ -92,11 +91,15 @@ public class ComboBoxPlayerChoice {
             });
         }
 
-        returnButton.setOnAction(event -> choicePlayerStage.close());
-        System.out.println(playerComboBox.getSelectionModel().getSelectedItem());
 
+        buttonLayout.setRight(returnButton);
+        buttonLayout.setLeft(validationButton);
+        pageLayout.setTop(comboBoxLayout);
+        pageLayout.setBottom(buttonLayout);
 
         Scene choicePlayerScene = new Scene(pageLayout);
+
+
         choicePlayerStage.initModality(Modality.APPLICATION_MODAL);
         choicePlayerStage.setTitle("Combo box player");
         choicePlayerStage.setScene(choicePlayerScene);
