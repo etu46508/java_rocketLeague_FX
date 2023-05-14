@@ -59,7 +59,6 @@ public class Menu  {
         primaryStage.setScene(menuScene);
         primaryStage.show();
 
-
         pageResearch = new ResearchPage();
         buttonPageResearch.setOnAction(event -> {
             try {

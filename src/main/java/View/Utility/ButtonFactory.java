@@ -26,8 +26,4 @@ public class ButtonFactory {
         return button;
     }
 }
-/*
-    BorderPane eastPanel = new BorderPane();
-        eastPanel.setRight(returnButton);
-                return eastPanel;
-                */
+

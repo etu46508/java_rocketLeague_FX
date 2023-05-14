@@ -20,6 +20,7 @@ public class TitleOfPage {
             titlePane.setStyle("-fx-background-color: grey;-fx-border-color: black ");
             title.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
             title.setStyle("-fx-text-fill: white;");
+
         }else if(type.equals("secondary page")){
             titlePane.setPrefHeight(100);
             titlePane.setMinHeight(50);
@@ -28,14 +29,15 @@ public class TitleOfPage {
             titlePane.setStyle("-fx-background-color: lightgrey;-fx-border-color: darkgrey ");
             title.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
             title.setStyle("-fx-text-fill: black;");
+
         } else if (type.equals("player display")) {
             titlePane.setPrefHeight(30);
             titlePane.setAlignment(Pos.CENTER);
             title.setStyle("-fx-font-size: 36; -fx-font-weight: bold;");
 
         }
-        titlePane.getChildren().add(title);
 
+        titlePane.getChildren().add(title);
         return titlePane;
     }
 

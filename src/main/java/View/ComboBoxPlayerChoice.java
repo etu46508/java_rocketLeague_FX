@@ -55,7 +55,6 @@ public class ComboBoxPlayerChoice {
         ButtonFactory buttonFactory = new ButtonFactory();
         Button returnButton = buttonFactory.buttonCreation(choicePlayerStage,null,"close page");
 
-
         playerComboBox.setOnAction(event -> validationButton.setDisable(false));
 
         if(Objects.equals(nextOpen, "update")){
@@ -89,16 +88,15 @@ public class ComboBoxPlayerChoice {
             });
         }
 
-
         buttonLayout.setRight(returnButton);
         buttonLayout.setLeft(validationButton);
         pageLayout.setTop(comboBoxLayout);
         pageLayout.setBottom(buttonLayout);
 
         Scene choicePlayerScene = new Scene(pageLayout);
-
         choicePlayerStage.initModality(Modality.APPLICATION_MODAL);
         choicePlayerStage.setTitle("Combo box player");
+
         choicePlayerStage.setScene(choicePlayerScene);
         choicePlayerStage.initOwner(primaryStage);
         choicePlayerStage.showAndWait();
