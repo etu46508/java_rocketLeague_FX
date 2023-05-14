@@ -1,6 +1,7 @@
 package View;
 
 import View.Utility.ButtonFactory;
+import View.Utility.MovementThread;
 import View.Utility.TitleOfPage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -52,12 +53,20 @@ public class Menu  {
         root.setCenter(contentPane);
         root.setBottom(southPanel);
 
+        //création du thread
+        MovementThread movementThread = new MovementThread(root);
+
         menuScene = new Scene(root, 1000, 800);
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Programme Java");
-
+        primaryStage.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
         primaryStage.setScene(menuScene);
         primaryStage.show();
+
+        //lancement du thread après .show() ?
+        movementThread.start();
 
         pageResearch = new ResearchPage();
         buttonPageResearch.setOnAction(event -> {
