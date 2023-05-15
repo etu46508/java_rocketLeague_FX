@@ -103,7 +103,7 @@ public class Manager {
         return clubAccess.getAllClubs();
     }
 
-    public ArrayList<String> getTournamentWonByClub(int club)throws Exception{
+    public ArrayList<String> getTournamentWonByClub(Integer club)throws Exception{
         return tournamentAccess.getTournamentWonByClub(club);
     }
 
