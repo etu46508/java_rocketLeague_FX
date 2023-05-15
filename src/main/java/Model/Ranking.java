@@ -8,6 +8,7 @@ public class Ranking {
     private Tournament tournament;
     private Team team;
 
+    //region constructor
     public Ranking(Integer position, Integer nbGoalScored, Integer nbGoalConceded, Integer cashPrize,Tournament tournament, Team team){
         setPosition(position);
         setTeam(team);
@@ -16,7 +17,10 @@ public class Ranking {
         setTournament(tournament);
        setCashPrize(cashPrize);
     }
+    //endregion
 
+
+    //region getters and setters
 
     public void setPosition(Integer position) {
         if(position > 0){
@@ -29,7 +33,6 @@ public class Ranking {
         return position;
     }
 
-
     public void setNbGoalScored(Integer nbGoalScored) {
         if(nbGoalScored > 0){
             this.nbGoalScored = nbGoalScored;
@@ -41,7 +44,6 @@ public class Ranking {
         return nbGoalScored;
     }
 
-
     public void setNbGoalConceded(Integer nbGoalConceded) {
         if(nbGoalConceded > 0){
             this.nbGoalConceded = nbGoalConceded;
@@ -52,8 +54,6 @@ public class Ranking {
     public Integer getNbGoalConceded() {
         return nbGoalConceded;
     }
-
-
 
     public void setCashPrize(Integer cashPrize) {
         if(cashPrize == null || cashPrize < 0){
@@ -74,7 +74,6 @@ public class Ranking {
         return tournament;
     }
 
-
     public Team getTeam() {
         return team;
     }
@@ -82,17 +81,5 @@ public class Ranking {
         this.team = team;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //endregion
 }

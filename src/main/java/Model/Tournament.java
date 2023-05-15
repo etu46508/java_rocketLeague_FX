@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class Tournament {
@@ -11,8 +12,10 @@ public class Tournament {
     private Locality location;
     private String streetAndNumber;
     private Integer nbSpectator;
-    private Ranking [] ranking;
+    private Ranking[] ranking;
+    private ArrayList<Ranking> rankings;
 
+    //region constructors
     public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSpectator,Locality location){
         setTournamentNumber(tournamentNumber);
         setWording(wording);
@@ -33,6 +36,7 @@ public class Tournament {
         setStreetAndNumber(streetAndNumber);
         setNbSpectator(nbSpectator);
     }
+
     public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams){
         setTournamentNumber(tournamentNumber);
         setWording(wording);
@@ -41,45 +45,69 @@ public class Tournament {
         setNbTeams(nbTeams);
     }
 
+    //endregion
 
-    public Integer getTournamentNumber() {
-        return tournamentNumber;
-    }
+
+    //region getters and setters
 
     public void setTournamentNumber(Integer tournamentNumber) {
         this.tournamentNumber = tournamentNumber;
     }
-
-    public int getNbTeams() {
-        return nbTeams;
+    public Integer getTournamentNumber() {
+        return tournamentNumber;
     }
 
-    public Integer getNbSpectator() {
-        return nbSpectator;
+    public void setWording(String wording) {
+        this.wording = wording;
+    }
+    public String getWording() {
+        return wording;
     }
 
-    public Integer getDepartureHour() {
-        return departureHour;
+    public void setStartDate(LocalDate startDate) {
+        StartDate = startDate;
+    }
+    public LocalDate getStartDate() {
+        return StartDate;
     }
 
     public void setDepartureHour(Integer departureHour) {
         this.departureHour = departureHour;
     }
-
-    public LocalDate getStartDate() {
-        return StartDate;
+    public Integer getDepartureHour() {
+        return departureHour;
     }
 
-    public Locality getLocation() {
-        return location;
+    public void setNbTeams(Integer nbTeams) {
+        if(nbTeams > 1){
+            this.nbTeams = nbTeams;
+        }else {
+            this.nbTeams = 8;
+        }
+    }
+    public Integer getNbTeams() {
+        return nbTeams;
     }
 
+    public void setNbSpectator(Integer nbSpectator) {
+        this.nbSpectator = nbSpectator;
+    }
+    public Integer getNbSpectator() {
+        return nbSpectator;
+    }
+
+    public void setStreetAndNumber(String streetAndNumber) {
+        this.streetAndNumber = streetAndNumber;
+    }
     public String getStreetAndNumber() {
         return streetAndNumber;
     }
 
-    public String getWording() {
-        return wording;
+    public void setLocation(Locality location) {
+        this.location = location;
+    }
+    public Locality getLocation() {
+        return location;
     }
 
     public Ranking[] getRanking() {
@@ -92,38 +120,7 @@ public class Tournament {
         }
     }
 
-
-    public void setLocation(Locality location) {
-        this.location = location;
-    }
-
-    public void setNbTeams(int nbTeams) {
-        if(nbTeams > 1){
-            this.nbTeams = nbTeams;
-        }else {
-            this.nbTeams = 8;
-        }
-    }
-
-    public void setNbSpectator(Integer nbSpectator) {
-        this.nbSpectator = nbSpectator;
-    }
-
-    public void setNbTeams(Integer nbTeams) {
-        this.nbTeams = nbTeams;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        StartDate = startDate;
-    }
-
-    public void setStreetAndNumber(String streetAndNumber) {
-        this.streetAndNumber = streetAndNumber;
-    }
-
-    public void setWording(String wording) {
-        this.wording = wording;
-    }
+    //endregion
 
 
 }

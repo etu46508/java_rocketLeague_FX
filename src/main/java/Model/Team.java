@@ -10,6 +10,7 @@ public class Team {
     private Club club;
     private ArrayList<Player> playersTeam;
 
+    //region constructors
     public Team(Integer number, String wordingTeam,String nameCoach,Club club){
         setNumber(number);
         setWordingTeam(wordingTeam);
@@ -24,6 +25,10 @@ public class Team {
         setNameCoach(nameCoach);
         setPlayers(players);
     }
+    //endregion
+
+
+    //region getters and setters
 
     public void setNumber(Integer number) {
         this.number = number;
@@ -32,15 +37,12 @@ public class Team {
         return number;
     }
 
-
     public void setWordingTeam(String wordingTeam) {
         this.wordingTeam = wordingTeam;
     }
-
     public String getWordingTeam() {
         return wordingTeam;
     }
-
 
     public void setNameCoach(String nameCoach) {
         this.nameCoach = nameCoach;
@@ -49,7 +51,6 @@ public class Team {
         return nameCoach;
     }
 
-
     public Club getClub() {
         return club;
     }
@@ -57,20 +58,19 @@ public class Team {
         this.club = club;
     }
 
-
-
     public ArrayList<Player> getPlayersOfTeam() {
         return playersTeam;
     }
-
     public void setPlayers(Player[] players) {
         Collections.addAll(this.playersTeam, players);
     }
 
+    //endregion
+
 
     public String toString(){
         StringBuilder output = new StringBuilder();
-        output.append("L'équipe ").append(club.getName()).append(" a pour Coach ").append(nameCoach).append("\nLes joureurs actuels sont :\n");
+        output.append("The team ").append(club.getName()).append(" has for coach ").append(nameCoach).append("\n the players are :\n");
         for(Player player : playersTeam){
             output.append("-").append(player.getPseudo()).append("\n");
         }

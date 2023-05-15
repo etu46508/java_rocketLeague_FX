@@ -9,29 +9,34 @@ public class Club {
     private String CEO;
     private LocalDate creationDate;
 
+    //endregion constructor
     public Club(Integer serialNumber, String name, String CEO, LocalDate date){
         setSerialNumber(serialNumber);
         setName(name);
         setCEO(CEO);
         setCreationDate(date);
     }
+    //endregion
 
-    //region getters & setters
+
+    //region getters and setters
 
     public void setSerialNumber(Integer serialNumber) {
         this.serialNumber = serialNumber;
     }
-
     public Integer getSerialNumber() {
         return serialNumber;
     }
 
-    public String getName() {return name;}
     public void setName(String name) {this.name = name;}
-    public String getCEO() {return CEO;}
+    public String getName() {return name;}
+
     public void setCEO(String CEO) {this.CEO = CEO;}
-    public LocalDate getCreationDate() {return creationDate;}
+    public String getCEO() {return CEO;}
+
     public void setCreationDate(LocalDate creationDate) {this.creationDate = creationDate;}
+    public LocalDate getCreationDate() {return creationDate;}
+
     //endregion
 
 }

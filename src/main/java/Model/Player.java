@@ -14,7 +14,7 @@ public class Player {
     private Locality home;
     private Team team;
 
-
+    //region constructors
     public Player(String pseudo, String name, LocalDate birthdate, String nationality, Integer playKeyboard, Integer yearWorldChampion, Locality home, Team team){
         setPseudo(pseudo);
         setName(name);
@@ -35,8 +35,9 @@ public class Player {
         setHomeName(homeName);
         setTeamNum(teamNum);
     }
+    //endregion
 
-
+    //region getters and setters
 
     public String getPseudo() {
         return pseudo;
@@ -134,6 +135,7 @@ public class Player {
         this.teamNum = teamNum;
     }
 
+    //endregion
 
     @Override
     public String toString() {
