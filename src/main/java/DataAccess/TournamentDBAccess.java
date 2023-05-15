@@ -91,13 +91,15 @@ public class TournamentDBAccess implements TournamentDAO{
         int tournamentNumber;
         try{
 
-            String sql = "SELECT number"+
+            String sql = "SELECT number "+
                     "FROM Tournament tournament " +
                     "WHERE wordingTournament = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet data = statement.executeQuery();
+
             statement.setString(1, wordingTournament);
+
+            ResultSet data = statement.executeQuery();
 
             data.next();
             tournamentNumber = data.getInt(1);

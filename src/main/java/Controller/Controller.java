@@ -46,7 +46,7 @@ public class Controller {
     }
 
 
-    public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
+    public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
         return manager.getTournementOfAMonth(numMonth);
     }
     public Tournament getTournament (String wordingTournament) throws Exception{

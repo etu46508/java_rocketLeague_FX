@@ -4,16 +4,17 @@ import Controller.Controller;
 import Model.Ranking;
 import View.Utility.ButtonFactory;
 import View.Utility.TitleOfPage;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -68,23 +69,31 @@ public class ResearchTournamentRanking {
         monthComboBox.setOnAction(event -> {
             ArrayList<String> tournaments;
             try {
-                System.out.println(monthComboBox.getValue() + monthComboBox.getSelectionModel().getSelectedIndex());
-                tournaments = new ArrayList<>(controller.getTournementOfAMonth(monthComboBox.getSelectionModel().getSelectedIndex() + 1));
+                tournaments = new ArrayList<>(controller.getTournamentOfAMonth(monthComboBox.getSelectionModel().getSelectedIndex() + 1));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
             tournamentComboBox.getItems().setAll(tournaments);
             tournamentComboBox.setDisable(false);
+
         });
 
         tournamentComboBox.setOnAction(event -> validationButton.setDisable(false));
+
+        validationButton.setOnAction(event -> {
+            try {
+                rankingDisplay(researchStage,tournamentComboBox.getValue());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         researchLayout.setTop(titlePane);
         researchLayout.setCenter(comboBoxLayout);
         researchLayout.setBottom(buttonLayout);
 
-        Scene researchScene = new Scene(researchLayout);
+        Scene researchScene = new Scene(researchLayout,300,200);
         researchStage.initModality(Modality.APPLICATION_MODAL);
         researchStage.setTitle("Combo box player");
 
@@ -94,11 +103,100 @@ public class ResearchTournamentRanking {
 
     }
 
-    private void rankingDisplay(String wordingTournament) throws Exception {
+
+
+    private void rankingDisplay(Stage researchStage,String wordingTournament) throws Exception {
         Integer tournamentNumber = controller.getTournamentNumber(wordingTournament);
         ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(tournamentNumber);
-        TableView tableView = new TableView();
+
+        TableView<InfoRank> tableView = new TableView<>();
+
+        TableColumn<InfoRank, String> positionColumn = new TableColumn<>("Position");
+        positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+
+        TableColumn<InfoRank, String> goalScoredColumn = new TableColumn<>("Goal scored");
+        goalScoredColumn.setCellValueFactory(new PropertyValueFactory<>("goalScored"));
+
+        TableColumn<InfoRank, String> goalConcededColumn = new TableColumn<>("Goal conceded");
+        goalConcededColumn.setCellValueFactory(new PropertyValueFactory<>("goalConceded"));
+
+        TableColumn<InfoRank, String> cashPrizeColumn = new TableColumn<>("cash prize");
+        cashPrizeColumn.setCellValueFactory(new PropertyValueFactory<>("cashPrize"));
+
+        TableColumn<InfoRank, String> teamColumn = new TableColumn<>("Team");
+        teamColumn.setCellValueFactory(new PropertyValueFactory<>("nameTeam"));
+
+        TableColumn<InfoRank, String> nameCoachColumn = new TableColumn<>("Name of coach");
+        nameCoachColumn .setCellValueFactory(new PropertyValueFactory<>("nameCoach"));
+
+        TableColumn<InfoRank, String> clubColumn = new TableColumn<>("Club");
+        clubColumn.setCellValueFactory(new PropertyValueFactory<>("wordingClub"));
+
+        tableView.getColumns().addAll(positionColumn,teamColumn,nameCoachColumn,clubColumn,goalScoredColumn,goalConcededColumn,cashPrizeColumn);
+
+        for(Ranking rank : rankings){
+            tableView.getItems().add(new InfoRank(rank.getPosition(),
+                    rank.getNbGoalScored(),
+                    rank.getNbGoalConceded(),
+                    rank.getCashPrize(),
+                    rank.getTeam().getWordingTeam(),
+                    rank.getTeam().getNameCoach(),
+                    rank.getTeam().getClub().getName()));
+        }
+
+        VBox root = new VBox(10);
+        root.getChildren().addAll(tableView);
+        Stage rankDisplayStage = new Stage();
+        Scene rankDisplayScene = new Scene(root);
+        rankDisplayStage.initModality(Modality.APPLICATION_MODAL);
+        rankDisplayStage.setTitle("TableView ranking display");
+
+        rankDisplayStage.setScene(rankDisplayScene);
+        rankDisplayStage.initOwner(researchStage);
+        rankDisplayStage.showAndWait();
 
 
+    }
+
+
+    public static class InfoRank {
+        private final SimpleStringProperty position;
+        private final SimpleStringProperty goalScored;
+        private final SimpleStringProperty goalConceded;
+        private final SimpleStringProperty cashPrize;
+        private final SimpleStringProperty nameTeam;
+        private final SimpleStringProperty nameCoach;
+        private final SimpleStringProperty wordingClub;
+        public InfoRank(Integer position,Integer goalScored, Integer goalConceded, Integer cashPrize, String nameTeam, String nameCoach, String wordingClub){
+            this.position = new SimpleStringProperty(position.toString());
+            this.goalScored = new SimpleStringProperty(goalScored.toString());
+            this.goalConceded = new SimpleStringProperty(goalConceded.toString());
+            this.cashPrize = new SimpleStringProperty(cashPrize.toString());
+            this.nameCoach = new SimpleStringProperty(nameCoach);
+            this.nameTeam = new SimpleStringProperty(nameTeam);
+            this.wordingClub = new SimpleStringProperty(wordingClub);
+        }
+
+        public String getPosition() {
+            return position.get();
+        }
+        public String getGoalScored() {
+            return goalScored.get();
+        }
+        public String getGoalConceded() {
+            return goalConceded.get();
+        }
+        public String getCashPrize() {
+            return cashPrize.get();
+        }
+        public String getNameTeam() {
+            return nameTeam.get();
+        }
+        public String getNameCoach() {
+            return nameCoach.get();
+        }
+        public String getWordingClub() {
+            return wordingClub.get();
+        }
     }
 }

@@ -8,7 +8,7 @@ public class Ranking {
     private Tournament tournament;
     private Team team;
 
-    public Ranking(Integer position, Integer nbGoalConceded, Integer nbGoalScored, Integer cashPrize,Tournament tournament, Team team){
+    public Ranking(Integer position, Integer nbGoalScored, Integer nbGoalConceded, Integer cashPrize,Tournament tournament, Team team){
         setPosition(position);
         setTeam(team);
         setNbGoalScored(nbGoalScored);
