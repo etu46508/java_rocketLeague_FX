@@ -1,14 +1,15 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Club {
     private Integer serialNumber;
     private String name;
     private String CEO;
-    private Date creationDate;
+    private LocalDate creationDate;
 
-    public Club(Integer serialNumber,String name, String CEO, Date date){
+    public Club(Integer serialNumber, String name, String CEO, LocalDate date){
         setSerialNumber(serialNumber);
         setName(name);
         setCEO(CEO);
@@ -29,8 +30,8 @@ public class Club {
     public void setName(String name) {this.name = name;}
     public String getCEO() {return CEO;}
     public void setCEO(String CEO) {this.CEO = CEO;}
-    public Date getCreationDate() {return creationDate;}
-    public void setCreationDate(Date creationDate) {this.creationDate = creationDate;}
+    public LocalDate getCreationDate() {return creationDate;}
+    public void setCreationDate(LocalDate creationDate) {this.creationDate = creationDate;}
     //endregion
 
 }

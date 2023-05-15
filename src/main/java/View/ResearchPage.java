@@ -46,6 +46,14 @@ public class ResearchPage {
         primaryStage.setScene(researchMenu);
         primaryStage.show();
 
+        button1.setOnAction(event -> {
+            try {
+                ResearchTournamentRanking researchTournamentRanking = new ResearchTournamentRanking(primaryStage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 
 

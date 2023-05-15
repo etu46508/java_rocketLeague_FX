@@ -66,7 +66,15 @@ public class Manager {
 
 
     public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
-        return tournamentAccess.getTournementOfAMonth(numMonth);
+        return tournamentAccess.getTournamentOfAMonth(numMonth);
+    }
+
+    public Tournament getTournament (String wordingTournament) throws Exception{
+        return tournamentAccess.getTournament(wordingTournament);
+    }
+
+    public Integer getTournamentNumber (String wordingTournament) throws Exception{
+        return tournamentAccess.getTournamentNumber(wordingTournament);
     }
 
     public ArrayList<Tournament>  getAllTournament () throws Exception{
@@ -74,6 +82,9 @@ public class Manager {
     }
 
 
+    public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
+        return rankingAccess.getAllRankingOfATounament(tournamentNumber);
+    }
 
 
 }

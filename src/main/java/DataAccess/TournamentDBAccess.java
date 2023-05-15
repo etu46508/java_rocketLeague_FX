@@ -12,15 +12,15 @@ public class TournamentDBAccess implements TournamentDAO{
         connection = SingletonConnexion.getInstance();
     }
 
-    public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
+    public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
         ArrayList<String> tournaments = new ArrayList<>();
         try{
 
             String sql = "SELECT tournament.wordingTournament " +
                     "FROM tournament " +
-                    "INNER JOIN ranking ON tournament.serialNumber = ranking.tournament " +
+                    "INNER JOIN ranking ON tournament.number = ranking.tournament " +
                     "WHERE MONTH(tournament.date) = ? " +
-                    "GROUP BY tournament.serialNumber " +
+                    "GROUP BY tournament.number " +
                     "having COUNT(*) = MAX(tournament.nbTeam) ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -87,9 +87,31 @@ public class TournamentDBAccess implements TournamentDAO{
         return tournament;
     }
 
+    public Integer getTournamentNumber (String wordingTournament) throws Exception{
+        int tournamentNumber;
+        try{
+
+            String sql = "SELECT number"+
+                    "FROM Tournament tournament " +
+                    "WHERE wordingTournament = ? ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+            statement.setString(1, wordingTournament);
+
+            data.next();
+            tournamentNumber = data.getInt(1);
 
 
-    public Tournament createTournament(ResultSet data) throws Exception{
+        }catch (SQLException e){
+            throw new SQLException(e);
+        }
+        return tournamentNumber;
+    }
+
+
+
+    private Tournament createTournament(ResultSet data) throws Exception{
         Tournament  tournament;
         try {
             LocalDate date = data.getDate(2).toLocalDate();

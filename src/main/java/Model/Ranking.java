@@ -3,12 +3,12 @@ package Model;
 public class Ranking {
     private Tournament tournament;
     private Team team;
-    private int position;
-    private int nbGoalScored;
-    private int nbGoalConceded;
-    private int cashPrize;
+    private Integer position;
+    private Integer nbGoalScored;
+    private Integer nbGoalConceded;
+    private Integer cashPrize;
 
-    public Ranking(Tournament tournament, Team team, int position, int nbGoalConceded, int nbGoalScored){
+    public Ranking(Integer position, Integer nbGoalConceded, Integer nbGoalScored,Tournament tournament, Team team){
         setPosition(position);
         setTeam(team);
         setNbGoalScored(nbGoalScored);
@@ -16,7 +16,7 @@ public class Ranking {
         setTournamentWording(tournament);
         cashPrize = 0;
     }
-    public Ranking(Tournament tournament, Team team, int position, int nbGoalConceded, int nbGoalScored, int cashPrize){
+    public Ranking(Integer position, Integer nbGoalConceded, Integer nbGoalScored, Integer cashPrize,Tournament tournament, Team team){
         setPosition(position);
         setTeam(team);
         setNbGoalScored(nbGoalScored);
@@ -25,19 +25,19 @@ public class Ranking {
        setCashPrize(cashPrize);
     }
 
-    public int getCashPrize() {
+    public Integer getCashPrize() {
         return cashPrize;
     }
 
-    public int getNbGoalConceded() {
+    public Integer getNbGoalConceded() {
         return nbGoalConceded;
     }
 
-    public int getNbGoalScored() {
+    public Integer getNbGoalScored() {
         return nbGoalScored;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -50,7 +50,7 @@ public class Ranking {
         return tournament;
     }
 
-    public void setCashPrize(int cashPrize) {
+    public void setCashPrize(Integer cashPrize) {
         if(cashPrize > 0){
             this.cashPrize = cashPrize;
         }else{
@@ -58,7 +58,7 @@ public class Ranking {
         }
     }
 
-    public void setNbGoalConceded(int nbGoalConceded) {
+    public void setNbGoalConceded(Integer nbGoalConceded) {
         if(nbGoalConceded > 0){
             this.nbGoalConceded = nbGoalConceded;
         }else{
@@ -66,7 +66,7 @@ public class Ranking {
         }
     }
 
-    public void setNbGoalScored(int nbGoalScored) {
+    public void setNbGoalScored(Integer nbGoalScored) {
         if(nbGoalScored > 0){
             this.nbGoalScored = nbGoalScored;
         }else{
@@ -74,7 +74,7 @@ public class Ranking {
         }
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         if(position > 0){
             this.position = position;
         }else{

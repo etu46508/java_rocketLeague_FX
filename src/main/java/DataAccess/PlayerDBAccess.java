@@ -215,7 +215,7 @@ public class PlayerDBAccess implements PlayerDAO {
         Player player;
         try {
             LocalDate birthdate = data.getDate(3).toLocalDate();
-            Date creationDate = data.getDate(16);
+            LocalDate creationDate = data.getDate(16).toLocalDate();
             player = new Player(data.getString(1),
                     data.getString(2),
                     birthdate,

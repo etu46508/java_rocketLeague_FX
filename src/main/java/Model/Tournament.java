@@ -1,18 +1,28 @@
 package Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Random;
+
 
 public class Tournament {
     private String wording;
     private LocalDate StartDate;
-    private Integer departureHour;
+    private Integer tournamentNumber, departureHour;
     private int nbTeams;
     private Locality location;
     private String streetAndNumber;
     private int nbSeats;
     private Ranking [] ranking;
+
+    public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSeats,Locality location){
+        setTournamentNumber(tournamentNumber);
+        setWording(wording);
+        setDepartureHour(departureHour);
+        setStartDate(startDate);
+        setNbTeams(nbTeams);
+        setLocation(location);
+        setStreetAndNumber(streetAndNumber);
+        setNbSeats(nbSeats);
+    }
 
     public Tournament(String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSeats,Locality location){
         setWording(wording);
@@ -23,8 +33,22 @@ public class Tournament {
         setStreetAndNumber(streetAndNumber);
         setNbSeats(nbSeats);
     }
+    public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams){
+        setTournamentNumber(tournamentNumber);
+        setWording(wording);
+        setDepartureHour(departureHour);
+        setStartDate(startDate);
+        setNbTeams(nbTeams);
+    }
 
 
+    public Integer getTournamentNumber() {
+        return tournamentNumber;
+    }
+
+    public void setTournamentNumber(Integer tournamentNumber) {
+        this.tournamentNumber = tournamentNumber;
+    }
 
     public int getNbTeams() {
         return nbTeams;

@@ -11,12 +11,12 @@ public class TitleOfPage {
     public StackPane createTitle(String text,String type){
         StackPane titlePane = new StackPane();
         Label title = new Label(text);
-
+        titlePane.setAlignment(Pos.CENTER);
         if(type.equals("menu")){
             titlePane.setPrefHeight(100);
             titlePane.setMinHeight(50);
             titlePane.setMaxHeight(200);
-            titlePane.setAlignment(Pos.CENTER);
+
             titlePane.setStyle("-fx-background-color: grey;-fx-border-color: black ");
             title.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
             title.setStyle("-fx-text-fill: white;");
@@ -25,16 +25,18 @@ public class TitleOfPage {
             titlePane.setPrefHeight(100);
             titlePane.setMinHeight(50);
             titlePane.setMaxHeight(200);
-            titlePane.setAlignment(Pos.CENTER);
+
             titlePane.setStyle("-fx-background-color: lightgrey;-fx-border-color: darkgrey ");
             title.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
             title.setStyle("-fx-text-fill: black;");
 
         } else if (type.equals("player display")) {
             titlePane.setPrefHeight(30);
-            titlePane.setAlignment(Pos.CENTER);
-            title.setStyle("-fx-font-size: 36; -fx-font-weight: bold;");
 
+            title.setStyle("-fx-font-size: 36; -fx-font-weight: bold;");
+        } else if (type.equals("research display")){
+            titlePane.setPrefHeight(20);
+            title.setStyle("-fx-font-size: 25; -fx-font-weight: bold;");
         }
 
         titlePane.getChildren().add(title);

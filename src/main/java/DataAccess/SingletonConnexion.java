@@ -6,9 +6,9 @@ import Exception.DataException;
 public class SingletonConnexion   {
     private static Connection singletonConnexion;
 
-    private SingletonConnexion()throws DataException {
+    private SingletonConnexion() throws DataException {
         try {
-            singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "");
+            singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "Boulettedu13");
             System.out.println("Succes");
         } catch (SQLException exception) {
             throw new DataException();
@@ -18,6 +18,7 @@ public class SingletonConnexion   {
 
     public static Connection getInstance() throws DataException {
         if(singletonConnexion == null){
+
             new SingletonConnexion();
         }
         return singletonConnexion;

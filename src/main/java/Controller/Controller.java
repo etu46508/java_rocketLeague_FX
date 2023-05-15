@@ -49,8 +49,21 @@ public class Controller {
     public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
         return manager.getTournementOfAMonth(numMonth);
     }
-    public ArrayList<Tournament>  getAllTournament () throws Exception{
+    public Tournament getTournament (String wordingTournament) throws Exception{
+        return manager.getTournament(wordingTournament);
+    }
+    public Integer getTournamentNumber (String wordingTournament) throws Exception{
+        return manager.getTournamentNumber(wordingTournament);
+    }
+    public ArrayList<Tournament> getAllTournament () throws Exception{
         return manager.getAllTournament();
     }
+
+
+    public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
+        return manager.getAllRankingOfATounament(tournamentNumber);
+    }
+
+
 
 }
