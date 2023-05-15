@@ -6,6 +6,8 @@ public interface TeamDAO {
 
     ArrayList<String> getTeamsAvailable();
 
+    ArrayList<String> getWordingFullTeam();
+
     Integer getTeamNumber (String wordingTeam);
 }
 

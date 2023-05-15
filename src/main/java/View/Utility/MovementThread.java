@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
 public class MovementThread extends Thread{
-    private Rectangle pictureRectangle;
+    private final Rectangle pictureRectangle;
 
     public MovementThread (BorderPane root){
         pictureRectangle = new Rectangle(200,200);

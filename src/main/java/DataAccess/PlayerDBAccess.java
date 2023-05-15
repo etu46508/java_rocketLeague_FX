@@ -81,9 +81,23 @@ public class PlayerDBAccess implements PlayerDAO {
         return players;
     }
 
-    public ArrayList<Player> getPlayerInTeam(int numTeam){
+    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException {
+        ArrayList<String> playersInTeam = new ArrayList<>();
+        try{
+            String sql = "Select pseudo FROM Player " +
+                    "INNER JOIN team ON player.team = team.serialNumber " +
+                    "WHERE wordingTeam = ? ";
 
-        return null;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, wordingTeam);
+            ResultSet data = statement.executeQuery();
+            while(data.next()){
+                playersInTeam.add(data.getString(1));
+            }
+        }catch (SQLException exception) {
+            throw new SQLException();
+        }
+        return playersInTeam;
     }
 
 

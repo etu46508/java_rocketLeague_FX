@@ -25,7 +25,7 @@ public class ResearchPage {
 
         ButtonFactory buttonFactory = new ButtonFactory();
         Button button1 = buttonFactory.buttonCreation(null,null,"next page","Tournament Ranking");
-        Button button2 = buttonFactory.buttonCreation(null,null,"next page","Tournament won by a player");
+        Button button2 = buttonFactory.buttonCreation(null,null,"next page","Historic of a player");
         Button button3 = buttonFactory.buttonCreation(null,null,"next page","Tournament won by a club");
 
 
@@ -55,7 +55,7 @@ public class ResearchPage {
         });
         button2.setOnAction(event -> {
             try {
-                ResearchTournamentWonByClub researchTournamentWonByClub = new ResearchTournamentWonByClub(primaryStage);
+                ResearchTournamentPlayedByPlayer researchTournamentPlayedByPlayer = new ResearchTournamentPlayedByPlayer(primaryStage);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
