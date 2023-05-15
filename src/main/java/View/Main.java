@@ -9,4 +9,5 @@ public class Main extends Application{
         Menu mainPage = new Menu();
         mainPage.start();
     }
+    
 }

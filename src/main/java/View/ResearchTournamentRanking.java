@@ -98,5 +98,7 @@ public class ResearchTournamentRanking {
         Integer tournamentNumber = controller.getTournamentNumber(wordingTournament);
         ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(tournamentNumber);
         TableView tableView = new TableView();
+
+
     }
 }

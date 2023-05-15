@@ -43,7 +43,6 @@ public class Menu  {
         contentPane.add(buttonPagePlayer, 0, 1);
         contentPane.add(buttonPageTree, 1, 1);
 
-        // Création espace image
         BorderPane southPanel = new BorderPane();
         Label image = new Label("Image");
         image.setStyle("fx-font-size: 10 px;-fx-border-color: red;");
@@ -53,7 +52,7 @@ public class Menu  {
         root.setCenter(contentPane);
         root.setBottom(southPanel);
 
-        //création du thread
+
         MovementThread movementThread = new MovementThread(root);
 
         menuScene = new Scene(root, 1000, 800);
@@ -65,21 +64,22 @@ public class Menu  {
         primaryStage.setScene(menuScene);
         primaryStage.show();
 
-        //lancement du thread après .show() ?
         movementThread.start();
 
-        pageResearch = new ResearchPage();
+
         buttonPageResearch.setOnAction(event -> {
             try {
+                pageResearch = new ResearchPage();
                 pageResearch.start(primaryStage,menuScene);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
 
-        player = new PagePlayerCRUD();
+
         buttonPagePlayer.setOnAction(event -> {
             try {
+                player = new PagePlayerCRUD();
                 player.start(primaryStage,menuScene);
             } catch (Exception e) {
                 throw new RuntimeException(e);
