@@ -12,8 +12,8 @@ public class MovementThread extends Thread{
 
     public MovementThread (BorderPane root){
         pictureRectangle = new Rectangle(200,200);
-        //Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\balleRocketLeague.png");
-        Image picture = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\balleRocketLeague.png");
+        Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\balleRocketLeague.png");
+        // Image picture = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\balleRocketLeague.png");
         pictureRectangle.setFill(new ImagePattern(picture));
         root.setBottom(pictureRectangle);
     }
@@ -21,9 +21,9 @@ public class MovementThread extends Thread{
     public void run(){
         while (true){
             try{
-                Thread.sleep(50);
+                Thread.sleep(20);
                 Rotate rotate = new Rotate();
-                rotate.setAngle(20);
+                rotate.setAngle(10);
                 rotate.setPivotX(100);
                 rotate.setPivotY(100);
                 pictureRectangle.getTransforms().add(rotate);

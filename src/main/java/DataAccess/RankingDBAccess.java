@@ -29,7 +29,7 @@ public class RankingDBAccess implements RankingDAO{
                     " INNER JOIN Tournament tournament on ranking.tournament =  tournament.number " +
                     " INNER JOIN Team team on ranking.team =  team.serialNumber " +
                     " INNER JOIN Club club on team.club = club.serialNumber " +
-                    " WHERE ranking.tournament = ; " +
+                    " WHERE ranking.tournament = ? " +
                     " ORDER BY position ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
