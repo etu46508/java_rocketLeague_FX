@@ -136,14 +136,18 @@ public class TournamentDBAccess implements TournamentDAO{
             String sql = "SELECT wordingTournament, date " +
                     "FROM tournament " +
                     "INNER JOIN ranking r on tournament.number = r.tournament "+
+                    "INNER JOIN team t on club = t.club " +
                     "AND r.position = 1 "+
-                    "AND r.team = club";
+                    "AND r.team = t.serialNumber";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
             data.next();
             while(data.next()){
-                tournaments.add(data.getString(1));
+                String tournament = data.getString("wordingTournament");
+                String date = data.getString("date");
+                String tournamentWithDate = tournament + ", " + date;
+                tournaments.add(tournamentWithDate);
             }
 
         }catch (SQLException e){

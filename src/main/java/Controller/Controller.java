@@ -69,7 +69,7 @@ public class Controller {
         return manager.getAllClubsName();
     }
 
-    public ArrayList<String> getTournamentWonByClub(int club) throws Exception{
+    public ArrayList<String> getTournamentWonByClub(Integer club) throws Exception{
         return manager.getTournamentWonByClub(club);
     }
 

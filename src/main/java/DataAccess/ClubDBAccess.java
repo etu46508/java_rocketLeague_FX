@@ -37,8 +37,9 @@ public class ClubDBAccess implements ClubDAO{
         try {
             String sql = "SELECT serialNumber "+
                     "FROM club "+
-                    "WHERE name = wording";
+                    "WHERE name = ? ";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, wording);
             ResultSet data = statement.executeQuery();
             data.next();
             serialNumber = data.getInt(1);
