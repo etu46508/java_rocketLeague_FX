@@ -5,9 +5,8 @@ import View.Utility.TitleOfPage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
@@ -29,10 +28,10 @@ public class PagePlayerCRUD  {
         Button button3 = buttonFactory.buttonCreation(null,null,"next page","Update a Player");
         Button button4 = buttonFactory.buttonCreation(null,null,"next page","Delete a Player");
 
-        contentPane.add(button1, 0, 0);
-        contentPane.add(button2, 0, 1);
-        contentPane.add(button3, 0, 2);
-        contentPane.add(button4, 0, 3);
+        contentPane.add(button1, 1, 1);
+        contentPane.add(button2, 1, 2);
+        contentPane.add(button3, 1, 3);
+        contentPane.add(button4, 1, 4);
 
         BorderPane centerPanel = new BorderPane();
         centerPanel.setLeft(contentPane);
@@ -41,11 +40,16 @@ public class PagePlayerCRUD  {
         BorderPane eastPanel = new BorderPane();
         eastPanel.setRight(returnButton);
 
+        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+
         root.setTop(titlePane);
         root.setCenter(centerPanel);
         root.setBottom(eastPanel);
+        root.setBackground(new Background(background));
 
-        Scene playerCRUD = new Scene(root, 1000, 800);
+        Scene playerCRUD = new Scene(root, 1280, 720);
         primaryStage.setScene(playerCRUD);
         primaryStage.show();
 

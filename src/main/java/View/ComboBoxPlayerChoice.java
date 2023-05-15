@@ -95,7 +95,7 @@ public class ComboBoxPlayerChoice {
 
         Scene choicePlayerScene = new Scene(pageLayout);
         choicePlayerStage.initModality(Modality.APPLICATION_MODAL);
-        choicePlayerStage.setTitle("ComboBox tournament");
+        choicePlayerStage.setTitle("ComboBox player");
 
         choicePlayerStage.setScene(choicePlayerScene);
         choicePlayerStage.initOwner(primaryStage);

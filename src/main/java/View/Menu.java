@@ -7,9 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
@@ -21,7 +22,7 @@ public class Menu  {
     private ResearchPage pageResearch;
 
 
-    public void start(){
+    public void start(Stage primaryStage, Scene welcomeScene){
         BorderPane root = new BorderPane();
 
         TitleOfPage title = new TitleOfPage();
@@ -43,20 +44,20 @@ public class Menu  {
         contentPane.add(buttonPagePlayer, 0, 1);
         contentPane.add(buttonPageTree, 1, 1);
 
-        BorderPane southPanel = new BorderPane();
-        Label image = new Label("Image");
-        image.setStyle("fx-font-size: 10 px;-fx-border-color: red;");
-        southPanel.setRight(image);
+        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeague.jpg");
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+
+        BorderPane southPanel = new BorderPane();;
 
         root.setTop(titlePane);
         root.setCenter(contentPane);
         root.setBottom(southPanel);
+        root.setBackground(new Background(background));
 
+        MovementThread movementThread = new MovementThread(southPanel);
 
-        MovementThread movementThread = new MovementThread(root);
-
-        menuScene = new Scene(root, 1000, 800);
-        Stage primaryStage = new Stage();
+        menuScene = new Scene(root, 1280, 720);
         primaryStage.setTitle("Programme Java");
         primaryStage.setOnCloseRequest(event -> {
             System.exit(0);
@@ -65,7 +66,6 @@ public class Menu  {
         primaryStage.show();
 
         movementThread.start();
-
 
         buttonPageResearch.setOnAction(event -> {
             try {
