@@ -1,4 +1,5 @@
 package Controller;
+
 import Business.Manager;
 import Model.*;
 import Exception.DataException;
@@ -64,6 +65,15 @@ public class Controller {
         return manager.getAllRankingOfATounament(tournamentNumber);
     }
 
+    public ArrayList<String> getAllClubName() throws Exception{
+        return manager.getAllClubsName();
+    }
 
+    public ArrayList<String> getTournamentWonByClub(int club) throws Exception{
+        return manager.getTournamentWonByClub(club);
+    }
 
+    public Integer getSerialNumber(String club) throws Exception{
+        return manager.getSerialNumber(club);
+    }
 }

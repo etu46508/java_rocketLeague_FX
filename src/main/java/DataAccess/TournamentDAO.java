@@ -12,5 +12,5 @@ public interface TournamentDAO {
     Tournament getTournament (String wordingTournament) throws Exception;
     Integer getTournamentNumber (String wordingTournament) throws Exception;
 
-
+    ArrayList<String> getTournamentWonByClub(int club) throws Exception;
 }

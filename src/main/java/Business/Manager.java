@@ -86,5 +86,15 @@ public class Manager {
         return rankingAccess.getAllRankingOfATounament(tournamentNumber);
     }
 
+    public ArrayList<String> getAllClubsName() throws Exception{
+        return clubAccess.getAllClubs();
+    }
 
+    public ArrayList<String> getTournamentWonByClub(int club)throws Exception{
+        return tournamentAccess.getTournamentWonByClub(club);
+    }
+
+    public Integer getSerialNumber (String club) throws Exception {
+        return clubAccess.getSerialNumber(club);
+    }
 }

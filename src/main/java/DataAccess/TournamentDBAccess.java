@@ -127,4 +127,26 @@ public class TournamentDBAccess implements TournamentDAO{
         }
         return tournament;
     }
+
+    public ArrayList<String> getTournamentWonByClub (int club) throws Exception{
+        ArrayList<String> tournaments = new ArrayList<>();
+        try {
+            String sql = "SELECT wordingTournament, date " +
+                    "FROM tournament " +
+                    "INNER JOIN ranking r on tournament.number = r.tournament "+
+                    "AND r.position = 1 "+
+                    "AND r.team = club";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            while(data.next()){
+                tournaments.add(data.getString(1));
+            }
+
+        }catch (SQLException e){
+            throw new SQLException(e);
+        }
+        return tournaments;
+    }
 }

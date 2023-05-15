@@ -53,6 +53,20 @@ public class ResearchPage {
                 throw new RuntimeException(e);
             }
         });
+        button2.setOnAction(event -> {
+            try {
+                ResearchTournamentWonByClub researchTournamentWonByClub = new ResearchTournamentWonByClub(primaryStage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        button3.setOnAction(event -> {
+            try {
+                ResearchTournamentWonByClub researchTournamentWonByClub = new ResearchTournamentWonByClub(primaryStage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
