@@ -7,13 +7,13 @@ public class Tournament {
     private String wording;
     private LocalDate StartDate;
     private Integer tournamentNumber, departureHour;
-    private int nbTeams;
+    private Integer nbTeams;
     private Locality location;
     private String streetAndNumber;
-    private int nbSeats;
+    private Integer nbSpectator;
     private Ranking [] ranking;
 
-    public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSeats,Locality location){
+    public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSpectator,Locality location){
         setTournamentNumber(tournamentNumber);
         setWording(wording);
         setDepartureHour(departureHour);
@@ -21,17 +21,17 @@ public class Tournament {
         setNbTeams(nbTeams);
         setLocation(location);
         setStreetAndNumber(streetAndNumber);
-        setNbSeats(nbSeats);
+        setNbSpectator(nbSpectator);
     }
 
-    public Tournament(String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSeats,Locality location){
+    public Tournament(String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSpectator,Locality location){
         setWording(wording);
         setDepartureHour(departureHour);
         setStartDate(startDate);
         setNbTeams(nbTeams);
         setLocation(location);
         setStreetAndNumber(streetAndNumber);
-        setNbSeats(nbSeats);
+        setNbSpectator(nbSpectator);
     }
     public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams){
         setTournamentNumber(tournamentNumber);
@@ -54,8 +54,8 @@ public class Tournament {
         return nbTeams;
     }
 
-    public int getNbSeats() {
-        return nbSeats;
+    public Integer getNbSpectator() {
+        return nbSpectator;
     }
 
     public Integer getDepartureHour() {
@@ -101,16 +101,16 @@ public class Tournament {
         if(nbTeams > 1){
             this.nbTeams = nbTeams;
         }else {
-            this.nbTeams = 0;
+            this.nbTeams = 8;
         }
     }
 
-    public void setNbSeats(int nbSeats) {
-        if(nbSeats > 1){
-            this.nbSeats = nbSeats;
-        }else {
-            this.nbSeats = 0;
-        }
+    public void setNbSpectator(Integer nbSpectator) {
+        this.nbSpectator = nbSpectator;
+    }
+
+    public void setNbTeams(Integer nbTeams) {
+        this.nbTeams = nbTeams;
     }
 
     public void setStartDate(LocalDate startDate) {

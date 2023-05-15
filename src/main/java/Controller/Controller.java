@@ -3,6 +3,8 @@ package Controller;
 import Business.Manager;
 import Model.*;
 import Exception.DataException;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -22,7 +24,9 @@ public class Controller {
     public Player getAPLayer(String playerPseudo) throws Exception{
         return manager.getAPLayer(playerPseudo);
     }
-
+    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException {
+        return manager.getPseudoPlayerInTeam(wordingTeam);
+    }
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
         manager.updatePlayer(player,pseudoPlayer);
     }
@@ -37,10 +41,16 @@ public class Controller {
     public ArrayList<String> getAllNameLocalities() throws Exception{
         return manager.getAllNameLocalities();
     }
+    public Locality getALocationOfATournament(Integer numberOfTournament) throws Exception{
+        return manager.getALocationOfATournament(numberOfTournament);
+    }
 
 
     public ArrayList<String> getTeamAvailable(){
         return manager.getTeamsAvailable();
+    }
+    public ArrayList<String> getWordingFullTeam(){
+        return manager.getWordingFullTeam();
     }
     public Integer getTeamNumber (String wordingTeam){
         return manager.getTeamNumber(wordingTeam);
@@ -62,9 +72,11 @@ public class Controller {
 
 
     public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
-        return manager.getAllRankingOfATounament(tournamentNumber);
+        return manager.getAllRankingOfATournament(tournamentNumber);
     }
-
+    public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
+        return  manager.getAllRankingOfAPlayer(pseudoPlayer);
+    }
     public ArrayList<String> getAllClubName() throws Exception{
         return manager.getAllClubsName();
     }

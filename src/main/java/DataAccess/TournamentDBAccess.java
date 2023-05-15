@@ -63,29 +63,31 @@ public class TournamentDBAccess implements TournamentDAO{
         return tournaments;
     }
 
+
     public Tournament getTournament (String wordingTournament) throws Exception{
         Tournament tournament;
         try{
 
-            String sql = "SELECT wordingTournament, date, departureHoure, nbTeam, streetAndNumber, numberSpectator, " +
+            String sql = "SELECT wordingTournament, date, departureHour, nbTeam, streetAndNumber, numberSpectator, " +
                     "loc.cityName,postalCode,country " +
                     "FROM Tournament tournament " +
-                    "LEFT JOIN Locality loc ON tournament.location = loc.cityName"+
+                    "LEFT JOIN Locality loc ON tournament.location = loc.cityName "+
                     "WHERE wordingTournament = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet data = statement.executeQuery();
             statement.setString(1, wordingTournament);
+
+            ResultSet data = statement.executeQuery();
 
             data.next();
             tournament = createTournament(data);
-
 
         }catch (SQLException e){
             throw new SQLException(e);
         }
         return tournament;
     }
+
 
     public Integer getTournamentNumber (String wordingTournament) throws Exception{
         int tournamentNumber;
@@ -96,21 +98,40 @@ public class TournamentDBAccess implements TournamentDAO{
                     "WHERE wordingTournament = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-
             statement.setString(1, wordingTournament);
 
             ResultSet data = statement.executeQuery();
-
             data.next();
+
             tournamentNumber = data.getInt(1);
-
-
         }catch (SQLException e){
             throw new SQLException(e);
         }
         return tournamentNumber;
     }
 
+
+    public ArrayList<String> getTournamentWonByClub (int club) throws Exception{
+        ArrayList<String> tournaments = new ArrayList<>();
+        try {
+            String sql = "SELECT wordingTournament, date " +
+                    "FROM tournament " +
+                    "INNER JOIN ranking r on tournament.number = r.tournament "+
+                    "AND r.position = 1 "+
+                    "AND r.team = club";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+
+            data.next();
+            while(data.next()){
+                tournaments.add(data.getString(1));
+            }
+        }catch (SQLException e){
+            throw new SQLException(e);
+        }
+        return tournaments;
+    }
 
 
     private Tournament createTournament(ResultSet data) throws Exception{
@@ -130,25 +151,5 @@ public class TournamentDBAccess implements TournamentDAO{
         return tournament;
     }
 
-    public ArrayList<String> getTournamentWonByClub (int club) throws Exception{
-        ArrayList<String> tournaments = new ArrayList<>();
-        try {
-            String sql = "SELECT wordingTournament, date " +
-                    "FROM tournament " +
-                    "INNER JOIN ranking r on tournament.number = r.tournament "+
-                    "AND r.position = 1 "+
-                    "AND r.team = club";
 
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet data = statement.executeQuery();
-            data.next();
-            while(data.next()){
-                tournaments.add(data.getString(1));
-            }
-
-        }catch (SQLException e){
-            throw new SQLException(e);
-        }
-        return tournaments;
-    }
 }

@@ -9,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -95,14 +94,13 @@ public class ResearchTournamentRanking {
 
         Scene researchScene = new Scene(researchLayout,300,200);
         researchStage.initModality(Modality.APPLICATION_MODAL);
-        researchStage.setTitle("Combo box player");
+        researchStage.setTitle("Tournament choice");
 
         researchStage.setScene(researchScene);
         researchStage.initOwner(primaryStage);
         researchStage.showAndWait();
 
     }
-
 
 
     private void rankingDisplay(Stage researchStage,String wordingTournament) throws Exception {

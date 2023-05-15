@@ -3,6 +3,8 @@ package Business;
 import DataAccess.*;
 import Model.*;
 import Exception.DataException;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 public class Manager {
     private  final LocalityDAO localityAccess;
@@ -37,6 +39,10 @@ public class Manager {
         return playerAccess.getAPLayer(playerPseudo);
     }
 
+    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException{
+        return playerAccess.getPseudoPlayerInTeam(wordingTeam);
+    }
+
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
         playerAccess.updatePlayer(player,pseudoPlayer);
     }
@@ -52,13 +58,17 @@ public class Manager {
     public ArrayList<String> getAllNameLocalities() throws Exception{
         return localityAccess.getAllNameLocalities();
     }
-
+    public Locality getALocationOfATournament(Integer numberOfTournament) throws Exception{
+        return localityAccess.getALocationOfATournament(numberOfTournament);
+    }
 
 
     public ArrayList<String> getTeamsAvailable(){
         return teamAccess.getTeamsAvailable();
     }
-
+    public ArrayList<String> getWordingFullTeam(){
+        return teamAccess.getWordingFullTeam();
+    }
     public Integer getTeamNumber (String wordingTeam){
         return teamAccess.getTeamNumber(wordingTeam);
     }
@@ -82,8 +92,11 @@ public class Manager {
     }
 
 
-    public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
+    public ArrayList<Ranking> getAllRankingOfATournament(Integer tournamentNumber) throws Exception{
         return rankingAccess.getAllRankingOfATounament(tournamentNumber);
+    }
+    public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
+        return  rankingAccess.getAllRankingOfAPlayer(pseudoPlayer);
     }
 
     public ArrayList<String> getAllClubsName() throws Exception{

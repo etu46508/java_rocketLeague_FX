@@ -35,9 +35,30 @@ public class TeamDBAccess implements TeamDAO{
         return teamsAvailable;
     }
 
+    public ArrayList<String> getWordingFullTeam(){
+        ArrayList<String> teams = new ArrayList<>();
+        try{
+            String sql = "SELECT team.wordingTeam " +
+                    "FROM team  " +
+                    "LEFT JOIN player ON team.serialNumber = player.team  " +
+                    "GROUP BY Team.serialNumber  " +
+                    "HAVING count(player.team) = 3";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+            while(data.next()){
+                teams.add(data.getString(1));
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return teams;
+    }
+
 
     public Integer getTeamNumber (String wordingTeam){
-        Integer teamNumber;
+        int teamNumber;
         try{
             String sql = "SELECT serialNumber FROM team WHERE wordingTeam = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
