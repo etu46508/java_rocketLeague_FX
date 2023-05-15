@@ -21,6 +21,8 @@ public class TitleOfPage {
             title.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
             title.setStyle("-fx-text-fill: white;");
 
+
+
         }else if(type.equals("secondary page")){
             titlePane.setPrefHeight(100);
             titlePane.setMinHeight(50);
