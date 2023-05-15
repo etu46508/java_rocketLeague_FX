@@ -36,7 +36,7 @@ public class TitleOfPage {
             title.setStyle("-fx-font-size: 36; -fx-font-weight: bold;");
         } else if (type.equals("research display")){
             titlePane.setPrefHeight(20);
-            title.setStyle("-fx-font-size: 25; -fx-font-weight: bold;");
+            title.setStyle("-fx-font-size: 20; -fx-font-weight: bold;");
         }
 
         titlePane.getChildren().add(title);
