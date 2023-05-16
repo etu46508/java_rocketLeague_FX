@@ -32,7 +32,7 @@ public class TitleOfPage {
             title.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
             title.setStyle("-fx-text-fill: black;");
 
-        } else if (type.equals("player display")) {
+        } else if (type.equals("display")) {
             titlePane.setPrefHeight(30);
             title.setStyle("-fx-font-size: 36; -fx-font-weight: bold;");
 

@@ -9,6 +9,8 @@ import Exception.DeletePlayerException;
 import Exception.UpdateException;
 import Exception.AddPlayerException;
 import Model.Team;
+import View.Utility.ExceptionDisplay;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,18 +22,17 @@ public class PlayerDBAccess implements PlayerDAO {
     }
 
     public Player getAPLayer(String playerPseudo) throws Exception{
-        Player player;
+        Player player = null;
         try{
-
-            String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship,"+
-                    "loc.cityName,postalCode,country," +
-                    "team, wordingTeam, nameCoach," +
+            String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship, "+
+                    "loc.cityName,postalCode,country, " +
+                    "team, wordingTeam, nameCoach, " +
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
-                    "INNER JOIN Locality loc on player.home = loc.cityName " +
+                    "INNER JOIN Locality loc ON player.home = loc.cityName " +
                     "LEFT JOIN Team team ON player.team = team.serialNumber " +
                     "LEFT JOIN Club club ON club.serialNumber = team.club " +
-                    "WHERE pseudo = ?";
+                    "WHERE pseudo = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -39,13 +40,14 @@ public class PlayerDBAccess implements PlayerDAO {
 
             ResultSet data = statement.executeQuery();
 
-            data.next();
-            player = createPlayer(data);
+            while(data.next()){
+                player = createPlayer(data);
+            }
 
         }catch (SQLException e){
             throw new SQLException(e);
         }catch (Exception e){
-            throw new PlayerException();
+            throw new Exception(e);
         }
         return player;
     }
@@ -76,7 +78,6 @@ public class PlayerDBAccess implements PlayerDAO {
 
         }catch (SQLException exception){
             throw new PlayerException();
-
         }
         return players;
     }
@@ -128,23 +129,19 @@ public class PlayerDBAccess implements PlayerDAO {
             statement.executeUpdate();
 
         }catch (Exception exception){
-            throw new AddPlayerException(player);
-
+            new ExceptionDisplay( new AddPlayerException(player));
         }
     }
 
     public void deletePlayer(String pseudoPlayer) throws Exception{
         try{
             String sql = "DELETE FROM Player where pseudo = ?";
-
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,pseudoPlayer);
             statement.executeUpdate();
 
-            System.out.println("Player supprimé");
-
         }catch (SQLException exception){
-            throw new DeletePlayerException();
+            throw new SQLException(exception);
         }
     }
 

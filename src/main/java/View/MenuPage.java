@@ -1,22 +1,24 @@
 package View;
 
 import View.Utility.ButtonFactory;
+import View.Utility.ExceptionDisplay;
 import View.Utility.MovementThread;
 import View.Utility.TitleOfPage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
-public class Menu  {
+public class MenuPage{
 
     private Scene menuScene;
     private PagePlayerCRUD player;
     private TreeTournamentPage pageRandomizer;
     private ResearchPage pageResearch;
+
 
 
     public void start(Stage primaryStage, Scene welcomeScene){
@@ -29,6 +31,13 @@ public class Menu  {
         contentPane.setAlignment(Pos.CENTER);
         contentPane.setVgap(60);
         contentPane.setHgap(75);
+
+        MenuItem menuItem1 = new MenuItem("IDK");
+        MenuItem menuItemResearch = new MenuItem("Research");
+        MenuItem menuItemPagePlayer = new MenuItem("Player CRUD");
+        MenuItem menuItemPageTree = new MenuItem("Tournament tree");
+
+        MenuButton menuButton = new MenuButton("Options", null, menuItem1,menuItemResearch, menuItemPagePlayer,menuItemPageTree);
 
         ButtonFactory buttonFactory = new ButtonFactory();
         Button button1 = buttonFactory.buttonCreation(null,null,"next page","IDK ");
@@ -45,9 +54,10 @@ public class Menu  {
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
-        BorderPane southPanel = new BorderPane();;
+        BorderPane southPanel = new BorderPane();
 
         root.setTop(titlePane);
+        root.setLeft(menuButton);
         root.setCenter(contentPane);
         root.setBottom(southPanel);
         root.setBackground(new Background(background));
@@ -63,32 +73,53 @@ public class Menu  {
         primaryStage.show();
 
         movementThread.start();
-
+        pageResearch = new ResearchPage();
+        player = new PagePlayerCRUD();
         buttonPageResearch.setOnAction(event -> {
             try {
-                pageResearch = new ResearchPage();
                 pageResearch.start(primaryStage,menuScene);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                new ExceptionDisplay(e);
             }
         });
 
-
         buttonPagePlayer.setOnAction(event -> {
             try {
-                player = new PagePlayerCRUD();
                 player.start(primaryStage,menuScene);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                new ExceptionDisplay(e);
             }
         });
         buttonPageTree.setOnAction(event -> {
             try {
                 pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                new ExceptionDisplay(e);
             }
         });
+
+        menuItemResearch.setOnAction(event -> {
+            try {
+                pageResearch.start(primaryStage,menuScene);
+            } catch (Exception e) {
+                new ExceptionDisplay(e);
+            }
+        });
+        menuItemPagePlayer.setOnAction(event -> {
+            try {
+                player.start(primaryStage,menuScene);
+            } catch (Exception e) {
+                new ExceptionDisplay(e);
+            }
+        });
+        menuItemPageTree.setOnAction(event -> {
+            try {
+                pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
+            } catch (Exception e) {
+                new ExceptionDisplay(e);
+            }
+        });
+
 
     }
 }

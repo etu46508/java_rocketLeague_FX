@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class WelcomePage {
 
-    public void start() throws Exception {
+    public void start() {
         Stage primaryStage = new Stage();
         BorderPane root = new BorderPane();
 
@@ -46,10 +46,12 @@ public class WelcomePage {
         primaryStage.setOnCloseRequest(event -> {
             System.exit(0);
         });
+
+
         primaryStage.show();
 
         entryButton.setOnAction(event ->{
-            Menu mainPage = new Menu();
+            MenuPage mainPage = new MenuPage();
             mainPage.start(primaryStage,welcomeScene);
         });
     }

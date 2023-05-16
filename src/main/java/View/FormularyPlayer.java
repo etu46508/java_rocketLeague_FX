@@ -16,7 +16,7 @@ import java.util.Objects;
 
 
 public class FormularyPlayer {
-    private final Controller controller;
+    private Controller controller;
     private final ArrayList<Integer> years,months,days, yearWorldChampionshipFull;
     private TextField pseudoTextField,surnameAndNameTextField,nationalityTextField;
     private Stage formularyStage;
@@ -25,9 +25,7 @@ public class FormularyPlayer {
     private CheckBox keyboardButton;
     private ComboBox<String> localitiesComboBox, teamsAvailableComboBox;
 
-    public FormularyPlayer() throws Exception {
-        controller = new Controller();
-
+    public FormularyPlayer() {
         this.years = new ArrayList<>();
         for (int year = LocalDate.now().getYear()-16; year >= 1950; year--) {
             years.add(year);
@@ -47,7 +45,8 @@ public class FormularyPlayer {
     }
 
 
-    public void openFormulary(Stage primaryStage,String pseudoPlayer) throws Exception {
+    public void openFormulary(Stage primaryStage,String pseudoPlayer,StringBuilder listeningCRUD) throws Exception {
+        controller = new Controller();
         formularyStage = new Stage();
 
         GridPane formularyLayout = new GridPane();
@@ -147,9 +146,11 @@ public class FormularyPlayer {
             validerButton.setOnAction(e -> {
                 try {
                     Player playerUpdate = validationFormulary();
-                    if(playerUpdate != null)
+                    if(playerUpdate != null){
+                        listeningCRUD.append(LocalDate.now()).append(": Updating of the player - ").append(pseudoPlayer).append(" to ").append(playerUpdate.getPseudo()).append("\n");
                         controller.updatePlayer(playerUpdate,pseudoPlayer);
-
+                        formularyStage.close();
+                    }
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
@@ -159,9 +160,10 @@ public class FormularyPlayer {
             validerButton.setOnAction(e -> {
                 try {
                     Player newPlayer = validationFormulary();
-                    if(newPlayer != null)
+                    if(newPlayer != null){
+                        listeningCRUD.append(LocalDate.now()).append(" : Addition of the player - ").append(newPlayer.getPseudo()).append("\n");
                         controller.addPlayer(newPlayer);
-
+                    }
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
@@ -232,7 +234,6 @@ public class FormularyPlayer {
         }
         if (!formularyError) {
             LocalDate birthday = LocalDate.of(year, month, day);
-            System.out.println("Player : " + pseudo + " du nom de : " + surnameAndName + " né le " + birthday + (keyboardBit == 1 ? " et est un joueur Clavier Souris" : ""));
             Player newPlayer = new Player(pseudo, surnameAndName, birthday, nationality, keyboardBit, yearWorldChampionComboBox.getValue(),localitiesComboBox.getValue(),team);
             formularyStage.close();
             return newPlayer;

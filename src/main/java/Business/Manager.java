@@ -78,17 +78,17 @@ public class Manager {
     public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
         return tournamentAccess.getTournamentOfAMonth(numMonth);
     }
-
     public Tournament getTournament (String wordingTournament) throws Exception{
         return tournamentAccess.getTournament(wordingTournament);
     }
-
     public Integer getTournamentNumber (String wordingTournament) throws Exception{
         return tournamentAccess.getTournamentNumber(wordingTournament);
     }
-
     public ArrayList<Tournament>  getAllTournament () throws Exception{
         return tournamentAccess.getAllTournament();
+    }
+    public ArrayList<String> getTournamentWonByClub(Integer club)throws Exception{
+        return tournamentAccess.getTournamentWonByClub(club);
     }
 
 
@@ -99,14 +99,11 @@ public class Manager {
         return  rankingAccess.getAllRankingOfAPlayer(pseudoPlayer);
     }
 
+
+
     public ArrayList<String> getAllClubsName() throws Exception{
         return clubAccess.getAllClubs();
     }
-
-    public ArrayList<String> getTournamentWonByClub(Integer club)throws Exception{
-        return tournamentAccess.getTournamentWonByClub(club);
-    }
-
     public Integer getSerialNumber (String club) throws Exception {
         return clubAccess.getSerialNumber(club);
     }

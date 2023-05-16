@@ -2,6 +2,7 @@ package View;
 
 
 import View.Utility.ButtonFactory;
+import View.Utility.ExceptionDisplay;
 import View.Utility.PlayerSheetDisplay;
 import View.Utility.VerificationPlayerDeletion;
 import javafx.geometry.Insets;
@@ -20,16 +21,10 @@ import Controller.Controller;
 
 
 public class ComboBoxPlayerChoice {
-    private final Controller controller;
     private ComboBox<String> playerComboBox;
 
-    public ComboBoxPlayerChoice() throws Exception {
-        controller = new Controller();
-    }
-
-
-
-    public void openChoicePlayer(Stage primaryStage,String nextOpen) throws Exception {
+    public void openChoicePlayer(Stage primaryStage,String nextOpen,StringBuilder listeningCRUD) throws Exception {
+        Controller controller = new Controller();
         Stage choicePlayerStage = new Stage();
         ArrayList<String> pseudoPlayers = controller.getAllPseudo();
 
@@ -61,9 +56,10 @@ public class ComboBoxPlayerChoice {
             validationButton.setOnAction(event -> {
                 try {
                     FormularyPlayer formularyUpdate = new FormularyPlayer();
-                    formularyUpdate.openFormulary(primaryStage,playerComboBox.getValue());
+                    formularyUpdate.openFormulary(primaryStage,playerComboBox.getValue(),listeningCRUD);
+
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    new ExceptionDisplay(e);
                 }
             });
         }
@@ -71,9 +67,9 @@ public class ComboBoxPlayerChoice {
             validationButton.setOnAction(event -> {
                 try {
                     VerificationPlayerDeletion verification = new VerificationPlayerDeletion();
-                    verification.openWindowVerification(primaryStage,playerComboBox.getValue());
+                    verification.openWindowVerification(primaryStage,playerComboBox.getValue(),listeningCRUD);
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    new ExceptionDisplay(e);
                 }
             });
 
@@ -81,9 +77,9 @@ public class ComboBoxPlayerChoice {
         if(Objects.equals(nextOpen, "read")){
             validationButton.setOnAction(event -> {
                 try {
-                    PlayerSheetDisplay display = new PlayerSheetDisplay(playerComboBox.getValue());
+                    PlayerSheetDisplay display = new PlayerSheetDisplay(playerComboBox.getValue(),listeningCRUD);
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    new ExceptionDisplay(e);
                 }
             });
         }
