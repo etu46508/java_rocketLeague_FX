@@ -106,7 +106,7 @@ public class ResearchTournamentRanking {
 
     private void rankingDisplay(Stage researchStage,String wordingTournament) throws Exception {
         Integer tournamentNumber = controller.getTournamentNumber(wordingTournament);
-        ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(tournamentNumber);
+        ArrayList<Ranking> rankings = controller.getAllRankingOfATournament(tournamentNumber);
 
         TableView<InfoRank> tableView = new TableView<>();
 

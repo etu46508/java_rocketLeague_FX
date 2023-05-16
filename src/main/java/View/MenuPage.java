@@ -1,6 +1,7 @@
 //region packages & imports
 package View;
 
+import Controller.Controller;
 import View.Utility.ButtonFactory;
 import View.Utility.ExceptionDisplay;
 import View.Utility.MovementThread;
@@ -11,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import java.sql.SQLException;
+import Exception.DataException;
 
 //endregion
 
@@ -73,7 +76,15 @@ public class MenuPage{
 
         menuScene = new Scene(root, 1280, 720);
         primaryStage.setTitle("Programme Java");
-        primaryStage.setOnCloseRequest(event -> System.exit(0));
+        primaryStage.setOnCloseRequest(event -> {
+            try {
+                Controller controller = new Controller();
+                controller.closeConnection();
+            } catch (DataException | SQLException e) {
+                throw new RuntimeException(e);
+            }
+            System.exit(0);
+        });
         primaryStage.setScene(menuScene);
         primaryStage.show();
 

@@ -56,7 +56,7 @@ public class TeamDBAccess implements TeamDAO{
         return teams;
     }
 
-    public Integer getTeamNumber (String wordingTeam){
+    public Integer getTeamNumber(String wordingTeam){
         int teamNumber;
         try{
             String sql = "SELECT serialNumber FROM team WHERE wordingTeam = ?";

@@ -100,7 +100,7 @@ public class Controller {
 
     // region Ranking
 
-    public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
+    public ArrayList<Ranking> getAllRankingOfATournament(Integer tournamentNumber) throws Exception{
         return manager.getAllRankingOfATournament(tournamentNumber);
     }
     public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
@@ -119,6 +119,12 @@ public class Controller {
         return manager.getSerialNumberOfClub(club);
     }
 
+    //endregion
+
+    //region connection
+    public void closeConnection() throws DataException, SQLException {
+        manager.closeConnection();
+    }
     //endregion
 
 

@@ -42,7 +42,7 @@ public class VerificationPlayerDeletion {
             try {
                 listeningCRUD.append(LocalDate.now()).append(" : Deletion of the player : ").append(pseudoPlayer).append("\n");
                 controller.deletePlayer(pseudoPlayer);
-                verificationStage.close();
+                primaryStage.close();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

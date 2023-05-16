@@ -78,7 +78,7 @@ public class TreeTournamentPage {
     }
 
     public void draw (String tournament) throws Exception {
-        ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(controller.getTournamentNumber(tournament));
+        ArrayList<Ranking> rankings = controller.getAllRankingOfATournament(controller.getTournamentNumber(tournament));
 
         if(rankings.size() == controller.getNbTeamOfTournament(tournament)){
             GridPane drawPane = new GridPane();

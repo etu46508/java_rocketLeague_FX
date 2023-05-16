@@ -127,7 +127,7 @@ public class PlayerDBAccess implements PlayerDAO {
                 statement.setInt(6,player.getYearWorldChampion());
             }
                 statement.setString(7,player.getHomeName());
-            if(player.getTeam() == null){
+            if(player.getTeamNum() == null){
                 statement.setNull(8,Types.INTEGER);
             }else{
                 statement.setInt(8,player.getTeamNum());

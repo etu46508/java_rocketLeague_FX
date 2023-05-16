@@ -135,4 +135,10 @@ public class Manager {
     //endregion
 
 
+    //region connection
+    public void closeConnection() throws SQLException, DataException {
+        new DBAccess().closeConnection();
+    }
+    //endregion
+
 }
