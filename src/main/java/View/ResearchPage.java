@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import View.Utility.ButtonFactory;
@@ -8,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+//endregion
 
 public class ResearchPage {
 
@@ -56,6 +59,7 @@ public class ResearchPage {
                 throw new RuntimeException(e);
             }
         });
+
         button2.setOnAction(event -> {
             try {
                 ResearchTournamentPlayedByPlayer researchTournamentPlayedByPlayer = new ResearchTournamentPlayedByPlayer(primaryStage);
@@ -63,6 +67,7 @@ public class ResearchPage {
                 throw new RuntimeException(e);
             }
         });
+
         button3.setOnAction(event -> {
             try {
                 ResearchTournamentWonByClub researchTournamentWonByClub = new ResearchTournamentWonByClub(primaryStage);
@@ -72,7 +77,5 @@ public class ResearchPage {
         });
 
     }
-
-
 
 }

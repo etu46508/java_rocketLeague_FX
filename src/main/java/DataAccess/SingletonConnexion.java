@@ -1,9 +1,11 @@
+//region packages & imports
 package DataAccess;
 
 import java.sql.*;
-
 import Exception.DataException;
 import View.Utility.ExceptionDisplay;
+
+//endregion
 
 public class SingletonConnexion   {
     private static Connection singletonConnexion;
@@ -16,7 +18,6 @@ public class SingletonConnexion   {
             new ExceptionDisplay(exception);
         }
     }
-
 
     public static Connection getInstance() throws DataException {
         if(singletonConnexion == null){

@@ -1,11 +1,13 @@
+//region packages & imports
 package View.Utility;
-
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+
+//endregion
 
 public class MovementThread extends Thread{
     private final Rectangle pictureRectangle;

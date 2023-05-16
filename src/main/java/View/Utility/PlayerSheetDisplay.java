@@ -1,3 +1,4 @@
+//region packages & imports
 package View.Utility;
 
 import Controller.Controller;
@@ -8,8 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import java.time.LocalDate;
+
+//endregion
 
 public class PlayerSheetDisplay {
     public PlayerSheetDisplay(String pseudoPlayer,StringBuilder listeningCRUD) throws Exception {
@@ -48,4 +50,5 @@ public class PlayerSheetDisplay {
         displayStage.show();
 
     }
+
 }

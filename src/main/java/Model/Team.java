@@ -1,16 +1,20 @@
+//region packages & imports
 package Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+//endregion
+
 public class Team {
+
+    //region constructors
     private Integer number;
     private String wordingTeam;
     private String nameCoach;
     private Club club;
     private ArrayList<Player> playersTeam;
 
-    //region constructors
     public Team(Integer number, String wordingTeam,String nameCoach,Club club){
         setNumber(number);
         setWordingTeam(wordingTeam);
@@ -25,6 +29,7 @@ public class Team {
         setNameCoach(nameCoach);
         setPlayers(players);
     }
+
     //endregion
 
 

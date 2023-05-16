@@ -1,10 +1,15 @@
+//region packages & imports
 package Model;
 
 import java.time.LocalDate;
 import java.time.Period;
 import static java.time.LocalDate.now;
 
+//endregion
+
 public class Player {
+
+    //region constructors
     private String pseudo,name,homeName;
     private LocalDate birthdate;
     private String nationality;
@@ -14,7 +19,6 @@ public class Player {
     private Locality home;
     private Team team;
 
-    //region constructors
     public Player(String pseudo, String name, LocalDate birthdate, String nationality, Integer playKeyboard, Integer yearWorldChampion, Locality home, Team team){
         setPseudo(pseudo);
         setName(name);
@@ -35,6 +39,7 @@ public class Player {
         setHomeName(homeName);
         setTeamNum(teamNum);
     }
+
     //endregion
 
     //region getters and setters

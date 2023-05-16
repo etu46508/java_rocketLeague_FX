@@ -1,14 +1,13 @@
+//region packages & imports
 package View.Utility;
-
 
 import javafx.scene.control.Alert;
 
+//endregion
+
 public class ExceptionDisplay {
 
-    private Exception exception; // L'exception donnée
-
     public ExceptionDisplay (Exception exception) {
-        this.exception = exception;
         displayExceptionPopup(exception);
     }
 

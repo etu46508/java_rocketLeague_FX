@@ -1,10 +1,9 @@
 package DataAccess;
 
-import Model.Club;
-
 import java.util.ArrayList;
 
 public interface ClubDAO {
     ArrayList<String> getAllClubs() throws Exception;
-    Integer getSerialNumber(String wording) throws Exception;
+    Integer getSerialNumberOfClub(String wording) throws Exception;
+
 }

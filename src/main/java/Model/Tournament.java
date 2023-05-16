@@ -1,10 +1,14 @@
+//region packages & imports
 package Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+//endregion
 
 public class Tournament {
+
+    //region constructors
     private String wording;
     private LocalDate StartDate;
     private Integer tournamentNumber, departureHour;
@@ -15,7 +19,6 @@ public class Tournament {
     private Ranking[] ranking;
     private ArrayList<Ranking> rankings;
 
-    //region constructors
     public Tournament(Integer tournamentNumber,String wording, LocalDate startDate, Integer departureHour, Integer nbTeams, String streetAndNumber,Integer nbSpectator,Locality location){
         setTournamentNumber(tournamentNumber);
         setWording(wording);

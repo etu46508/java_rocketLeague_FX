@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import View.Utility.ButtonFactory;
@@ -11,9 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+//endregion
 
 public class MenuPage{
-
     private Scene menuScene;
     private final PagePlayerCRUD playerCRUD;
     private TreeTournamentPage pageRandomizer;
@@ -87,6 +88,7 @@ public class MenuPage{
                 new ExceptionDisplay(e);
             }
         });
+
         buttonPageResearch.setOnAction(event -> {
             try {
                 pageResearch.start(primaryStage,menuScene);
@@ -94,6 +96,7 @@ public class MenuPage{
                 new ExceptionDisplay(e);
             }
         });
+
         buttonPagePlayer.setOnAction(event -> {
             try {
                 playerCRUD.start(primaryStage,menuScene);
@@ -101,6 +104,7 @@ public class MenuPage{
                 throw new RuntimeException(e);
             }
         });
+
         buttonPageTree.setOnAction(event -> {
             try {
                 pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
@@ -108,6 +112,7 @@ public class MenuPage{
                 new ExceptionDisplay(e);
             }
         });
+
         buttonThreadEvolved.setOnAction(event -> {
             try {
                 ThreadEvolved threadEvolved = new ThreadEvolved(primaryStage,menuScene);
@@ -124,6 +129,7 @@ public class MenuPage{
                 new ExceptionDisplay(e);
             }
         });
+
         menuItemPagePlayer.setOnAction(event -> {
             try {
                 playerCRUD.start(primaryStage,menuScene);
@@ -131,6 +137,7 @@ public class MenuPage{
                 new ExceptionDisplay(e);
             }
         });
+
         menuItemPageTree.setOnAction(event -> {
             try {
                 pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
@@ -139,7 +146,7 @@ public class MenuPage{
             }
         });
 
-
     }
+
 }
 

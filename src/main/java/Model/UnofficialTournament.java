@@ -1,6 +1,9 @@
+//region packages & imports
 package Model;
 
 import java.time.LocalDate;
+
+//endregion
 
 public class UnofficialTournament extends Tournament{
     private String organizerName;

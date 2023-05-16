@@ -1,5 +1,5 @@
+//region packages & imports
 package View;
-
 
 import View.Utility.ButtonFactory;
 import View.Utility.ExceptionDisplay;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import Controller.Controller;
 
+//endregion
 
 public class ComboBoxPlayerChoice {
     private ComboBox<String> playerComboBox;
@@ -62,6 +63,7 @@ public class ComboBoxPlayerChoice {
                 }
             });
         }
+
         if(Objects.equals(nextOpen, "delete")){
             validationButton.setOnAction(event -> {
                 try {
@@ -71,8 +73,8 @@ public class ComboBoxPlayerChoice {
                     new ExceptionDisplay(e);
                 }
             });
-
         }
+
         if(Objects.equals(nextOpen, "read")){
             validationButton.setOnAction(event -> {
                 try {

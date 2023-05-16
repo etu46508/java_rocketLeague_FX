@@ -1,35 +1,29 @@
+//region packages & imports
 package View;
 
 import Controller.Controller;
 import Model.Ranking;
-import Model.Team;
-import Model.Tournament;
 import View.Utility.ButtonFactory;
 import View.Utility.TitleOfPage;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Random;
 
+//endregion
 
 public class TreeTournamentPage {
     private final Controller controller;
-    private Stage primaryStage;
     private Scene tournamentScene;
     private ToggleGroup teamGroup;
     private RadioButton team4, team8, team16;
     private Label zoneTextInfo;
-    private ComboBox tournamentComboBox;
+    private ComboBox<Object> tournamentComboBox;
     private BorderPane root;
     private Button drawButton;
 
@@ -39,25 +33,19 @@ public class TreeTournamentPage {
     }
 
     public void start(Stage primaryStage, Scene menuScene) throws Exception {
-        this.primaryStage = primaryStage;
         root = new BorderPane();
 
-        // Création titre Page
         TitleOfPage title = new TitleOfPage();
         StackPane titlePane = title.createTitle("Randomizer of tournament tree","secondary page");
 
-
-        // Création de l'espace content bouton, message, comboBox
         GridPane contentPane = new GridPane();
         contentPane.setAlignment(Pos.TOP_LEFT);
         contentPane.setVgap(30);
         contentPane.setHgap(30);
 
-
         Label zoneTextInfo = new Label();
         zoneTextInfo.setStyle("-fx-font-size:15");
 
-        // création comboBox
         tournamentComboBox = new ComboBox<>();
         tournamentComboBox.getItems().addAll(controller.getAllFutureTournament());
         tournamentComboBox.setPromptText("Select Tournament");
@@ -68,14 +56,11 @@ public class TreeTournamentPage {
             drawButton.setDisable(false);
         });
 
-
-        // Button retour au menu
         ButtonFactory buttonFactory = new ButtonFactory();
         Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
         BorderPane eastPanel = new BorderPane();
         eastPanel.setRight(returnButton);
 
-        // Button lancer le tirage
         drawButton = new Button("draw");
         drawButton.setDisable(true);
         contentPane.add(drawButton, 2, 4);
@@ -87,16 +72,13 @@ public class TreeTournamentPage {
             }
         });
 
-        // Ajout du titre et du contenu à la page
         root.setTop(titlePane);
         root.setCenter(contentPane);
         root.setBottom(eastPanel);
 
-        // Création de la scène Menu et affichage de la fenêtre
         tournamentScene = new Scene(root, 1280, 720);
         primaryStage.setScene(tournamentScene);
         primaryStage.show();
-
 
     }
 
@@ -108,7 +90,6 @@ public class TreeTournamentPage {
         return label;
     }
      */
-
 
     public void draw (String tournament) throws Exception {
         ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(controller.getTournamentNumber(tournament));

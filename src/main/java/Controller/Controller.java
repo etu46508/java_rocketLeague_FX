@@ -3,24 +3,27 @@ package Controller;
 import Business.Manager;
 import Model.*;
 import Exception.DataException;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controller {
+
+    // region constructor
     private final Manager manager;
     public Controller() throws DataException {
         manager = new Manager();
     }
 
+    //endregion
+
+
+    // region Player
     public void addPlayer(Player player) throws Exception{
         manager.addPlayer(player);
     }
-
     public ArrayList<String> getAllPseudo() throws Exception{
         return manager.getAllPseudo();
     }
-
     public Player getAPLayer(String playerPseudo) throws Exception{
         return manager.getAPLayer(playerPseudo);
     }
@@ -37,6 +40,10 @@ public class Controller {
         return manager.getYearFilledOfWorldChampions();
     }
 
+    //endregion
+
+
+    // region Locality
 
     public ArrayList<String> getAllNameLocalities() throws Exception{
         return manager.getAllNameLocalities();
@@ -45,6 +52,10 @@ public class Controller {
         return manager.getALocationOfATournament(numberOfTournament);
     }
 
+    //endregion
+
+
+    // region Team
 
     public ArrayList<String> getTeamAvailable(){
         return manager.getTeamsAvailable();
@@ -57,6 +68,10 @@ public class Controller {
     }
     public String getWordingTeam (Integer serialNumber){return manager.getWordingTeam(serialNumber);}
 
+    //endregion
+
+
+    // region Tournament
 
     public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
         return manager.getTournementOfAMonth(numMonth);
@@ -76,7 +91,14 @@ public class Controller {
     public Integer getNbTeamOfTournament(String tournament) throws Exception{
         return manager.getNbTeamOfTournament(tournament);
     }
+    public ArrayList<String> getTournamentWonByClub(Integer club) throws Exception{
+        return manager.getTournamentWonByClub(club);
+    }
 
+    //endregion
+
+
+    // region Ranking
 
     public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
         return manager.getAllRankingOfATournament(tournamentNumber);
@@ -84,15 +106,20 @@ public class Controller {
     public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
         return  manager.getAllRankingOfAPlayer(pseudoPlayer);
     }
+
+    //endregion
+
+
+    // region Club
+
     public ArrayList<String> getAllClubName() throws Exception{
         return manager.getAllClubsName();
     }
-
-    public ArrayList<String> getTournamentWonByClub(Integer club) throws Exception{
-        return manager.getTournamentWonByClub(club);
+    public Integer getSerialNumberOfClub(String club) throws Exception{
+        return manager.getSerialNumberOfClub(club);
     }
 
-    public Integer getSerialNumber(String club) throws Exception{
-        return manager.getSerialNumber(club);
-    }
+    //endregion
+
+
 }

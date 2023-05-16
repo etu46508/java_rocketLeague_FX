@@ -1,16 +1,18 @@
 package Model;
 
 public class Sponsor {
+
+    //region constructor
     private String wording;
     private String nameManager;
     private Club clubSponsored;
 
-    //region constructor
     public Sponsor(String wording, String nameManager, Club clubSponsored){
         setWording(wording);
         setNameManager(nameManager);
         setClubSponsored(clubSponsored);
     }
+
     //endregion
 
     //region getters & setters

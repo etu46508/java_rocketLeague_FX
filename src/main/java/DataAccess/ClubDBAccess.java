@@ -1,20 +1,21 @@
+//region packages & imports
 package DataAccess;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.sql.Connection;
+import java.util.ArrayList;;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import Exception.DataException;
+
+//endregion
 
 public class ClubDBAccess implements ClubDAO{
     private final Connection connection;
-
     public ClubDBAccess () throws DataException{
         connection = SingletonConnexion.getInstance();
     }
+
     @Override
     public ArrayList<String> getAllClubs() throws Exception {
         ArrayList<String> clubs = new ArrayList<>();
@@ -32,7 +33,7 @@ public class ClubDBAccess implements ClubDAO{
         return clubs;
     }
 
-    public Integer getSerialNumber (String wording) throws Exception{
+    public Integer getSerialNumberOfClub(String wording) throws Exception{
         Integer serialNumber;
         try {
             String sql = "SELECT serialNumber "+
@@ -48,4 +49,5 @@ public class ClubDBAccess implements ClubDAO{
         }
         return serialNumber;
     }
+
 }

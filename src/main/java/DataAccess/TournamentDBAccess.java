@@ -1,11 +1,14 @@
+//region packages & imports
 package DataAccess;
 
 import Model.*;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import Exception.DataException;
+
+//endregion
+
 public class TournamentDBAccess implements TournamentDAO{
     private final Connection connection;
     public TournamentDBAccess ()throws DataException {
@@ -94,22 +97,16 @@ public class TournamentDBAccess implements TournamentDAO{
                     "WHERE wordingTournament = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-
             statement.setString(1, wordingTournament);
-
             ResultSet data = statement.executeQuery();
-
             data.next();
             tournamentNumber = data.getInt(1);
-
 
         }catch (SQLException e){
             throw new SQLException(e);
         }
         return tournamentNumber;
     }
-
-
 
     private Tournament createTournament(ResultSet data) throws Exception{
         Tournament  tournament;
@@ -157,18 +154,15 @@ public class TournamentDBAccess implements TournamentDAO{
     public ArrayList<String> getAllFutureTournament () throws SQLException {
         ArrayList<String> tournaments = new ArrayList<>();
         try{
-
             String sql = "SELECT wordingTournament " +
                     "FROM Tournament tournament " +
                     "WHERE tournament.date > CURDATE() ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
-
             while(data.next()){
                 tournaments.add(data.getString(1));
             }
-
         }catch (SQLException e){
             throw new SQLException(e);
         } catch (Exception e) {
@@ -193,4 +187,5 @@ public class TournamentDBAccess implements TournamentDAO{
         }
         return nbTeam;
     }
+
 }

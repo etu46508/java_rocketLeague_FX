@@ -1,7 +1,8 @@
+//region packages & imports
 package DataAccess;
 
 import java.util.ArrayList;
-
+//endregion
 public interface TeamDAO {
 
     ArrayList<String> getTeamsAvailable();
@@ -10,6 +11,7 @@ public interface TeamDAO {
 
     Integer getTeamNumber (String wordingTeam);
     String getWordingTeam (Integer serialNumber);
+
 }
 
 

@@ -1,3 +1,4 @@
+//region packages & imports
 package DataAccess;
 
 import java.sql.Connection;
@@ -7,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Exception.DataException;
 import Model.Locality;
+
+//endregion
 
 public class LocalityDBAccess implements LocalityDAO{
 

@@ -1,7 +1,9 @@
+//region packages & imports
 package Model;
 
 import java.time.LocalDate;
 
+//endregion
 
 public class Club {
     private Integer serialNumber;

@@ -1,3 +1,4 @@
+//region packages & imports
 package View.Utility;
 
 import Controller.Controller;
@@ -9,8 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.time.LocalDate;
+
+//endregion
 
 public class VerificationPlayerDeletion {
     private final Controller controller;

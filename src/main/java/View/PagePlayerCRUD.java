@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import View.Utility.ButtonFactory;
@@ -11,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-
+//endregion
 
 public class PagePlayerCRUD  {
     private final StringBuilder listeningCRUD;

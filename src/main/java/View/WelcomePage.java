@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import View.Utility.ButtonFactory;
@@ -10,7 +11,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-
+//endregion
 
 public class WelcomePage {
 
@@ -48,14 +49,13 @@ public class WelcomePage {
             System.exit(0);
         });
 
-
         primaryStage.show();
 
         entryButton.setOnAction(event ->{
             MenuPage mainPage = new MenuPage();
             mainPage.start(primaryStage,welcomeScene);
         });
-    }
 
+    }
 
 }

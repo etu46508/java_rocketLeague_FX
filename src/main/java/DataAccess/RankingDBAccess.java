@@ -1,7 +1,7 @@
+//region packages & imports
 package DataAccess;
 
 import Model.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import Exception.DataException;
+
+//endregion
 
 public class RankingDBAccess implements RankingDAO{
 
@@ -80,9 +82,6 @@ public class RankingDBAccess implements RankingDAO{
         }
         return rankings;
     }
-
-    //public Integer getTeamSerialNumber ()
-
 
     public Ranking createRanking(ResultSet data){
         Ranking ranking;

@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import Controller.Controller;
@@ -21,9 +22,9 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+//endregion
 
 public class ResearchTournamentPlayedByPlayer {
-
     private final Controller controller;
     private final ComboBox<String> teamComboBox,playerInTeamComboBox;
 
@@ -144,7 +145,6 @@ public class ResearchTournamentPlayedByPlayer {
                         rank.getCashPrize(),
                         rank.getNbGoalScored(),
                         rank.getNbGoalConceded()));
-
             }
             else{
                 tableView.getItems().add(new InfoPerformancePlayer(rank.getTournament().getWording(),
@@ -175,7 +175,6 @@ public class ResearchTournamentPlayedByPlayer {
     }
 
     public static class InfoPerformancePlayer {
-
         private final SimpleStringProperty wordingTournament;
         private final SimpleStringProperty dateTournament;
         private final SimpleStringProperty position;
@@ -185,7 +184,6 @@ public class ResearchTournamentPlayedByPlayer {
         private final SimpleStringProperty nbGoalConceded;
         private SimpleStringProperty nbSpectator;
         private SimpleStringProperty address;
-
 
         public InfoPerformancePlayer(String wordingTournament, LocalDate dateTournament,Integer position, String wordingTeam, Integer cashPrize, Integer nbGoalScored, Integer nbGoalConceded, Integer nbSpectator, String streetAndNumber, String wordingLocality, Integer codePostal, String country) {
             this.wordingTournament = new SimpleStringProperty(wordingTournament);

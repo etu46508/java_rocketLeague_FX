@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import Controller.Controller;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
+//endregion
 
 public class FormularyPlayer {
     private Controller controller;
@@ -128,18 +130,22 @@ public class FormularyPlayer {
             yearComboBox.setValue(player.getYearOfBirth());
             monthComboBox.setValue(player.getMonthOfBirth());
             dayComboBox.setValue(player.getDayOfBirth());
+
             if(player.getYearWorldChampion() != 0){
                 yearWorldChampionComboBox.setValue(player.getYearWorldChampion());
                 yearWorldChampionComboBox.getItems().add(player.getYearWorldChampion());
-            }else{
+            }
+            else{
                 yearWorldChampionComboBox.setValue(null);
             }
 
             localitiesComboBox.setValue(player.getHome().getWording());
+
             if(player.getTeam() != null){
                 teamsAvailableComboBox.setValue(player.getTeam().getWordingTeam());
                 teamsAvailableComboBox.getItems().add(player.getTeam().getWordingTeam());
-            }else{
+            }
+            else{
                 teamsAvailableComboBox.setValue("<none>");
             }
 
@@ -156,7 +162,8 @@ public class FormularyPlayer {
                     throw new RuntimeException(ex);
                 }
             });
-        }else{
+        }
+        else{
             teamsAvailableComboBox.setValue("<none>");
             validerButton.setOnAction(e -> {
                 try {
@@ -200,7 +207,6 @@ public class FormularyPlayer {
         if(!Objects.equals(teamsAvailableComboBox.getValue(), "<none>")){
             team = controller.getTeamNumber(teamsAvailableComboBox.getValue());
         }
-
         StringBuilder fieldEmpty = new StringBuilder();
         boolean formularyError = false;
 
@@ -242,7 +248,6 @@ public class FormularyPlayer {
             System.out.println(fieldEmpty);
             return null;
         }
-
 
     }
 

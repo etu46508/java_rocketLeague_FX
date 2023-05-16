@@ -1,3 +1,4 @@
+//region packages & imports
 package DataAccess;
 
 import Model.Club;
@@ -9,10 +10,11 @@ import Exception.UpdateException;
 import Exception.AddPlayerException;
 import Model.Team;
 import View.Utility.ExceptionDisplay;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+//endregion
 
 public class PlayerDBAccess implements PlayerDAO {
     private final Connection connection;
@@ -62,7 +64,6 @@ public class PlayerDBAccess implements PlayerDAO {
         return player;
     }
 
-
     public ArrayList<Player> getAllPLayer() throws Exception{
         ArrayList<Player> players = new ArrayList<>();
         try{
@@ -110,9 +111,6 @@ public class PlayerDBAccess implements PlayerDAO {
         return playersInTeam;
     }
 
-
-
-
     public void addPlayer(Player player) throws AddPlayerException {
         try{
             String sql = "INSERT INTO Player(pseudo,firstNameLastName,birthdate,nationality,playKeybord,yearWorldchampionship,home,team )values(?,?,?,?,?,?,?,?)";
@@ -153,7 +151,6 @@ public class PlayerDBAccess implements PlayerDAO {
         }
     }
 
-
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
         try{
             String sql ="UPDATE Player set pseudo = ?, firstNameLastName = ?, birthdate = ?, nationality = ?, playKeybord = ?, yearWorldchampionship = ?,home = ?,team = ? " +
@@ -183,11 +180,10 @@ public class PlayerDBAccess implements PlayerDAO {
             throw new UpdateException(pseudoPlayer);
         }
     }
+
     public void addPlayerToTeam(int numTeam){
 
     }
-
-
 
     public ArrayList<String> getAllPseudo() throws Exception{
         ArrayList<String> playersPseudo = new ArrayList<>();
@@ -223,7 +219,6 @@ public class PlayerDBAccess implements PlayerDAO {
         }
         return getYearFilledOfWorldChampions;
     }
-
 
     public Player createPlayer(ResultSet data) throws Exception{
         Player player;
@@ -262,4 +257,5 @@ public class PlayerDBAccess implements PlayerDAO {
         }
         return player;
     }
+
 }

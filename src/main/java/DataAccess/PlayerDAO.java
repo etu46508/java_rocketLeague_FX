@@ -1,10 +1,12 @@
+//region packages & imports
 package DataAccess;
 
 import Model.Player;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+//endregion
 
 public interface PlayerDAO {
 

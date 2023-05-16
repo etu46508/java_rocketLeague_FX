@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import View.Utility.ButtonFactory;
@@ -11,6 +12,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+
+//endregion
 
 public class ThreadEvolved extends Thread{
     private final Rectangle pictureRectangle;

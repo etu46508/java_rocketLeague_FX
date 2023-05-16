@@ -1,3 +1,4 @@
+//region packages & imports
 package View;
 
 import Controller.Controller;
@@ -18,6 +19,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+//endregion
 
 public class ResearchTournamentRanking {
     private final Controller controller;
@@ -99,9 +102,7 @@ public class ResearchTournamentRanking {
         researchStage.setScene(researchScene);
         researchStage.initOwner(primaryStage);
         researchStage.showAndWait();
-
     }
-
 
     private void rankingDisplay(Stage researchStage,String wordingTournament) throws Exception {
         Integer tournamentNumber = controller.getTournamentNumber(wordingTournament);

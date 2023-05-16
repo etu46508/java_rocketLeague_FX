@@ -1,7 +1,7 @@
+//region packages & imports
 package View;
 
 import Controller.Controller;
-import Model.Club;
 import View.Utility.ButtonFactory;
 import View.Utility.TitleOfPage;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,15 +11,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
+
+//endregion
 
 public class ResearchTournamentWonByClub {
     private final Controller controller;
@@ -63,7 +63,7 @@ public class ResearchTournamentWonByClub {
         buttonDisplayTournament.setOnAction(actionEvent -> {
             ArrayList<String> tournaments;
             try {
-                Integer clubSelected = controller.getSerialNumber(clubComboBox.getValue());
+                Integer clubSelected = controller.getSerialNumberOfClub(clubComboBox.getValue());
                 tournaments = new ArrayList<>(controller.getTournamentWonByClub(clubSelected));
             } catch (Exception e) {
                 throw new RuntimeException(e);

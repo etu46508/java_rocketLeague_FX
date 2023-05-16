@@ -1,6 +1,8 @@
 package Model;
 
 public class Ranking {
+
+    //region constructor
     private Integer position;
     private Integer nbGoalScored;
     private Integer nbGoalConceded;
@@ -8,7 +10,6 @@ public class Ranking {
     private Tournament tournament;
     private Team team;
 
-    //region constructor
     public Ranking(Integer position, Integer nbGoalScored, Integer nbGoalConceded, Integer cashPrize,Tournament tournament, Team team){
         setPosition(position);
         setTeam(team);

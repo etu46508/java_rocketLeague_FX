@@ -1,3 +1,4 @@
+//region packages & imports
 package DataAccess;
 
 import java.sql.Connection;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Exception.DataException;
 
+//end
 
 public class TeamDBAccess implements TeamDAO{
     private final Connection connection;
@@ -28,7 +30,6 @@ public class TeamDBAccess implements TeamDAO{
             while(data.next()){
                 teamsAvailable.add(data.getString(1));
             }
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -49,13 +50,11 @@ public class TeamDBAccess implements TeamDAO{
             while(data.next()){
                 teams.add(data.getString(1));
             }
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return teams;
     }
-
 
     public Integer getTeamNumber (String wordingTeam){
         int teamNumber;

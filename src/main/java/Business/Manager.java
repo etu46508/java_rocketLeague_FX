@@ -3,10 +3,12 @@ package Business;
 import DataAccess.*;
 import Model.*;
 import Exception.DataException;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 public class Manager {
+
+    // region constructor
     private  final LocalityDAO localityAccess;
     private final ClubDAO clubAccess;
     private final TeamDAO teamAccess;
@@ -14,6 +16,7 @@ public class Manager {
     private final TournamentDAO tournamentAccess;
     private final UnofficialTournamentDAO unofficialTournamentAccess;
     private final RankingDAO rankingAccess;
+
 
     public Manager() throws DataException{
         localityAccess = new LocalityDBAccess();
@@ -25,28 +28,26 @@ public class Manager {
         rankingAccess = new RankingDBAccess();
     }
 
+    //endregion
 
+
+    // region Player
 
     public void addPlayer(Player player) throws Exception{
         playerAccess.addPlayer(player);
     }
-
     public ArrayList<String> getAllPseudo() throws Exception{
         return playerAccess.getAllPseudo();
     }
-
     public Player getAPLayer(String playerPseudo) throws Exception{
         return playerAccess.getAPLayer(playerPseudo);
     }
-
     public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException{
         return playerAccess.getPseudoPlayerInTeam(wordingTeam);
     }
-
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
         playerAccess.updatePlayer(player,pseudoPlayer);
     }
-
     public void deletePlayer(String pseudoPlayer) throws Exception{
         playerAccess.deletePlayer(pseudoPlayer);
     }
@@ -54,6 +55,10 @@ public class Manager {
         return playerAccess.getYearFilledOfWorldChampions();
     }
 
+    //endregion
+
+
+    // region Locality
 
     public ArrayList<String> getAllNameLocalities() throws Exception{
         return localityAccess.getAllNameLocalities();
@@ -62,6 +67,10 @@ public class Manager {
         return localityAccess.getALocationOfATournament(numberOfTournament);
     }
 
+    //endregion
+
+
+    // region Teams
 
     public ArrayList<String> getTeamsAvailable(){
         return teamAccess.getTeamsAvailable();
@@ -74,7 +83,10 @@ public class Manager {
     }
     public String getWordingTeam (Integer serialNumber) {return teamAccess.getWordingTeam(serialNumber);}
 
+    //endregion
 
+
+    // region Tournament
 
     public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
         return tournamentAccess.getTournamentOfAMonth(numMonth);
@@ -98,6 +110,22 @@ public class Manager {
         return tournamentAccess.getNbTeamOfTournament(tournament);
     }
 
+    //endregion
+
+
+    // region Club
+
+    public ArrayList<String> getAllClubsName() throws Exception{
+        return clubAccess.getAllClubs();
+    }
+    public Integer getSerialNumberOfClub (String club) throws Exception {
+        return clubAccess.getSerialNumberOfClub(club);
+    }
+
+    //endregion
+
+
+    // region Ranking
 
     public ArrayList<Ranking> getAllRankingOfATournament(Integer tournamentNumber) throws Exception{
         return rankingAccess.getAllRankingOfATounament(tournamentNumber);
@@ -106,12 +134,7 @@ public class Manager {
         return  rankingAccess.getAllRankingOfAPlayer(pseudoPlayer);
     }
 
+    //endregion
 
 
-    public ArrayList<String> getAllClubsName() throws Exception{
-        return clubAccess.getAllClubs();
-    }
-    public Integer getSerialNumber (String club) throws Exception {
-        return clubAccess.getSerialNumber(club);
-    }
 }
