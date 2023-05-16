@@ -209,7 +209,7 @@ public class FormularyPlayer {
         } else {
             keyboardBit = 0;
         }
-        if (!pseudo.matches("[\\w\\d\\s\\S]{3,20}")) {
+        if (!pseudo.matches("[\\w+\\s?\\w+]{3,20}")) {
             fieldEmpty.append("Error : the pseudo field isn't valid.\n");
             pseudoTextField.setStyle("-fx-border-color: red;");
             formularyError = true;

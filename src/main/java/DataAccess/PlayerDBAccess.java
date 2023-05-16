@@ -21,7 +21,7 @@ public class PlayerDBAccess implements PlayerDAO {
         connection = SingletonConnexion.getInstance();
     }
 
-    public Player getAPLayer(String playerPseudo) throws Exception{
+    public Player getAPLayer(String pseudoPlayer) throws Exception{
         Player player = null;
         try{
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship, "+
@@ -32,11 +32,11 @@ public class PlayerDBAccess implements PlayerDAO {
                     "INNER JOIN Locality loc ON player.home = loc.cityName " +
                     "LEFT JOIN Team team ON player.team = team.serialNumber " +
                     "LEFT JOIN Club club ON club.serialNumber = team.club " +
-                    "WHERE pseudo = ? ";
+                    "WHERE firstNameLastName = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setString(1, playerPseudo);
+            statement.setString(1, pseudoPlayer);
 
             ResultSet data = statement.executeQuery();
 
@@ -189,7 +189,7 @@ public class PlayerDBAccess implements PlayerDAO {
         ArrayList<String> playersPseudo = new ArrayList<>();
 
         try{
-            String sql = "Select pseudo FROM Player";
+            String sql = "Select pseudo FROM Player ORDER BY pseudo";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
             while(data.next()){
