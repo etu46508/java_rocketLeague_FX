@@ -45,15 +45,13 @@ public class WelcomePage {
         primaryStage.setTitle("Programme Java");
 
         primaryStage.setScene(welcomeScene);
-        primaryStage.setOnCloseRequest(event -> {
-            System.exit(0);
-        });
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
 
         primaryStage.show();
 
         entryButton.setOnAction(event ->{
             MenuPage mainPage = new MenuPage();
-            mainPage.start(primaryStage,welcomeScene);
+            mainPage.start(primaryStage);
         });
 
     }

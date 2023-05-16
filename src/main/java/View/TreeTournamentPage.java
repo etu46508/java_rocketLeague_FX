@@ -19,9 +19,6 @@ import java.util.Random;
 
 public class TreeTournamentPage {
     private final Controller controller;
-    private Scene tournamentScene;
-    private ToggleGroup teamGroup;
-    private RadioButton team4, team8, team16;
     private Label zoneTextInfo;
     private ComboBox<Object> tournamentComboBox;
     private BorderPane root;
@@ -76,7 +73,7 @@ public class TreeTournamentPage {
         root.setCenter(contentPane);
         root.setBottom(eastPanel);
 
-        tournamentScene = new Scene(root, 1280, 720);
+        Scene tournamentScene = new Scene(root, 1280, 720);
         primaryStage.setScene(tournamentScene);
         primaryStage.show();
 

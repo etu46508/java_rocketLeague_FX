@@ -64,9 +64,7 @@ public class PagePlayerCRUD  {
         primaryStage.setScene(playerCRUD);
         primaryStage.show();
 
-        listiningButton.setOnAction(event -> {
-            displayListeningAction(listeningCRUD);
-        });
+        listiningButton.setOnAction(event -> displayListeningAction(listeningCRUD));
 
 
         button1.setOnAction(event -> {

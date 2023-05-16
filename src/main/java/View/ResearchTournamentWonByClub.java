@@ -56,9 +56,7 @@ public class ResearchTournamentWonByClub {
         buttonLayout.setRight(returnButton);
 
 
-        clubComboBox.setOnAction(actionEvent -> {
-            buttonDisplayTournament.setDisable(false);
-        });
+        clubComboBox.setOnAction(actionEvent -> buttonDisplayTournament.setDisable(false));
 
         buttonDisplayTournament.setOnAction(actionEvent -> {
             ArrayList<String> tournaments;

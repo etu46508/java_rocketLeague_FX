@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class ThreadEvolved extends Thread{
     private final Rectangle pictureRectangle;
-    private int speed = 20;;
+    private int speed = 20;
     public ThreadEvolved(Stage primaryStage, Scene menuScene){
         BorderPane root = new BorderPane();
         TitleOfPage title = new TitleOfPage();

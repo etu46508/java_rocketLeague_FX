@@ -25,7 +25,7 @@ public class MenuPage{
         playerCRUD = new PagePlayerCRUD();
     }
 
-    public void start(Stage primaryStage, Scene welcomeScene){
+    public void start(Stage primaryStage){
         BorderPane root = new BorderPane();
 
         TitleOfPage title = new TitleOfPage();
@@ -73,9 +73,7 @@ public class MenuPage{
 
         menuScene = new Scene(root, 1280, 720);
         primaryStage.setTitle("Programme Java");
-        primaryStage.setOnCloseRequest(event -> {
-            System.exit(0);
-        });
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
         primaryStage.setScene(menuScene);
         primaryStage.show();
 

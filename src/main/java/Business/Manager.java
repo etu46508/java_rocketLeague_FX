@@ -14,7 +14,6 @@ public class Manager {
     private final TeamDAO teamAccess;
     private final PlayerDAO playerAccess;
     private final TournamentDAO tournamentAccess;
-    private final UnofficialTournamentDAO unofficialTournamentAccess;
     private final RankingDAO rankingAccess;
 
 
@@ -24,7 +23,6 @@ public class Manager {
         teamAccess = new TeamDBAccess();
         playerAccess = new PlayerDBAccess();
         tournamentAccess = new TournamentDBAccess();
-        unofficialTournamentAccess = new UnofficialTournamentDBAccess();
         rankingAccess = new RankingDBAccess();
     }
 

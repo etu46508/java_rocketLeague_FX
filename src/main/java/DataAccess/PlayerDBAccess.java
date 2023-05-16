@@ -23,7 +23,7 @@ public class PlayerDBAccess implements PlayerDAO {
     }
 
     public Player getAPLayer(String pseudoPlayer) throws Exception{
-        Player player = null;
+        Player player;
         try{
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship, "+
                     "loc.cityName, postalCode, country, " +

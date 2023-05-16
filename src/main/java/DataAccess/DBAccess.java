@@ -13,7 +13,6 @@ public class DBAccess {
         connection = SingletonConnexion.getInstance();
     }
 
-
     public void closeConnection() throws DataException {
         try {
             connection.close();

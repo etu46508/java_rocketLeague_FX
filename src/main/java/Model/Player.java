@@ -145,15 +145,15 @@ public class Player {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder("Player : "+ getPseudo() +"\n");
-        output.append("- Surname and name  : "+ getName() +"\n");
-        output.append("- Age : "+ getAge() +"\n");
-        output.append("- Birthdate : "+ getBirthdate() +"\n");
-        output.append("- Nationality : "+ getNationality() +" and resides in "+ getHome().getWording()+"\n");
+        output.append("- Surname and name  : ").append(getName()).append("\n");
+        output.append("- Age : ").append(getAge()).append("\n");
+        output.append("- Birthdate : ").append(getBirthdate()).append("\n");
+        output.append("- Nationality : ").append(getNationality()).append(" and resides in ").append(getHome().getWording()).append("\n");
         if(getYearWorldChampion() != 0){
-            output.append("- Last victory in the world championship : "+ getYearWorldChampion() +"\n");
+            output.append("- Last victory in the world championship : ").append(getYearWorldChampion()).append("\n");
         }
         if(getTeam() != null){
-            output.append("- Play with the team : "+ getTeam().getWordingTeam() +" in the club : "+ getTeam().getClub().getName()+"\n");
+            output.append("- Play with the team : ").append(getTeam().getWordingTeam()).append(" in the club : ").append(getTeam().getClub().getName()).append("\n");
         }else{
             output.append("- He isn't in a team at the moment  \n");
         }

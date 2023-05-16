@@ -2,7 +2,7 @@
 package DataAccess;
 
 import java.sql.Connection;
-import java.util.ArrayList;;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class ClubDBAccess implements ClubDAO{
     }
 
     public Integer getSerialNumberOfClub(String wording) throws Exception{
-        Integer serialNumber;
+        int serialNumber;
         try {
             String sql = "SELECT serialNumber "+
                     "FROM club "+

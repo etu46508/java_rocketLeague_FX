@@ -172,7 +172,7 @@ public class TournamentDBAccess implements TournamentDAO{
     }
 
     public Integer getNbTeamOfTournament (String tournament) throws SQLException{
-        Integer nbTeam;
+        int nbTeam;
         try {
             String sql = "SELECT nbTeam "+
                     "FROM Tournament tournament " +
