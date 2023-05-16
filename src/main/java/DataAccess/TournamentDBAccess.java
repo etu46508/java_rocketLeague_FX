@@ -131,8 +131,7 @@ public class TournamentDBAccess implements TournamentDAO{
             String sql = "SELECT wordingTournament, date " +
                     "FROM tournament " +
                     "INNER JOIN ranking r on (tournament.number = r.tournament) " +
-                    "WHERE (r.position = 1 " +
-                    "AND r.team = ?) ";
+                    "WHERE (r.position = 1 AND r.team = ?) ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,club);
