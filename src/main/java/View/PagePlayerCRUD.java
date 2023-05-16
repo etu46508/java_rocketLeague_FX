@@ -40,7 +40,10 @@ public class PagePlayerCRUD  {
         contentPane.add(button3, 1, 3);
         contentPane.add(button4, 1, 4);
 
+
+
         Button listiningButton = buttonFactory.buttonCreation(null,null,"options","Listening actions");
+
         contentPane.add(listiningButton, 1, 5);
 
         BorderPane centerPanel = new BorderPane();
@@ -50,8 +53,8 @@ public class PagePlayerCRUD  {
         Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
         eastPanel.setRight(returnButton);
 
-        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
-        //Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeagueCRUD.jpg");
+        //Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
+        Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeagueCRUD.jpg");
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 

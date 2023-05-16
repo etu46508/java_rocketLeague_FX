@@ -27,6 +27,7 @@ public class ResearchTournamentWonByClub {
 
     public ResearchTournamentWonByClub(Stage primaryStage) throws Exception{
         controller = new Controller();
+
         Stage researchStage = new Stage();
 
         BorderPane researchLayout = new BorderPane();

@@ -26,8 +26,8 @@ public class ThreadEvolved extends Thread{
         BorderPane contentPane = new BorderPane();
 
         pictureRectangle = new Rectangle(400,400);
-        Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\rocketLeagueFly.png");
-        //Image picture = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\balleRocketLeague.png");
+        //Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\rocketLeagueFly.png");
+        Image picture = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\rocketLeagueFly.png");
         pictureRectangle.setFill(new ImagePattern(picture));
         contentPane.setCenter(pictureRectangle);
 

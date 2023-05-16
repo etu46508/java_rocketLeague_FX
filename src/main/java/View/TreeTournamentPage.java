@@ -1,4 +1,3 @@
-//region packages & imports
 package View;
 
 import Controller.Controller;
@@ -15,12 +14,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Random;
 
-//endregion
 
 public class TreeTournamentPage {
     private final Controller controller;
     private Label zoneTextInfo;
-    private ComboBox<Object> tournamentComboBox;
+    private ComboBox tournamentComboBox;
     private BorderPane root;
     private Button drawButton;
 
@@ -78,15 +76,6 @@ public class TreeTournamentPage {
         primaryStage.show();
 
     }
-
-    /*
-    private javafx.scene.control.Label createLabel(String text, int size) {
-        javafx.scene.control.Label label = new javafx.scene.control.Label(text);
-        label.setFont(Font.font("Verdana", FontWeight.BOLD, size));
-        label.setStyle("-fx-text-fill: black;");
-        return label;
-    }
-     */
 
     public void draw (String tournament) throws Exception {
         ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(controller.getTournamentNumber(tournament));
