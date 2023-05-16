@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 
 
 public class PagePlayerCRUD  {
+    private final StringBuilder listeningCRUD;
+    public PagePlayerCRUD(){
+        listeningCRUD = new StringBuilder();
+    }
     public void start(Stage primaryStage, Scene menuScene) throws Exception {
         BorderPane root = new BorderPane();
         TitleOfPage title = new TitleOfPage();
@@ -36,7 +40,7 @@ public class PagePlayerCRUD  {
         contentPane.add(button4, 1, 4);
 
 
-        StringBuilder listeningCRUD = new StringBuilder();
+
         Button listiningButton = buttonFactory.buttonCreation(primaryStage,menuScene,"listening","Listening actions");
 
         contentPane.add(listiningButton, 1, 5);
@@ -48,7 +52,7 @@ public class PagePlayerCRUD  {
         Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
         eastPanel.setRight(returnButton);
 
-        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
+        Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 

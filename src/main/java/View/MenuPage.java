@@ -15,11 +15,14 @@ import javafx.stage.Stage;
 public class MenuPage{
 
     private Scene menuScene;
-    private PagePlayerCRUD player;
+    private final PagePlayerCRUD playerCRUD;
     private TreeTournamentPage pageRandomizer;
-    private ResearchPage pageResearch;
+    private final ResearchPage pageResearch;
 
-
+    public MenuPage(){
+        pageResearch = new ResearchPage();
+        playerCRUD = new PagePlayerCRUD();
+    }
 
     public void start(Stage primaryStage, Scene welcomeScene){
         BorderPane root = new BorderPane();
@@ -50,7 +53,7 @@ public class MenuPage{
         contentPane.add(buttonPagePlayer, 0, 1);
         contentPane.add(buttonPageTree, 1, 1);
 
-        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeague.jpg");
+        Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeague.jpg");
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
@@ -73,8 +76,7 @@ public class MenuPage{
         primaryStage.show();
 
         movementThread.start();
-        pageResearch = new ResearchPage();
-        player = new PagePlayerCRUD();
+
         buttonPageResearch.setOnAction(event -> {
             try {
                 pageResearch.start(primaryStage,menuScene);
@@ -85,7 +87,7 @@ public class MenuPage{
 
         buttonPagePlayer.setOnAction(event -> {
             try {
-                player.start(primaryStage,menuScene);
+                playerCRUD.start(primaryStage,menuScene);
             } catch (Exception e) {
                 new ExceptionDisplay(e);
             }
@@ -107,7 +109,7 @@ public class MenuPage{
         });
         menuItemPagePlayer.setOnAction(event -> {
             try {
-                player.start(primaryStage,menuScene);
+                playerCRUD.start(primaryStage,menuScene);
             } catch (Exception e) {
                 new ExceptionDisplay(e);
             }
