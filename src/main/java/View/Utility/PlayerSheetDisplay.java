@@ -9,8 +9,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class PlayerSheetDisplay {
-    public PlayerSheetDisplay(String pseudoPlayer) throws Exception {
+    public PlayerSheetDisplay(String pseudoPlayer,StringBuilder listeningCRUD) throws Exception {
         Controller controller = new Controller();
         Player player = controller.getAPLayer(pseudoPlayer);
 
@@ -19,7 +21,7 @@ public class PlayerSheetDisplay {
         contentDisplay.setPadding(new Insets(20));
 
         TitleOfPage title = new TitleOfPage();
-        StackPane titlePane = title.createTitle("Player sheet :","player display");
+        StackPane titlePane = title.createTitle("Player sheet :","display");
 
         Label textSheet = new Label(player.toString());
         textSheet.setStyle("-fx-font-size: 18;");
@@ -40,7 +42,7 @@ public class PlayerSheetDisplay {
             double height = newVal.doubleValue() - titlePane.getHeight() - 3 * contentDisplay.getPadding().getTop() - 2 * textSheet.getPadding().getTop() - textSheet.getPadding().getBottom();
             textSheet.setPrefHeight(height);
         });
-
+        listeningCRUD.append(LocalDate.now()).append(" : Reading of the player - ").append(player.getPseudo()).append("\n");
         Scene displayScene = new Scene(contentDisplay,600,400);
         displayStage.setScene(displayScene);
         displayStage.show();

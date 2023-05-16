@@ -112,7 +112,7 @@ public class TreeTournamentPage {
         root.setBottom(eastPanel);
 
         // Création de la scène Menu et affichage de la fenêtre
-        tournamentScene = new Scene(root, 1000, 800);
+        tournamentScene = new Scene(root, 1280, 720);
         primaryStage.setScene(tournamentScene);
         primaryStage.show();
 

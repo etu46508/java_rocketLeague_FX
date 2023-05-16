@@ -10,14 +10,16 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class VerificationPlayerDeletion {
     private final Controller controller;
-    Stage verificationStage;
+    private Stage verificationStage;
     public VerificationPlayerDeletion() throws DataException {
         controller = new Controller();
     }
 
-    public void openWindowVerification(Stage primaryStage,String pseudoPlayer){
+    public void openWindowVerification(Stage primaryStage,String pseudoPlayer,StringBuilder listeningCRUD){
         GridPane verificationPane = new GridPane();
 
         verificationPane.setPadding(new Insets(25, 25, 25, 25));
@@ -34,8 +36,9 @@ public class VerificationPlayerDeletion {
 
         yesButton.setOnAction(event -> {
             try {
+                listeningCRUD.append(LocalDate.now()).append(" : Deletion of the player : ").append(pseudoPlayer).append("\n");
                 controller.deletePlayer(pseudoPlayer);
-                primaryStage.close();
+                verificationStage.close();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

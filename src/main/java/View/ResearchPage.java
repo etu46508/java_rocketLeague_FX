@@ -5,9 +5,8 @@ import View.Utility.TitleOfPage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class ResearchPage {
@@ -28,21 +27,24 @@ public class ResearchPage {
         Button button2 = buttonFactory.buttonCreation(null,null,"next page","Historic of a player");
         Button button3 = buttonFactory.buttonCreation(null,null,"next page","Tournament won by a club");
 
-
-        contentPane.add(button1, 2, 5);
+        contentPane.add(button1, 1, 4);
         contentPane.add(button2, 0, 8);
-        contentPane.add(button3, 3, 8);
-
+        contentPane.add(button3, 2, 8);
 
         Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
         BorderPane eastPanel = new BorderPane();
         eastPanel.setRight(returnButton);
 
+        Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueResearch.jpg");
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+
         root.setTop(titlePane);
         root.setCenter(contentPane);
         root.setBottom(eastPanel);
+        root.setBackground(new Background(background));
 
-        Scene researchMenu = new Scene(root, 1000, 800);
+        Scene researchMenu = new Scene(root, 1280, 720);
         primaryStage.setScene(researchMenu);
         primaryStage.show();
 
