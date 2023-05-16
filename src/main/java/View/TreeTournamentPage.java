@@ -100,16 +100,6 @@ public class TreeTournamentPage {
 
     }
 
-    /*
-    private javafx.scene.control.Label createLabel(String text, int size) {
-        javafx.scene.control.Label label = new javafx.scene.control.Label(text);
-        label.setFont(Font.font("Verdana", FontWeight.BOLD, size));
-        label.setStyle("-fx-text-fill: black;");
-        return label;
-    }
-     */
-
-
     public void draw (String tournament) throws Exception {
         ArrayList<Ranking> rankings = controller.getAllRankingOfATounament(controller.getTournamentNumber(tournament));
 

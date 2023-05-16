@@ -30,6 +30,7 @@ public class ResearchTournamentWonByClub {
 
         clubs = new ComboBox<>();
         clubs.getItems().addAll(controller.getAllClubName());
+        clubs.setPromptText("Select club");
 
         BorderPane researchClub = new BorderPane();
         TitleOfPage title = new TitleOfPage();

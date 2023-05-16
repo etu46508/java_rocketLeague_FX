@@ -10,8 +10,8 @@ public class SingletonConnexion   {
 
     private SingletonConnexion() throws DataException {
         try {
-            //singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "B@tterie!147");
-            singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "Boulettedu13");
+            singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "B@tterie!147");
+            //singletonConnexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/rocketleague", "root", "Boulettedu13");
         } catch (SQLException exception) {
             new ExceptionDisplay(exception);
         }
