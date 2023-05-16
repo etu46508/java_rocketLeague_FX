@@ -150,6 +150,7 @@ public class FormularyPlayer {
                         listeningCRUD.append(LocalDate.now()).append(": Updating of the player - ").append(pseudoPlayer).append(" to ").append(playerUpdate.getPseudo()).append("\n");
                         controller.updatePlayer(playerUpdate,pseudoPlayer);
                         formularyStage.close();
+                        primaryStage.close();
                     }
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);

@@ -74,12 +74,10 @@ public class TournamentDBAccess implements TournamentDAO{
                     "WHERE wordingTournament = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet data = statement.executeQuery();
             statement.setString(1, wordingTournament);
-
+            ResultSet data = statement.executeQuery();
             data.next();
             tournament = createTournament(data);
-
 
         }catch (SQLException e){
             throw new SQLException(e);

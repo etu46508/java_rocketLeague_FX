@@ -80,7 +80,6 @@ public class MenuPage{
 
         movementThread.start();
 
-
         button1.setOnAction(event -> {
             try {
                 System.out.println("Gestion");
@@ -99,7 +98,7 @@ public class MenuPage{
             try {
                 playerCRUD.start(primaryStage,menuScene);
             } catch (Exception e) {
-                new ExceptionDisplay(e);
+                throw new RuntimeException(e);
             }
         });
         buttonPageTree.setOnAction(event -> {

@@ -56,8 +56,7 @@ public class ComboBoxPlayerChoice {
             validationButton.setOnAction(event -> {
                 try {
                     FormularyPlayer formularyUpdate = new FormularyPlayer();
-                    formularyUpdate.openFormulary(primaryStage,playerComboBox.getValue(),listeningCRUD);
-
+                    formularyUpdate.openFormulary(choicePlayerStage,playerComboBox.getValue(),listeningCRUD);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -67,7 +66,7 @@ public class ComboBoxPlayerChoice {
             validationButton.setOnAction(event -> {
                 try {
                     VerificationPlayerDeletion verification = new VerificationPlayerDeletion();
-                    verification.openWindowVerification(primaryStage,playerComboBox.getValue(),listeningCRUD);
+                    verification.openWindowVerification(choicePlayerStage,playerComboBox.getValue(),listeningCRUD);
                 } catch (Exception e) {
                     new ExceptionDisplay(e);
                 }

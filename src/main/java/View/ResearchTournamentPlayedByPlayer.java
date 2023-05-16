@@ -55,7 +55,7 @@ public class ResearchTournamentPlayedByPlayer {
         comboBoxLayout.add(playerInTeamComboBox,1,1);
 
         BorderPane buttonLayout = new BorderPane();
-        Button validationButton = new Button("Validation");
+        Button validationButton = new Button("Display");
         validationButton.setDisable(true);
         ButtonFactory buttonFactory = new ButtonFactory();
         Button returnButton = buttonFactory.buttonCreation(researchStage,null,"close page");
