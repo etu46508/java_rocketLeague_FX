@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class PlayerDBAccess implements PlayerDAO {
     private final Connection connection;
-    public PlayerDBAccess ()throws DataException {
+    public PlayerDBAccess ()throws SQLException {
         connection = SingletonConnexion.getInstance();
     }
 

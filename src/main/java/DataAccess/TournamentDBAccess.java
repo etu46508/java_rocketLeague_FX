@@ -5,20 +5,18 @@ import Model.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import Exception.DataException;
 
 //endregion
 
 public class TournamentDBAccess implements TournamentDAO{
     private final Connection connection;
-    public TournamentDBAccess ()throws DataException {
+    public TournamentDBAccess ()throws SQLException {
         connection = SingletonConnexion.getInstance();
     }
 
     public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
         ArrayList<String> tournaments = new ArrayList<>();
         try{
-
             String sql = "SELECT tournament.wordingTournament " +
                     "FROM tournament " +
                     "INNER JOIN ranking ON tournament.number = ranking.tournament " +
@@ -45,7 +43,6 @@ public class TournamentDBAccess implements TournamentDAO{
         ArrayList<Tournament> tournaments = new ArrayList<>();
         Tournament tournament;
         try{
-
             String sql = "SELECT wordingTournament, date, departureHoure, nbTeam, streetAndNumber, numberSpectator, " +
                     "loc.cityName,postalCode,country " +
                     "FROM Tournament tournament " +
@@ -53,12 +50,10 @@ public class TournamentDBAccess implements TournamentDAO{
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
-
             while(data.next()){
                 tournament = createTournament(data);
                 tournaments.add(tournament);
             }
-
 
         }catch (SQLException e){
             throw new SQLException(e);
@@ -69,11 +64,10 @@ public class TournamentDBAccess implements TournamentDAO{
     public Tournament getTournament (String wordingTournament) throws Exception{
         Tournament tournament;
         try{
-
-            String sql = "SELECT wordingTournament, date, departureHoure, nbTeam, streetAndNumber, numberSpectator, " +
+            String sql = "SELECT wordingTournament, date, departureHour, nbTeam, streetAndNumber, numberSpectator, " +
                     "loc.cityName,postalCode,country " +
                     "FROM Tournament tournament " +
-                    "LEFT JOIN Locality loc ON tournament.location = loc.cityName"+
+                    "LEFT JOIN Locality loc ON tournament.location = loc.cityName "+
                     "WHERE wordingTournament = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -91,7 +85,6 @@ public class TournamentDBAccess implements TournamentDAO{
     public Integer getTournamentNumber (String wordingTournament) throws Exception{
         int tournamentNumber;
         try{
-
             String sql = "SELECT number "+
                     "FROM Tournament tournament " +
                     "WHERE wordingTournament = ? ";

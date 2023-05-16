@@ -12,7 +12,7 @@ import Exception.DataException;
 
 public class TeamDBAccess implements TeamDAO{
     private final Connection connection;
-    public TeamDBAccess ()throws DataException {
+    public TeamDBAccess ()throws SQLException {
         connection = SingletonConnexion.getInstance();
     }
 

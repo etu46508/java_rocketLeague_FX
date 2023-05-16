@@ -10,7 +10,7 @@ public class Controller {
 
     // region constructor
     private final Manager manager;
-    public Controller() throws DataException {
+    public Controller() throws SQLException {
         manager = new Manager();
     }
 

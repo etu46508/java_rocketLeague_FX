@@ -17,7 +17,7 @@ public class Manager {
     private final RankingDAO rankingAccess;
 
 
-    public Manager() throws DataException{
+    public Manager() throws SQLException{
         localityAccess = new LocalityDBAccess();
         clubAccess = new ClubDBAccess();
         teamAccess = new TeamDBAccess();

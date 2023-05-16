@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 //endregion
@@ -17,7 +19,7 @@ import java.time.LocalDate;
 public class VerificationPlayerDeletion {
     private final Controller controller;
     private Stage verificationStage;
-    public VerificationPlayerDeletion() throws DataException {
+    public VerificationPlayerDeletion() throws SQLException {
         controller = new Controller();
     }
 

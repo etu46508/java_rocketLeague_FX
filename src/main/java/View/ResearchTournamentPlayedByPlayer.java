@@ -19,6 +19,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ public class ResearchTournamentPlayedByPlayer {
     private final Controller controller;
     private final ComboBox<String> teamComboBox,playerInTeamComboBox;
 
-    public ResearchTournamentPlayedByPlayer(Stage primaryStage) throws DataException {
+    public ResearchTournamentPlayedByPlayer(Stage primaryStage) throws SQLException {
         controller = new Controller();
         Stage researchStage = new Stage();
 

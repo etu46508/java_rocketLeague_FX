@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DBAccess {
     private Connection connection;
-    public DBAccess()throws DataException {
+    public DBAccess()throws SQLException {
         connection = SingletonConnexion.getInstance();
     }
 
