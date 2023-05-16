@@ -55,6 +55,7 @@ public class Controller {
     public Integer getTeamNumber (String wordingTeam){
         return manager.getTeamNumber(wordingTeam);
     }
+    public String getWordingTeam (Integer serialNumber){return manager.getWordingTeam(serialNumber);}
 
 
     public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
@@ -68,6 +69,12 @@ public class Controller {
     }
     public ArrayList<Tournament> getAllTournament () throws Exception{
         return manager.getAllTournament();
+    }
+    public ArrayList<String> getAllFutureTournament() throws Exception{
+        return manager.getAllFutureTournament();
+    }
+    public Integer getNbTeamOfTournament(String tournament) throws Exception{
+        return manager.getNbTeamOfTournament(tournament);
     }
 
 

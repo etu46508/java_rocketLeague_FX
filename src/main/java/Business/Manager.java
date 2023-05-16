@@ -72,6 +72,7 @@ public class Manager {
     public Integer getTeamNumber (String wordingTeam){
         return teamAccess.getTeamNumber(wordingTeam);
     }
+    public String getWordingTeam (Integer serialNumber) {return teamAccess.getWordingTeam(serialNumber);}
 
 
 
@@ -89,6 +90,12 @@ public class Manager {
     }
     public ArrayList<String> getTournamentWonByClub(Integer club)throws Exception{
         return tournamentAccess.getTournamentWonByClub(club);
+    }
+    public ArrayList<String> getAllFutureTournament() throws Exception{
+        return tournamentAccess.getAllFutureTournament();
+    }
+    public Integer getNbTeamOfTournament(String tournament) throws Exception{
+        return tournamentAccess.getNbTeamOfTournament(tournament);
     }
 
 

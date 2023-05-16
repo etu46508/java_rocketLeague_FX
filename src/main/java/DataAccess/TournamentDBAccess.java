@@ -155,4 +155,44 @@ public class TournamentDBAccess implements TournamentDAO{
         }
         return tournaments;
     }
+
+    public ArrayList<String> getAllFutureTournament () throws SQLException {
+        ArrayList<String> tournaments = new ArrayList<>();
+        try{
+
+            String sql = "SELECT wordingTournament " +
+                    "FROM Tournament tournament " +
+                    "WHERE tournament.date > CURDATE() ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+
+            while(data.next()){
+                tournaments.add(data.getString(1));
+            }
+
+        }catch (SQLException e){
+            throw new SQLException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return tournaments;
+    }
+
+    public Integer getNbTeamOfTournament (String tournament) throws SQLException{
+        Integer nbTeam;
+        try {
+            String sql = "SELECT nbTeam "+
+                    "FROM Tournament tournament " +
+                    "WHERE tournament.wordingTournament = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,tournament);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            nbTeam = data.getInt(1);
+        }catch (SQLException e){
+            throw new SQLException(e);
+        }
+        return nbTeam;
+    }
 }

@@ -2,6 +2,7 @@ package DataAccess;
 
 import Model.Tournament;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface TournamentDAO {
@@ -13,4 +14,6 @@ public interface TournamentDAO {
     Integer getTournamentNumber (String wordingTournament) throws Exception;
 
     ArrayList<String> getTournamentWonByClub(int club) throws Exception;
+    ArrayList<String> getAllFutureTournament () throws SQLException;
+    Integer getNbTeamOfTournament (String tournament) throws SQLException;
 }

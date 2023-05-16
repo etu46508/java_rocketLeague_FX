@@ -9,6 +9,7 @@ public interface TeamDAO {
     ArrayList<String> getWordingFullTeam();
 
     Integer getTeamNumber (String wordingTeam);
+    String getWordingTeam (Integer serialNumber);
 }
 
 

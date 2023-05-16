@@ -81,6 +81,7 @@ public class RankingDBAccess implements RankingDAO{
         return rankings;
     }
 
+    //public Integer getTeamSerialNumber ()
 
 
     public Ranking createRanking(ResultSet data){
@@ -107,4 +108,5 @@ public class RankingDBAccess implements RankingDAO{
         }
         return ranking;
     }
+
 }

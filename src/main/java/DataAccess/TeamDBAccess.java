@@ -71,4 +71,19 @@ public class TeamDBAccess implements TeamDAO{
         }
         return teamNumber;
     }
+
+    public String getWordingTeam (Integer serialNumber){
+        String wordingTeam;
+        try {
+            String sql = "SELECT wordingTeam FROM team WHERE serialNumber = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,serialNumber);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            wordingTeam = data.getString(1);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return wordingTeam;
+    }
 }
