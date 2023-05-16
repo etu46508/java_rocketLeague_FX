@@ -136,7 +136,7 @@ public class FormularyPlayer {
             }
 
             localitiesComboBox.setValue(player.getHome().getWording());
-            if(player.getTeam().getWordingTeam() != null){
+            if(player.getTeam() != null){
                 teamsAvailableComboBox.setValue(player.getTeam().getWordingTeam());
                 teamsAvailableComboBox.getItems().add(player.getTeam().getWordingTeam());
             }else{

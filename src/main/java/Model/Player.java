@@ -147,7 +147,7 @@ public class Player {
         if(getYearWorldChampion() != 0){
             output.append("- Last victory in the world championship : "+ getYearWorldChampion() +"\n");
         }
-        if(getTeam().getWordingTeam()!= null){
+        if(getTeam() != null){
             output.append("- Play with the team : "+ getTeam().getWordingTeam() +" in the club : "+ getTeam().getClub().getName()+"\n");
         }else{
             output.append("- He isn't in a team at the moment  \n");
