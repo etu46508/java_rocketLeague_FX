@@ -86,7 +86,7 @@ public class Manager {
 
     // region Tournament
 
-    public ArrayList<String>  getTournementOfAMonth (Integer numMonth) throws Exception{
+    public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
         return tournamentAccess.getTournamentOfAMonth(numMonth);
     }
     public Tournament getTournament (String wordingTournament) throws Exception{

@@ -74,7 +74,7 @@ public class Controller {
     // region Tournament
 
     public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
-        return manager.getTournementOfAMonth(numMonth);
+        return manager.getTournamentOfAMonth(numMonth);
     }
     public Tournament getTournament (String wordingTournament) throws Exception{
         return manager.getTournament(wordingTournament);

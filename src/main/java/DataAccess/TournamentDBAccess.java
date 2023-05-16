@@ -101,23 +101,6 @@ public class TournamentDBAccess implements TournamentDAO{
         return tournamentNumber;
     }
 
-    private Tournament createTournament(ResultSet data) throws Exception{
-        Tournament  tournament;
-        try {
-            LocalDate date = data.getDate(2).toLocalDate();
-            tournament = new Tournament (data.getString(1),
-                    date,
-                    data.getInt(3),
-                    data.getInt(4),
-                    data.getString(5),
-                    data.getInt(6),
-                    new Locality(data.getString(7),data.getInt(8),data.getString(9)));
-        }catch (SQLException exception){
-            throw new SQLException();
-        }
-        return tournament;
-    }
-
     public ArrayList<String> getTournamentWonByClub (int club) throws Exception{
         ArrayList<String> tournaments = new ArrayList<>();
         try {
@@ -146,9 +129,12 @@ public class TournamentDBAccess implements TournamentDAO{
     public ArrayList<String> getAllFutureTournament () throws SQLException {
         ArrayList<String> tournaments = new ArrayList<>();
         try{
-            String sql = "SELECT wordingTournament " +
+            String sql = "SELECT tournament.wordingTournament " +
                     "FROM Tournament tournament " +
-                    "WHERE tournament.date > CURDATE() ";
+                    "LEFT JOIN Ranking ranking ON tournament.number = ranking.tournament " +
+                    "WHERE tournament.date > CURDATE() " +
+                    "GROUP BY tournament.nbTeam, tournament.wordingTournament " +
+                    "HAVING COUNT(ranking.position) = tournament.nbTeam ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
@@ -178,6 +164,23 @@ public class TournamentDBAccess implements TournamentDAO{
             throw new SQLException(e);
         }
         return nbTeam;
+    }
+
+    private Tournament createTournament(ResultSet data) throws Exception{
+        Tournament  tournament;
+        try {
+            LocalDate date = data.getDate(2).toLocalDate();
+            tournament = new Tournament (data.getString(1),
+                    date,
+                    data.getInt(3),
+                    data.getInt(4),
+                    data.getString(5),
+                    data.getInt(6),
+                    new Locality(data.getString(7),data.getInt(8),data.getString(9)));
+        }catch (SQLException exception){
+            throw new SQLException();
+        }
+        return tournament;
     }
 
 }
