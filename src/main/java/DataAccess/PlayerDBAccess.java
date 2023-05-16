@@ -34,11 +34,11 @@ public class PlayerDBAccess implements PlayerDAO {
                     "WHERE pseudo = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-
             statement.setString(1, pseudoPlayer);
-
             ResultSet data = statement.executeQuery();
+
             data.next();
+
             if(data.getString(11) != null){
                 player = createPlayer(data);
             }else{
@@ -50,18 +50,10 @@ public class PlayerDBAccess implements PlayerDAO {
                 statement = connection.prepareStatement(sql);
                 statement.setString(1, pseudoPlayer);
                 data = statement.executeQuery();
+
                 data.next();
-
-                player = new Player(data.getString(1),
-                        data.getString(2),
-                        data.getDate(3).toLocalDate(),
-                        data.getString(4),
-                        (int) data.getByte(5),
-                        data.getInt(6),
-                        new Locality(data.getString(7),data.getInt(8),data.getString(9)),
-                        null);
+                player = createPlayerWithoutTeam(data);
             }
-
         }catch (SQLException e){
             throw new SQLException(e);
         }catch (Exception e){
@@ -86,7 +78,6 @@ public class PlayerDBAccess implements PlayerDAO {
                     "order by player.team";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-
             ResultSet data = statement.executeQuery();
 
             while(data.next()){
@@ -125,7 +116,6 @@ public class PlayerDBAccess implements PlayerDAO {
     public void addPlayer(Player player) throws AddPlayerException {
         try{
             String sql = "INSERT INTO Player(pseudo,firstNameLastName,birthdate,nationality,playKeybord,yearWorldchampionship,home,team )values(?,?,?,?,?,?,?,?)";
-
             PreparedStatement statement = SingletonConnexion.getInstance().prepareStatement(sql);
 
             statement.setString(1,player.getPseudo());
@@ -181,7 +171,6 @@ public class PlayerDBAccess implements PlayerDAO {
             }else{
                 statement.setInt(6,player.getYearWorldChampion());
             }
-
             statement.setString(7,player.getHomeName());
             if(player.getTeamNum() == null){
                 statement.setNull(8,Types.INTEGER);
@@ -189,13 +178,10 @@ public class PlayerDBAccess implements PlayerDAO {
                 statement.setInt(8,player.getTeamNum());
             }
             statement.setString(9,pseudoPlayer);
-
             statement.executeUpdate();
-
         }catch (SQLException exception){
             throw new UpdateException(pseudoPlayer);
         }
-
     }
     public void addPlayerToTeam(int numTeam){
 
@@ -205,7 +191,6 @@ public class PlayerDBAccess implements PlayerDAO {
 
     public ArrayList<String> getAllPseudo() throws Exception{
         ArrayList<String> playersPseudo = new ArrayList<>();
-
         try{
             String sql = "Select pseudo FROM Player ORDER BY pseudo";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -254,6 +239,24 @@ public class PlayerDBAccess implements PlayerDAO {
                     new Locality(data.getString(7),data.getInt(8),data.getString(9)),
                     new Team(data.getInt(10),data.getString(11),data.getString(12), new Club(data.getInt(13),data.getString(14), data.getString(15),creationDate)));
 
+        }catch (SQLException exception){
+            throw new SQLException();
+        }
+        return player;
+    }
+
+    public Player createPlayerWithoutTeam(ResultSet data) throws Exception{
+        Player player;
+        try {
+            LocalDate birthdate = data.getDate(3).toLocalDate();
+            player = new Player(data.getString(1),
+                    data.getString(2),
+                    birthdate,
+                    data.getString(4),
+                    (int) data.getByte(5),
+                    data.getInt(6),
+                    new Locality(data.getString(7),data.getInt(8),data.getString(9)),
+                    null);
         }catch (SQLException exception){
             throw new SQLException();
         }

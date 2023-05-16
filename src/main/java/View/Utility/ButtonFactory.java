@@ -32,8 +32,8 @@ public class ButtonFactory {
             button.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
             button.setPrefSize(200, 75);
             button.setStyle("-fx-background-color: E0E0E0; -fx-border-color: black;-fx-background-radius: 30; -fx-border-radius: 30;");
-        } else if (Objects.equals(info, "listening")){
-            button.setText(text[0]);button.setText(text[0]);
+        } else if (Objects.equals(info, "options")){
+            button.setText(text[0]);
             button.setPrefSize(150, 75);
             button.setFont(Font.font("Helvetica", FontWeight.BOLD, FontPosture.REGULAR, 15));
             button.setStyle("-fx-background-color: lightgrey;-fx-border-color: black;");

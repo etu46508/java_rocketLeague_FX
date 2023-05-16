@@ -59,6 +59,8 @@ public class MenuPage{
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
         BorderPane southPanel = new BorderPane();
+        Button buttonThreadEvolved = buttonFactory.buttonCreation(null,null,"options","Thread Evolved");
+        southPanel.setRight(buttonThreadEvolved);
 
         root.setTop(titlePane);
         root.setLeft(menuButton);
@@ -78,6 +80,14 @@ public class MenuPage{
 
         movementThread.start();
 
+
+        button1.setOnAction(event -> {
+            try {
+                System.out.println("Gestion");
+            } catch (Exception e) {
+                new ExceptionDisplay(e);
+            }
+        });
         buttonPageResearch.setOnAction(event -> {
             try {
                 pageResearch.start(primaryStage,menuScene);
@@ -85,7 +95,6 @@ public class MenuPage{
                 new ExceptionDisplay(e);
             }
         });
-
         buttonPagePlayer.setOnAction(event -> {
             try {
                 playerCRUD.start(primaryStage,menuScene);
@@ -96,6 +105,14 @@ public class MenuPage{
         buttonPageTree.setOnAction(event -> {
             try {
                 pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
+            } catch (Exception e) {
+                new ExceptionDisplay(e);
+            }
+        });
+        buttonThreadEvolved.setOnAction(event -> {
+            try {
+                ThreadEvolved threadEvolved = new ThreadEvolved(primaryStage,menuScene);
+                threadEvolved.start();
             } catch (Exception e) {
                 new ExceptionDisplay(e);
             }

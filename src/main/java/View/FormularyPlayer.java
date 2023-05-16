@@ -237,7 +237,6 @@ public class FormularyPlayer {
             Player newPlayer = new Player(pseudo, surnameAndName, birthday, nationality, keyboardBit, yearWorldChampionComboBox.getValue(),localitiesComboBox.getValue(),team);
             formularyStage.close();
             return newPlayer;
-
         }else{
             System.out.println(fieldEmpty);
             return null;
