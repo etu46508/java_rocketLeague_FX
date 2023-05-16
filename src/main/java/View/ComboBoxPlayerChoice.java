@@ -59,7 +59,7 @@ public class ComboBoxPlayerChoice {
                     formularyUpdate.openFormulary(primaryStage,playerComboBox.getValue(),listeningCRUD);
 
                 } catch (Exception e) {
-                    new ExceptionDisplay(e);
+                    throw new RuntimeException(e);
                 }
             });
         }

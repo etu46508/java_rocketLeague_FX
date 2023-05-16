@@ -5,7 +5,6 @@ import Model.Locality;
 import Model.Player;
 import Exception.PlayerException;
 import Exception.DataException;
-import Exception.DeletePlayerException;
 import Exception.UpdateException;
 import Exception.AddPlayerException;
 import Model.Team;
@@ -25,9 +24,9 @@ public class PlayerDBAccess implements PlayerDAO {
         Player player = null;
         try{
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship, "+
-                    "loc.cityName,postalCode,country, " +
-                    "team, wordingTeam, nameCoach, " +
-                    "club.serialNumber,name,CEO,creationDate  "+
+                    "loc.cityName, postalCode, country, " +
+                    "team.serialNumber, wordingTeam, nameCoach, " +
+                    "club.serialNumber,name ,CEO ,creationDate  "+
                     "FROM Player player  " +
                     "INNER JOIN Locality loc ON player.home = loc.cityName " +
                     "LEFT JOIN Team team ON player.team = team.serialNumber " +
@@ -39,9 +38,28 @@ public class PlayerDBAccess implements PlayerDAO {
             statement.setString(1, pseudoPlayer);
 
             ResultSet data = statement.executeQuery();
-
-            while(data.next()){
+            data.next();
+            if(data.getString(11) != null){
                 player = createPlayer(data);
+            }else{
+                sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship, "+
+                        "loc.cityName, postalCode, country  " +
+                        "FROM Player player  " +
+                        "INNER JOIN Locality loc ON player.home = loc.cityName " +
+                        "WHERE pseudo = ? AND player.team IS NULL";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, pseudoPlayer);
+                data = statement.executeQuery();
+                data.next();
+
+                player = new Player(data.getString(1),
+                        data.getString(2),
+                        data.getDate(3).toLocalDate(),
+                        data.getString(4),
+                        (int) data.getByte(5),
+                        data.getInt(6),
+                        new Locality(data.getString(7),data.getInt(8),data.getString(9)),
+                        null);
             }
 
         }catch (SQLException e){
