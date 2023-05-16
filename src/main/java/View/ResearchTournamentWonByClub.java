@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -32,47 +33,51 @@ public class ResearchTournamentWonByClub {
 
         BorderPane researchClub = new BorderPane();
         TitleOfPage title = new TitleOfPage();
-        StackPane titlePane = title.createTitle("Clubs :","research display");
 
         Button buttonDisplayTournament = new Button("Afficher");
         buttonDisplayTournament.setDisable(true);
 
+
         clubs.setOnAction(actionEvent -> {
+            buttonDisplayTournament.setDisable(false);
+        });
+
+        buttonDisplayTournament.setOnAction(actionEvent -> {
             ArrayList<String> tournaments;
             try {
                 Integer clubSelected = controller.getSerialNumber(clubs.getValue());
                 tournaments = new ArrayList<>(controller.getTournamentWonByClub(clubSelected));
-                //!!!!!!!!!!!ERREUR!!!!!!! affiche tt les tournois jpense
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            //----code de chatGPT pour tableView-----------------------------------------
-            TableView<String[]> tableView = new TableView<>();
+            TableColumn<String, String> nameColumn = new TableColumn<>("Nom");
+            nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().split("\\|")[0]));
 
-            TableColumn<String[], String> nameColumn = new TableColumn<>("Nom");
-            nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
+            TableColumn<String, String> dateColumn = new TableColumn<>("Date");
+            dateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().split("\\|")[1]));
 
-            TableColumn<String[], String> dateColumn = new TableColumn<>("Date");
-            dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
+            TableView<String> wonByClubTable = new TableView<>();
+            wonByClubTable.getColumns().addAll(nameColumn, dateColumn);
 
-            tableView.getColumns().addAll(nameColumn, dateColumn);
+            ObservableList<String> tournamentList = FXCollections.observableArrayList(tournaments);
+            wonByClubTable.setItems(tournamentList);
 
-            ObservableList<String[]> data = FXCollections.observableArrayList();
-            for (String tournament : tournaments) {
-                String[] parts = tournament.split(",");
-                data.add(parts);
-            }
 
-            tableView.setItems(data);
-            Scene displayScene = new Scene(tableView, 500,300);
-            researchStage.setTitle("Tournament won by " + clubs.getValue());
-            researchStage.setScene(displayScene);
-            //------------------------------------------------------------------------------
+            VBox root = new VBox(10);
+            root.getChildren().addAll(wonByClubTable);
+            Scene displayScene = new Scene(root, 300, 300);
+            Stage displayStage = new Stage();
+            displayStage.initModality(Modality.APPLICATION_MODAL);
+            displayStage.setTitle("Tournament won by " + clubs.getValue());
+            displayStage.setScene(displayScene);
+            displayStage.initOwner(researchStage);
+            displayStage.showAndWait();
         });
 
         researchClub.setLeft(clubs);
 
-        Scene scene = new Scene(researchClub, 500,300);
+        Scene scene = new Scene(researchClub, 200,200);
+        researchClub.setBottom(buttonDisplayTournament);
         researchStage.initModality(Modality.APPLICATION_MODAL);
         researchStage.setTitle("Tournament(s) won by a club");
         researchStage.setScene(scene);
