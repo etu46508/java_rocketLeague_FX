@@ -32,7 +32,7 @@ public class PlayerDBAccess implements PlayerDAO {
                     "INNER JOIN Locality loc ON player.home = loc.cityName " +
                     "LEFT JOIN Team team ON player.team = team.serialNumber " +
                     "LEFT JOIN Club club ON club.serialNumber = team.club " +
-                    "WHERE firstNameLastName = ? ";
+                    "WHERE pseudo = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
