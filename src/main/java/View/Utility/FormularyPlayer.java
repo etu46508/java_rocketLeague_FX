@@ -27,6 +27,7 @@ public class FormularyPlayer {
     private CheckBox keyboardButton;
     private ComboBox<String> localitiesComboBox, teamsAvailableComboBox;
     private Label errorFormulary;
+    private boolean formularyError;
 
     public FormularyPlayer() {
         this.years = new ArrayList<>();
@@ -155,7 +156,7 @@ public class FormularyPlayer {
 
             validerButton.setOnAction(e -> {
                 try {
-                    Player playerUpdate = validationFormulary();
+                    Player playerUpdate = validationFormulary(false);
                     if(playerUpdate != null){
                         listeningCRUD.append(LocalDate.now()).append(": Updating of the player - ").append(pseudoPlayer).append(" to ").append(playerUpdate.getPseudo()).append("\n");
                         controller.updatePlayer(playerUpdate,pseudoPlayer);
@@ -171,7 +172,7 @@ public class FormularyPlayer {
             teamsAvailableComboBox.setValue("<none>");
             validerButton.setOnAction(e -> {
                 try {
-                    Player newPlayer = validationFormulary();
+                    Player newPlayer = validationFormulary(true);
                     if(newPlayer != null){
                         listeningCRUD.append(LocalDate.now()).append(" : Addition of the player - ").append(newPlayer.getPseudo()).append("\n");
                         controller.addPlayer(newPlayer);
@@ -194,7 +195,7 @@ public class FormularyPlayer {
 
     
 
-    private Player validationFormulary() throws Exception {
+    private Player validationFormulary(Boolean update) throws Exception {
         errorFormulary.setText("");
         pseudoTextField.setStyle("-fx-border-color: transparent;");
         surnameAndNameTextField.setStyle("-fx-border-color: transparent;");
@@ -227,10 +228,12 @@ public class FormularyPlayer {
             pseudoTextField.setStyle("-fx-border-color: red;");
             formularyError = true;
         }
-        if(controller.getAllPseudo().contains(pseudo)){
-            fieldEmpty.append("Error : a player has already this pseudo.\n");
-            pseudoTextField.setStyle("-fx-border-color: red;");
-            formularyError = true;
+        if(update){
+            if(controller.getAllPseudo().contains(pseudo)){
+                fieldEmpty.append("Error : a player has already this pseudo.\n");
+                pseudoTextField.setStyle("-fx-border-color: red;");
+                formularyError = true;
+            }
         }
         if (!surnameAndName.matches("^(?=.{5,30}$)[A-Z][a-zÀ-ÖØ-öø-ſ]*(?:-[A-Z][a-zÀ-ÖØ-öø-ſ]*)*(?: [A-Z][a-zÀ-ÖØ-öø-ſ]*(?:-[A-Z][a-zÀ-ÖØ-öø-ſ]*)*)*(?: [A-Z][a-zÀ-ÖØ-öø-ſ]*(?: [A-Z][a-zÀ-ÖØ-öø-ſ]*)*)$") && surnameAndNameTextField != null) {
             fieldEmpty.append("Error : the surnameAndName field isn't valid.\n");
