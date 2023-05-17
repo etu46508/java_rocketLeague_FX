@@ -107,7 +107,7 @@ public class PlayerDBAccess implements PlayerDAO {
                 playersInTeam.add(data.getString(1));
             }
         }catch (SQLException exception) {
-            throw new PlayerInTeamException(wordingTeam);
+            throw new PlayerInTeamException();
         }
         return playersInTeam;
     }

@@ -1,7 +1,5 @@
 package Exception;
 
-import Model.Locality;
-
 public class LocationOfTournamentException extends Exception {
     public LocationOfTournamentException(){}
 
