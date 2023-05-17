@@ -63,7 +63,7 @@ public class RankingDBAccess implements RankingDAO{
                     " INNER JOIN Club club on team.club = club.serialNumber " +
                     " INNER JOIN Player player on team.serialNumber = player.team " +
                     " LEFT JOIN Locality locality on tournament.location = locality.cityName " +
-                    " WHERE player.pseudo = ?" +
+                    " WHERE player.pseudo = ? AND ranking.position != 0 " +
                     " ORDER BY tournament.date";
 
             PreparedStatement statement = connection.prepareStatement(sql);

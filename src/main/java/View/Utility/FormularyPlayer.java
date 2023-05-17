@@ -1,5 +1,5 @@
 //region packages & imports
-package View;
+package View.Utility;
 
 import Controller.Controller;
 import Model.Player;
@@ -26,6 +26,7 @@ public class FormularyPlayer {
     private ComboBox<Integer> yearComboBox,monthComboBox,dayComboBox,yearWorldChampionComboBox;
     private CheckBox keyboardButton;
     private ComboBox<String> localitiesComboBox, teamsAvailableComboBox;
+    private Label errorFormulary;
 
     public FormularyPlayer() {
         this.years = new ArrayList<>();
@@ -116,6 +117,9 @@ public class FormularyPlayer {
         Button validerButton = new Button("Valider");
         formularyLayout.add(validerButton,0,10);
 
+        errorFormulary = new Label();
+        formularyLayout.add(errorFormulary,2,10);
+
         ButtonFactory buttonFactory = new ButtonFactory();
         Button returnButton = buttonFactory.buttonCreation(formularyStage,formularyScene,"close page");
         formularyLayout.add(returnButton,10,10);
@@ -191,6 +195,7 @@ public class FormularyPlayer {
     
 
     private Player validationFormulary() throws Exception {
+        errorFormulary.setText("");
         pseudoTextField.setStyle("-fx-border-color: transparent;");
         surnameAndNameTextField.setStyle("-fx-border-color: transparent;");
         nationalityTextField.setStyle("-fx-border-color: transparent;");
@@ -251,7 +256,10 @@ public class FormularyPlayer {
             formularyStage.close();
             return newPlayer;
         }else{
-            System.out.println(fieldEmpty);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error formulary !");
+            alert.setContentText(fieldEmpty.toString());
+            alert.showAndWait();
             return null;
         }
 

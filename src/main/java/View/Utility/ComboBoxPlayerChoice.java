@@ -1,10 +1,7 @@
 //region packages & imports
-package View;
+package View.Utility;
 
-import View.Utility.ButtonFactory;
-import View.Utility.ExceptionDisplay;
-import View.Utility.PlayerSheetDisplay;
-import View.Utility.VerificationPlayerDeletion;
+import View.Utility.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

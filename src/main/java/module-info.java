@@ -7,4 +7,6 @@ module View {
 
     opens View to javafx.fxml;
     exports View;
+    exports View.Utility;
+    opens View.Utility to javafx.fxml;
 }
