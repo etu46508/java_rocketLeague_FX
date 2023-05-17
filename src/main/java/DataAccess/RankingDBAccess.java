@@ -107,4 +107,31 @@ public class RankingDBAccess implements RankingDAO{
         return ranking;
     }
 
+    public Ranking getRanking (int team, int tournament) throws SQLException {
+        Ranking ranking;
+        try{
+            String sql = "SELECT position, nbGoalScored, nbGoalConceded, cashPrize, " +
+                    " tournament.number, wordingTournament, date, departureHour, nbTeam, " +
+                    " team.serialNumber, wordingTeam, nameCoach, " +
+                    " club.serialNumber , name , CEO, creationDate " +
+                    " FROM Ranking ranking " +
+                    " INNER JOIN Tournament tournament on ranking.tournament =  ? " +
+                    " INNER JOIN Team team on ranking.team =  ? " +
+                    " INNER JOIN Club club on team.club = club.serialNumber " +
+                    " INNER JOIN Player player on team.serialNumber = player.team " +
+                    " LEFT JOIN Locality locality on tournament.location = locality.cityName ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,tournament);
+            statement.setInt(2,team);
+            ResultSet data = statement.executeQuery();
+
+            data.next();
+            ranking = createRanking(data);
+
+        }catch (SQLException exception){
+            throw new SQLException(exception);
+        }
+        return ranking;
+    }
 }

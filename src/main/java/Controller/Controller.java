@@ -106,7 +106,9 @@ public class Controller {
     public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
         return  manager.getAllRankingOfAPlayer(pseudoPlayer);
     }
-
+    public Ranking getRanking (int team, int tournament) throws Exception{
+        return manager.getRanking(team,tournament);
+    }
     //endregion
 
 
