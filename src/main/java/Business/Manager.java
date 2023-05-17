@@ -132,6 +132,9 @@ public class Manager {
     public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
         return  rankingAccess.getAllRankingOfAPlayer(pseudoPlayer);
     }
+    public Ranking getRanking (int team, int tournament) throws Exception {
+        return rankingAccess.getRanking(team,tournament);
+    }
 
     //endregion
 

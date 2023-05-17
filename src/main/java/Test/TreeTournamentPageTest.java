@@ -1,65 +1,79 @@
 package Test;
 
+import Controller.Controller;
+import Model.Ranking;
+import Model.Team;
+import View.*;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TreeTournamentPageTest {
+    private TreeTournamentPage treeTournamentPage;
+    private Button drawButton;
+    private ComboBox<String> tournamentComboBox;
+    private ArrayList<Ranking> rankings;
+    private Controller controller;
+    private GridPane drawPane;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
+        Stage primaryStage = new Stage();
+        Scene menuScene = new Scene(new javafx.scene.layout.Pane(), 800, 600);
+        treeTournamentPage = new TreeTournamentPage(primaryStage, menuScene);
+        controller = new Controller();
+        drawButton = treeTournamentPage.getDrawButton();
+        tournamentComboBox = treeTournamentPage.getTournamentComboBox();
+        rankings.add(controller.getRanking(1,112));
+        rankings.add(controller.getRanking(2,112));
+        rankings.add(controller.getRanking(3,112));
+        rankings.add(controller.getRanking(5,112));
+        rankings.add(controller.getRanking(6,112));
+        rankings.add(controller.getRanking(7,112));
+        rankings.add(controller.getRanking(8,112));
+        rankings.add(controller.getRanking(9,112));
+        drawPane = (GridPane) treeTournamentPage.getRoot().getLeft();
     }
 
     @Test
     void start() {
-    }
-
-    @Test
-    void draw() {
-    }
-}
-
-/*
-code de chat gpt pour exemple
-class TreeTournamentPageTest {
-
-    private TreeTournamentPage treeTournamentPage;
-
-    @BeforeEach
-    void setUp() throws Exception {
-        // Initialisation avant chaque test
-        Stage primaryStage = new Stage();
-        Scene menuScene = new Scene(new javafx.scene.layout.Pane(), 800, 600);
-        treeTournamentPage = new TreeTournamentPage(primaryStage, menuScene);
-    }
-
-    @Test
-    void testDrawButtonEnabledWhenComboBoxSelected() {
-        // Récupération de la ComboBox et du bouton de dessin
-        ComboBox<String> tournamentComboBox = treeTournamentPage.getTournamentComboBox();
-        Button drawButton = treeTournamentPage.getDrawButton();
-
-        // Vérification que le bouton de dessin est initialement désactivé
+        //initialement set a disable
         assertTrue(drawButton.isDisabled());
 
-        // Sélection d'un élément dans la ComboBox
-        tournamentComboBox.getSelectionModel().select("Tournament 1");
-
-        // Vérification que le bouton de dessin est maintenant activé
+        //selection du premier élément puis test si enable
+        tournamentComboBox.getSelectionModel().selectFirst();
         assertFalse(drawButton.isDisabled());
     }
 
     @Test
-    void testDrawButtonDisabledWhenComboBoxNotSelected() {
-        // Récupération de la ComboBox et du bouton de dessin
-        ComboBox<String> tournamentComboBox = treeTournamentPage.getTournamentComboBox();
-        Button drawButton = treeTournamentPage.getDrawButton();
+    void draw() throws Exception{
+            // Appel de la méthode draw() avec des équipes complètes
+            treeTournamentPage.draw("RLCS Final Saison 6");//correspondant a 112
 
-        // Vérification que le bouton de dessin est initialement désactivé
-        assertTrue(drawButton.isDisabled());
+            // Vérification du résultat attendu
+            assertEquals(8, treeTournamentPage.getRoot().getChildren().size());
+            assertTrue(treeTournamentPage.getRoot().getLeft() instanceof GridPane);//check pour liens
 
-        // Vérification que le bouton de dessin reste désactivé si aucun élément n'est sélectionné dans la ComboBox
-        assertTrue(drawButton.isDisabled());
+            //re vérifie la taille du résultat attendu
+            assertEquals(8, drawPane.getChildren().size());
+            // Vérifie les équipes dans le drawPane
+            assertNotNull(drawPane.lookup("Les abeilles"));
+            assertNotNull(drawPane.lookup("BDS"));
+
+
+            // enleve le dernier élément
+            rankings.remove(7);
+            //appel avec une équipe manquante
+            treeTournamentPage.draw("RLCS Final Saison 6");
+            // Vérification du résultat attendu
+            assertEquals("The number of teams isn't complete", treeTournamentPage.getZoneTextInfo().getText());
     }
 }
- */
