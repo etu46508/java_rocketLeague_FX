@@ -17,7 +17,7 @@ import Exception.PlayerRankingException;
 public class RankingDBAccess implements RankingDAO{
 
     private final Connection connection;
-    public RankingDBAccess () throws SQLException, DataException {
+    public RankingDBAccess () throws DataException {
         connection = SingletonConnexion.getInstance();
     }
 

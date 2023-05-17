@@ -137,7 +137,7 @@ public class Manager {
 
 
     //region connection
-    public void closeConnection() throws SQLException, DataException {
+    public void closeConnection() throws DataException {
         new DBAccess().closeConnection();
     }
     //endregion
