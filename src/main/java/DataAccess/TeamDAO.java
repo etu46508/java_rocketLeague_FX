@@ -5,12 +5,12 @@ import java.util.ArrayList;
 //endregion
 public interface TeamDAO {
 
-    ArrayList<String> getTeamsAvailable();
+    ArrayList<String> getTeamsAvailable() throws Exception;
 
-    ArrayList<String> getWordingFullTeam();
+    ArrayList<String> getWordingFullTeam() throws Exception;
 
-    Integer getTeamNumber (String wordingTeam);
-    String getWordingTeam (Integer serialNumber);
+    Integer getTeamNumber (String wordingTeam) throws Exception;
+    String getWordingTeam (Integer serialNumber) throws Exception;
 
 }
 

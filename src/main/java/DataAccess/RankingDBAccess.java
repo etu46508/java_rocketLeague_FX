@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import Exception.DataException;
+import Exception.RankingTournamentException;
+import Exception.PlayerRankingException;
+
 //endregion
 
 public class RankingDBAccess implements RankingDAO{
@@ -18,7 +21,7 @@ public class RankingDBAccess implements RankingDAO{
         connection = SingletonConnexion.getInstance();
     }
 
-    public ArrayList<Ranking> getAllRankingOfATounament(Integer tournamentNumber) throws Exception{
+    public ArrayList<Ranking> getAllRankingOfATournament(Integer tournamentNumber) throws RankingTournamentException{
         ArrayList<Ranking> rankings = new ArrayList<>();
         try{
             Ranking ranking;
@@ -43,13 +46,13 @@ public class RankingDBAccess implements RankingDAO{
             }
 
         }catch (SQLException exception){
-            throw new SQLException(exception);
+            throw new RankingTournamentException();
 
         }
         return rankings;
     }
 
-    public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
+    public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws PlayerRankingException{
         ArrayList<Ranking> rankings = new ArrayList<>();
         try{
             Ranking ranking;
@@ -74,10 +77,8 @@ public class RankingDBAccess implements RankingDAO{
                 ranking = createRanking(data);
                 rankings.add(ranking);
             }
-
         }catch (SQLException exception){
-            throw new SQLException(exception);
-
+            throw new PlayerRankingException();
         }
         return rankings;
     }

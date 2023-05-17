@@ -83,7 +83,7 @@ public class MenuPage{
                 controller.closeConnection();
                 System.exit(0);
             } catch (DataException | SQLException e) {
-                throw new RuntimeException(e);
+                new ExceptionDisplay(e);
             }
 
         });
@@ -96,7 +96,7 @@ public class MenuPage{
             try {
                 playerCRUD.start(primaryStage,menuScene);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                new ExceptionDisplay(e);
             }
         });
 
@@ -131,7 +131,7 @@ public class MenuPage{
                 controller.closeConnection();
                 System.exit(0);
             } catch (DataException | SQLException e) {
-                throw new RuntimeException(e);
+                new ExceptionDisplay(e);
             }
         });
 

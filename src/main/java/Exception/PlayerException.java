@@ -5,6 +5,6 @@ public class PlayerException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Error, the player does not exist in the database.";
+        return "Error, the player does not exist in the database ";
     }
 }

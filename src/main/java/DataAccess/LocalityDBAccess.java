@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Exception.DataException;
 import Model.Locality;
+import Exception.LocationOfTournamentException;
 
 //endregion
 
 public class LocalityDBAccess implements LocalityDAO{
 
     private final Connection connection;
-    public LocalityDBAccess () throws SQLException, DataException {
+    public LocalityDBAccess () throws DataException {
         connection = SingletonConnexion.getInstance();
     }
 
@@ -29,7 +30,7 @@ public class LocalityDBAccess implements LocalityDAO{
             }
 
         }catch (SQLException exception) {
-            throw new SQLException();
+            throw new DataException();
         }
         return localities;
     }
@@ -49,7 +50,7 @@ public class LocalityDBAccess implements LocalityDAO{
                 location = new Locality(data.getString(1),data.getInt(2),data.getString(3));
             }
         }catch (SQLException exception) {
-            throw new SQLException();
+            throw new LocationOfTournamentException();
         }
         return location;
     }

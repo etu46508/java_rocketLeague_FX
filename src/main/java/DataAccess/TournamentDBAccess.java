@@ -6,12 +6,13 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import Exception.DataException;
+import Exception.TournamentException;
 
 //endregion
 
 public class TournamentDBAccess implements TournamentDAO{
     private final Connection connection;
-    public TournamentDBAccess () throws SQLException, DataException {
+    public TournamentDBAccess () throws DataException {
         connection = SingletonConnexion.getInstance();
     }
 
@@ -57,12 +58,12 @@ public class TournamentDBAccess implements TournamentDAO{
             }
 
         }catch (SQLException e){
-            throw new SQLException(e);
+            throw new DataException();
         }
         return tournaments;
     }
 
-    public Tournament getTournament (String wordingTournament) throws Exception{
+    public Tournament getTournament (String wordingTournament) throws TournamentException{
         Tournament tournament;
         try{
             String sql = "SELECT wordingTournament, date, departureHour, nbTeam, streetAndNumber, numberSpectator, " +
@@ -77,13 +78,13 @@ public class TournamentDBAccess implements TournamentDAO{
             data.next();
             tournament = createTournament(data);
 
-        }catch (SQLException e){
-            throw new SQLException(e);
+        }catch (Exception e){
+            throw new TournamentException();
         }
         return tournament;
     }
 
-    public Integer getTournamentNumber (String wordingTournament) throws Exception{
+    public Integer getTournamentNumber (String wordingTournament) throws TournamentException{
         int tournamentNumber;
         try{
             String sql = "SELECT number "+
@@ -97,7 +98,7 @@ public class TournamentDBAccess implements TournamentDAO{
             tournamentNumber = data.getInt(1);
 
         }catch (SQLException e){
-            throw new SQLException(e);
+            throw new TournamentException();
         }
         return tournamentNumber;
     }
@@ -150,7 +151,7 @@ public class TournamentDBAccess implements TournamentDAO{
         return tournaments;
     }
 
-    public Integer getNbTeamOfTournament (String tournament) throws SQLException{
+    public Integer getNbTeamOfTournament (String tournament) throws Exception {
         int nbTeam;
         try {
             String sql = "SELECT nbTeam "+
@@ -162,7 +163,7 @@ public class TournamentDBAccess implements TournamentDAO{
             data.next();
             nbTeam = data.getInt(1);
         }catch (SQLException e){
-            throw new SQLException(e);
+            throw new Exception();
         }
         return nbTeam;
     }

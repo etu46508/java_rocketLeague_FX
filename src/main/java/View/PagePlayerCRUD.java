@@ -23,6 +23,7 @@ public class PagePlayerCRUD  {
     public PagePlayerCRUD(){
         listeningCRUD = new StringBuilder();
     }
+
     public void start(Stage primaryStage, Scene menuScene) throws Exception {
         BorderPane root = new BorderPane();
         TitleOfPage title = new TitleOfPage();

@@ -30,7 +30,7 @@ public class ResearchTournamentPlayedByPlayer {
     private final Controller controller;
     private final ComboBox<String> teamComboBox,playerInTeamComboBox;
 
-    public ResearchTournamentPlayedByPlayer(Stage primaryStage) throws SQLException, DataException {
+    public ResearchTournamentPlayedByPlayer(Stage primaryStage) throws Exception {
         controller = new Controller();
         Stage researchStage = new Stage();
 

@@ -6,6 +6,7 @@ import Exception.DataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class Manager {
 
     // region constructor
@@ -40,7 +41,7 @@ public class Manager {
     public Player getAPLayer(String playerPseudo) throws Exception{
         return playerAccess.getAPLayer(playerPseudo);
     }
-    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException{
+    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws Exception {
         return playerAccess.getPseudoPlayerInTeam(wordingTeam);
     }
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
@@ -70,16 +71,16 @@ public class Manager {
 
     // region Teams
 
-    public ArrayList<String> getTeamsAvailable(){
+    public ArrayList<String> getTeamsAvailable() throws Exception {
         return teamAccess.getTeamsAvailable();
     }
-    public ArrayList<String> getWordingFullTeam(){
+    public ArrayList<String> getWordingFullTeam() throws Exception {
         return teamAccess.getWordingFullTeam();
     }
-    public Integer getTeamNumber (String wordingTeam){
+    public Integer getTeamNumber (String wordingTeam) throws Exception {
         return teamAccess.getTeamNumber(wordingTeam);
     }
-    public String getWordingTeam (Integer serialNumber) {return teamAccess.getWordingTeam(serialNumber);}
+    public String getWordingTeam (Integer serialNumber) throws Exception {return teamAccess.getWordingTeam(serialNumber);}
 
     //endregion
 
@@ -126,7 +127,7 @@ public class Manager {
     // region Ranking
 
     public ArrayList<Ranking> getAllRankingOfATournament(Integer tournamentNumber) throws Exception{
-        return rankingAccess.getAllRankingOfATounament(tournamentNumber);
+        return rankingAccess.getAllRankingOfATournament(tournamentNumber);
     }
     public ArrayList<Ranking> getAllRankingOfAPlayer(String pseudoPlayer) throws Exception{
         return  rankingAccess.getAllRankingOfAPlayer(pseudoPlayer);

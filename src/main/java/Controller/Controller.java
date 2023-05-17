@@ -27,7 +27,7 @@ public class Controller {
     public Player getAPLayer(String playerPseudo) throws Exception{
         return manager.getAPLayer(playerPseudo);
     }
-    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException {
+    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws Exception {
         return manager.getPseudoPlayerInTeam(wordingTeam);
     }
     public void updatePlayer(Player player,String pseudoPlayer) throws Exception{
@@ -57,16 +57,16 @@ public class Controller {
 
     // region Team
 
-    public ArrayList<String> getTeamAvailable(){
+    public ArrayList<String> getTeamAvailable() throws Exception {
         return manager.getTeamsAvailable();
     }
-    public ArrayList<String> getWordingFullTeam(){
+    public ArrayList<String> getWordingFullTeam() throws Exception {
         return manager.getWordingFullTeam();
     }
-    public Integer getTeamNumber (String wordingTeam){
+    public Integer getTeamNumber (String wordingTeam) throws Exception {
         return manager.getTeamNumber(wordingTeam);
     }
-    public String getWordingTeam (Integer serialNumber){return manager.getWordingTeam(serialNumber);}
+    public String getWordingTeam (Integer serialNumber) throws Exception {return manager.getWordingTeam(serialNumber);}
 
     //endregion
 

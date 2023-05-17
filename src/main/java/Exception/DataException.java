@@ -6,14 +6,10 @@ public class DataException extends Exception{
 
     public DataException() {
         this.message = getMessage();
-       //ExceptionDisplay display = new ExceptionDisplay(message);
     }
-
 
     @Override
     public String getMessage() {
-        return "Erreur, la base de donnée n'est pas connectée ou est vide";
+        return "Error, database is not connected or is empty";
     }
-
-
 }

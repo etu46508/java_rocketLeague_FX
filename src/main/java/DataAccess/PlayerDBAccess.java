@@ -4,21 +4,22 @@ package DataAccess;
 import Model.Club;
 import Model.Locality;
 import Model.Player;
+import Model.Team;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import Exception.PlayerException;
 import Exception.DataException;
 import Exception.UpdateException;
 import Exception.AddPlayerException;
-import Model.Team;
-import View.Utility.ExceptionDisplay;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import Exception.DeletePlayerException;
+import Exception.PlayerInTeamException;
 
 //endregion
 
 public class PlayerDBAccess implements PlayerDAO {
     private final Connection connection;
-    public PlayerDBAccess () throws SQLException, DataException {
+    public PlayerDBAccess () throws DataException {
         connection = SingletonConnexion.getInstance();
     }
 
@@ -57,7 +58,7 @@ public class PlayerDBAccess implements PlayerDAO {
                 player = createPlayerWithoutTeam(data);
             }
         }catch (SQLException e){
-            throw new SQLException(e);
+            throw new PlayerException();
         }catch (Exception e){
             throw new Exception(e);
         }
@@ -70,13 +71,13 @@ public class PlayerDBAccess implements PlayerDAO {
             Player player;
             String sql = "SELECT pseudo, firstNameLastName, birthdate, nationality, playKeybord, yearWorldchampionship, "+
                     "loc.cityName,postalCode,country, " +
-                    "team, wordingTeam, nameCoach," +
+                    "team, wordingTeam, nameCoach, " +
                     "club.serialNumber,name,CEO,creationDate  "+
                     "FROM Player player  " +
                     "INNER JOIN Locality loc on player.home = loc.cityName " +
                     "LEFT JOIN Team team ON player.team = team.serialNumber " +
                     "LEFT JOIN Club club ON club.serialNumber = team.club " +
-                    "order by player.team";
+                    "order by player.team ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
@@ -87,12 +88,12 @@ public class PlayerDBAccess implements PlayerDAO {
             }
 
         }catch (SQLException exception){
-            throw new PlayerException();
+            throw new DataException();
         }
         return players;
     }
 
-    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws SQLException {
+    public ArrayList<String> getPseudoPlayerInTeam(String wordingTeam) throws PlayerInTeamException {
         ArrayList<String> playersInTeam = new ArrayList<>();
         try{
             String sql = "Select pseudo FROM Player " +
@@ -106,7 +107,7 @@ public class PlayerDBAccess implements PlayerDAO {
                 playersInTeam.add(data.getString(1));
             }
         }catch (SQLException exception) {
-            throw new SQLException();
+            throw new PlayerInTeamException(wordingTeam);
         }
         return playersInTeam;
     }
@@ -135,7 +136,7 @@ public class PlayerDBAccess implements PlayerDAO {
             statement.executeUpdate();
 
         }catch (Exception exception){
-            throw new RuntimeException(exception);
+            throw new AddPlayerException(player);
         }
     }
 
@@ -147,7 +148,7 @@ public class PlayerDBAccess implements PlayerDAO {
             statement.executeUpdate();
 
         }catch (SQLException exception){
-            throw new SQLException(exception);
+            throw new DeletePlayerException();
         }
     }
 
@@ -179,10 +180,6 @@ public class PlayerDBAccess implements PlayerDAO {
         }catch (SQLException exception){
             throw new UpdateException(pseudoPlayer);
         }
-    }
-
-    public void addPlayerToTeam(int numTeam){
-
     }
 
     public ArrayList<String> getAllPseudo() throws Exception{

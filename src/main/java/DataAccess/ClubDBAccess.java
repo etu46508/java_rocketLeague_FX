@@ -28,7 +28,7 @@ public class ClubDBAccess implements ClubDAO{
             }
 
         }catch (SQLException exception) {
-            throw new SQLException();
+            throw new SQLException(exception);
         }
         return clubs;
     }
