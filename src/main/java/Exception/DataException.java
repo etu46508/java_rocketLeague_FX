@@ -2,11 +2,8 @@ package Exception;
 
 
 public class DataException extends Exception{
-    private String message;
 
-    public DataException() {
-        this.message = getMessage();
-    }
+    public DataException() {}
 
     @Override
     public String getMessage() {
