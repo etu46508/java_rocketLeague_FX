@@ -39,23 +39,23 @@ public class MenuPage{
         contentPane.setVgap(60);
         contentPane.setHgap(75);
 
-        MenuItem menuItem1 = new MenuItem("IDK");
-        MenuItem menuItemResearch = new MenuItem("Research");
         MenuItem menuItemPagePlayer = new MenuItem("Player CRUD");
+        MenuItem menuItemResearch = new MenuItem("Research");
         MenuItem menuItemPageTree = new MenuItem("Tournament tree");
+        MenuItem menuItemThread= new MenuItem("Thread evolved");
 
-        MenuButton menuButton = new MenuButton("Options", null, menuItem1,menuItemResearch, menuItemPagePlayer,menuItemPageTree);
+        MenuButton menuButton = new MenuButton("Options", null, menuItemPagePlayer,menuItemResearch,menuItemPageTree,menuItemThread);
 
         ButtonFactory buttonFactory = new ButtonFactory();
-        Button button1 = buttonFactory.buttonCreation(null,null,"next page","IDK ");
-        Button buttonPageResearch = buttonFactory.buttonCreation(null,null,"next page","Research");
         Button buttonPagePlayer = buttonFactory.buttonCreation(null,null,"next page","Player CRUD");
+        Button buttonPageResearch = buttonFactory.buttonCreation(null,null,"next page","Research");
         Button buttonPageTree = buttonFactory.buttonCreation(null,null,"next page","Tournament tree");
+        Button buttonThread = buttonFactory.buttonCreation(null,null,"next page","Thread evolved");
 
-        contentPane.add(button1, 0, 0);
+        contentPane.add(buttonPagePlayer, 0, 0);
         contentPane.add(buttonPageResearch, 1, 0);
-        contentPane.add(buttonPagePlayer, 0, 1);
-        contentPane.add(buttonPageTree, 1, 1);
+        contentPane.add(buttonPageTree, 0, 1);
+        contentPane.add(buttonThread , 1, 1);
 
         Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeague.jpg");
         //Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeague.jpg");
@@ -63,8 +63,8 @@ public class MenuPage{
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
         BorderPane southPanel = new BorderPane();
-        Button buttonThreadEvolved = buttonFactory.buttonCreation(null,null,"options","Thread Evolved");
-        southPanel.setRight(buttonThreadEvolved);
+        Button buttonLeave = buttonFactory.buttonCreation(null,null,"options","Leave");
+        southPanel.setRight(buttonLeave);
 
         root.setTop(titlePane);
         root.setLeft(menuButton);
@@ -80,21 +80,22 @@ public class MenuPage{
             try {
                 Controller controller = new Controller();
                 controller.closeConnection();
+                System.exit(0);
             } catch (DataException | SQLException e) {
                 throw new RuntimeException(e);
             }
-            System.exit(0);
+
         });
         primaryStage.setScene(menuScene);
         primaryStage.show();
 
         movementThread.start();
 
-        button1.setOnAction(event -> {
+        buttonPagePlayer.setOnAction(event -> {
             try {
-                System.out.println("Gestion");
+                playerCRUD.start(primaryStage,menuScene);
             } catch (Exception e) {
-                new ExceptionDisplay(e);
+                throw new RuntimeException(e);
             }
         });
 
@@ -106,14 +107,6 @@ public class MenuPage{
             }
         });
 
-        buttonPagePlayer.setOnAction(event -> {
-            try {
-                playerCRUD.start(primaryStage,menuScene);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
-
         buttonPageTree.setOnAction(event -> {
             try {
                 pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
@@ -122,12 +115,22 @@ public class MenuPage{
             }
         });
 
-        buttonThreadEvolved.setOnAction(event -> {
+        buttonThread.setOnAction(event -> {
             try {
                 ThreadEvolved threadEvolved = new ThreadEvolved(primaryStage,menuScene);
                 threadEvolved.start();
             } catch (Exception e) {
                 new ExceptionDisplay(e);
+            }
+        });
+
+        buttonLeave.setOnAction(event -> {
+            try {
+                Controller controller = new Controller();
+                controller.closeConnection();
+                System.exit(0);
+            } catch (DataException | SQLException e) {
+                throw new RuntimeException(e);
             }
         });
 
@@ -150,6 +153,14 @@ public class MenuPage{
         menuItemPageTree.setOnAction(event -> {
             try {
                 pageRandomizer = new TreeTournamentPage(primaryStage, menuScene);
+            } catch (Exception e) {
+                new ExceptionDisplay(e);
+            }
+        });
+        menuItemThread.setOnAction(event -> {
+            try {
+                ThreadEvolved threadEvolved = new ThreadEvolved(primaryStage,menuScene);
+                threadEvolved.start();
             } catch (Exception e) {
                 new ExceptionDisplay(e);
             }

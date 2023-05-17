@@ -7,9 +7,10 @@ import View.Utility.TitleOfPage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,7 +20,7 @@ public class TreeTournamentPage {
     private final Controller controller;
     private Label zoneTextInfo;
     private ComboBox tournamentComboBox;
-    private BorderPane root;
+    private BorderPane root,contentPane;
     private Button drawButton;
 
     public TreeTournamentPage (Stage primaryStage, Scene menuScene) throws Exception {
@@ -33,10 +34,10 @@ public class TreeTournamentPage {
         TitleOfPage title = new TitleOfPage();
         StackPane titlePane = title.createTitle("Randomizer of tournament tree","secondary page");
 
-        GridPane contentPane = new GridPane();
-        contentPane.setAlignment(Pos.TOP_LEFT);
-        contentPane.setVgap(30);
-        contentPane.setHgap(30);
+        GridPane choicePane = new GridPane();
+        choicePane.setAlignment(Pos.CENTER);
+        choicePane.setVgap(30);
+        choicePane.setHgap(30);
 
         Label zoneTextInfo = new Label();
         zoneTextInfo.setStyle("-fx-font-size:15");
@@ -45,7 +46,7 @@ public class TreeTournamentPage {
         tournamentComboBox.getItems().addAll(controller.getAllFutureTournament());
         tournamentComboBox.setPromptText("Select Tournament");
 
-        contentPane.add(tournamentComboBox,1,4);
+        choicePane.add(tournamentComboBox,1,0);
 
         tournamentComboBox.setOnAction(actionEvent -> {
             drawButton.setDisable(false);
@@ -58,7 +59,7 @@ public class TreeTournamentPage {
 
         drawButton = new Button("draw");
         drawButton.setDisable(true);
-        contentPane.add(drawButton, 2, 4);
+        choicePane.add(drawButton, 2, 0);
         drawButton.setOnAction(event -> {
             try {
                 draw(tournamentComboBox.getSelectionModel().getSelectedItem().toString());
@@ -66,10 +67,17 @@ public class TreeTournamentPage {
                 throw new RuntimeException(e);
             }
         });
+        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueTree.jpg");
+        //Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeagueTree.jpg");
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
+        contentPane = new BorderPane();
+        contentPane.setCenter(choicePane);
         root.setTop(titlePane);
-        root.setCenter(contentPane);
+        root.setLeft(contentPane);
         root.setBottom(eastPanel);
+        root.setBackground(new Background(background));
 
         Scene tournamentScene = new Scene(root, 1280, 720);
         primaryStage.setScene(tournamentScene);
@@ -82,6 +90,7 @@ public class TreeTournamentPage {
 
         if(rankings.size() == controller.getNbTeamOfTournament(tournament)){
             GridPane drawPane = new GridPane();
+            drawPane.setAlignment(Pos.CENTER);
             drawPane.setVgap(20);
             drawPane.setHgap(50);
             boolean against = true;
@@ -95,10 +104,14 @@ public class TreeTournamentPage {
             while(teams.size() != 0){
                 rnd = new Random().nextInt(teams.size());
                 Label teamLabel = new Label(teams.get(rnd));
+                teamLabel.setFont(Font.font("Impact", FontWeight.SEMI_BOLD, 25));
+                teamLabel.setStyle("-fx-text-fill: White;");
                 if(against){
                     drawPane.add(teamLabel, 0, iTeam);
                 }else{
                     Label againstLabel = new Label("against");
+                    againstLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+                    againstLabel.setStyle("-fx-text-fill: White;");
                     drawPane.add(againstLabel, 1,iTeam);
                     drawPane.add(teamLabel, 2, iTeam);
                     iTeam++;
@@ -106,7 +119,7 @@ public class TreeTournamentPage {
                 teams.remove(rnd);
                 against = !against;
             }
-            root.setBottom(drawPane);
+            root.setCenter(drawPane);
         }else{
             zoneTextInfo.setText("The number of teams isn't complete");
         }
