@@ -28,8 +28,9 @@ public class ThreadEvolved extends Thread{
         pictureRectangle = new Rectangle(400,400);
 
         //Image picture = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\rocketLeagueFly.png");
-        Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\rocketLeagueFly.png");
+        //Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\rocketLeagueFly.png");
         //Image picture = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\rocketLeagueFly.png");
+        Image picture = new Image("https://github.com/etu46508/java_rocketLeague_FX/blob/master/src/images/rocketLeagueFly.png?raw=true");
 
         pictureRectangle.setFill(new ImagePattern(picture));
         contentPane.setCenter(pictureRectangle);
@@ -66,8 +67,9 @@ public class ThreadEvolved extends Thread{
         westPanel.setBottom(returnButton2);
 
         //Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueThread.jpg ");
-        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueThread.jpg");
+        //Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueThread.jpg");
         //Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeagueThread.jpg");
+        Image backgroundImage = new Image("https://github.com/etu46508/java_rocketLeague_FX/blob/master/src/images/fondRocketLeagueThread.jpg?raw=true");
 
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);

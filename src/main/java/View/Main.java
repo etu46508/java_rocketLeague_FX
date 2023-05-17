@@ -10,7 +10,6 @@ public class Main extends Application{
         WelcomePage mainPage = new WelcomePage();
         mainPage.start();
 
-       // mainPage.start();
     }
     
 }
