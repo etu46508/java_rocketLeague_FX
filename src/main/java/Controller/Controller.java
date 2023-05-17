@@ -4,6 +4,7 @@ import Business.Manager;
 import Model.*;
 import Exception.DataException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
@@ -119,6 +120,9 @@ public class Controller {
     }
     public Integer getSerialNumberOfClub(String club) throws Exception{
         return manager.getSerialNumberOfClub(club);
+    }
+    public ArrayList<Ranking> getVictoryOfAClub (Integer serialNumberClub, LocalDate date) throws Exception{
+        return manager.getVictoryOfAClub(serialNumberClub,date);
     }
 
     //endregion

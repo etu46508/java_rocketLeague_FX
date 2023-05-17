@@ -19,12 +19,12 @@ public class TournamentDBAccess implements TournamentDAO{
     public ArrayList<String> getTournamentOfAMonth(Integer numMonth) throws Exception{
         ArrayList<String> tournaments = new ArrayList<>();
         try{
-            String sql = "SELECT tournament.wordingTournament " +
-                    "FROM tournament " +
-                    "INNER JOIN ranking ON tournament.number = ranking.tournament " +
-                    "WHERE MONTH(tournament.date) = ? " +
-                    "GROUP BY tournament.number " +
-                    "having COUNT(*) = MAX(tournament.nbTeam) ";
+            String sql = " SELECT tournament.wordingTournament " +
+                    " FROM tournament " +
+                    " INNER JOIN ranking ON tournament.number = ranking.tournament " +
+                    " WHERE MONTH(tournament.date) = ? AND CURDATE() > tournament.date AND ranking.position != 0 " +
+                    " GROUP BY tournament.number " +
+                    " having COUNT(*) = MAX(tournament.nbTeam) ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -45,10 +45,10 @@ public class TournamentDBAccess implements TournamentDAO{
         ArrayList<Tournament> tournaments = new ArrayList<>();
         Tournament tournament;
         try{
-            String sql = "SELECT wordingTournament, date, departureHoure, nbTeam, streetAndNumber, numberSpectator, " +
-                    "loc.cityName,postalCode,country " +
-                    "FROM Tournament tournament " +
-                    "LEFT JOIN Locality loc ON tournament.location = loc.cityName";
+            String sql = " SELECT wordingTournament, date, departureHoure, nbTeam, streetAndNumber, numberSpectator, " +
+                    " loc.cityName,postalCode,country " +
+                    " FROM Tournament tournament " +
+                    " LEFT JOIN Locality loc ON tournament.location = loc.cityName ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();

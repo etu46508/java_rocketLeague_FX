@@ -4,6 +4,7 @@ import DataAccess.*;
 import Model.*;
 import Exception.DataException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -18,7 +19,7 @@ public class Manager {
     private final RankingDAO rankingAccess;
 
 
-    public Manager() throws SQLException, DataException {
+    public Manager() throws DataException {
         localityAccess = new LocalityDBAccess();
         clubAccess = new ClubDBAccess();
         teamAccess = new TeamDBAccess();
@@ -134,6 +135,9 @@ public class Manager {
     }
     public Ranking getRanking (int team, int tournament) throws Exception {
         return rankingAccess.getRanking(team,tournament);
+    }
+    public ArrayList<Ranking> getVictoryOfAClub (Integer serialNumberClub, LocalDate date) throws Exception{
+        return rankingAccess.getVictoryOfAClub(serialNumberClub,date);
     }
 
     //endregion

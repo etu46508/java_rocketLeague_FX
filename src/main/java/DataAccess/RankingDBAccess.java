@@ -2,10 +2,8 @@
 package DataAccess;
 
 import Model.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import Exception.DataException;
@@ -134,5 +132,37 @@ public class RankingDBAccess implements RankingDAO{
             throw new SQLException(exception);
         }
         return ranking;
+    }
+    public ArrayList<Ranking> getVictoryOfAClub (Integer serialNumberClub, LocalDate date) throws SQLException {
+        ArrayList<Ranking> rankings = new ArrayList<>();
+        Date dateResearch = java.sql.Date.valueOf(date);
+        try{
+            Ranking ranking;
+            String sql = "SELECT position, nbGoalScored, nbGoalConceded, cashPrize, " +
+                    " tournament.number, wordingTournament, date, departureHour, nbTeam, " +
+                    " team.serialNumber, wordingTeam, nameCoach, " +
+                    " club.serialNumber , name , CEO, creationDate " +
+                    " FROM Ranking ranking " +
+                    " INNER JOIN Tournament tournament on ranking.tournament = tournament.number " +
+                    " INNER JOIN Team team on ranking.team =  team.serialNumber " +
+                    " INNER JOIN Club club on team.club = club.serialNumber " +
+                    " LEFT JOIN Locality locality on tournament.location = locality.cityName " +
+                    " WHERE team.club = ? AND ranking.position = 1 AND tournament.date > ? ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,serialNumberClub);
+            statement.setDate(2,dateResearch);
+            ResultSet data = statement.executeQuery();
+
+            data.next();
+            while(data.next()){
+                ranking = createRanking(data);
+                rankings.add(ranking);
+            }
+
+        }catch (SQLException exception){
+            throw new SQLException(exception);
+        }
+        return rankings;
     }
 }

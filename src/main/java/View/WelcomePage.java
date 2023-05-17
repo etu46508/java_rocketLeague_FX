@@ -19,23 +19,15 @@ public class WelcomePage {
             Stage primaryStage = new Stage();
             BorderPane root = new BorderPane();
 
-            //Image picture = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\logoRocketLeagueBlanc.png");
-            //Image picture = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\logoRocketLeagueBlanc.png");
-            //Image picture = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\logoRocketLeagueBlanc.png");
-            Image picture = new Image("https://github.com/etu46508/java_rocketLeague_FX/blob/master/src/images/balleRocketLeague.png?raw=true");
-
-            Rectangle pictureContent = new Rectangle(200,200);
+            Image picture = new Image("https://github.com/etu46508/java_rocketLeague_FX/blob/master/src/images/logoRocketLeagueBlanc.png?raw=true");
+            Rectangle pictureContent = new Rectangle(400,200);
             BorderPane nordPane = new BorderPane();
             pictureContent.setFill(new ImagePattern(picture));
 
             ButtonFactory factory = new ButtonFactory();
             Button entryButton = factory.buttonCreation(primaryStage ,null,"welcome","Enter");
 
-            //Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeague.jpg");
-            //Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeague.jpg");
-            //Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeague.jpg");
             Image backgroundImage = new Image("https://github.com/etu46508/java_rocketLeague_FX/blob/master/src/images/fondRocketLeague.jpg?raw=true");
-
             BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
             BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
@@ -43,7 +35,6 @@ public class WelcomePage {
             nordPane.setRight(entryButton);
             root.setBottom(nordPane);
             root.setBackground(new Background(background));
-
 
             Scene welcomeScene = new Scene(root, 1280, 720);
             welcomeScene.setFill(Color.TRANSPARENT);

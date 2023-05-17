@@ -2,7 +2,6 @@ package Test;
 
 import Controller.Controller;
 import Model.Ranking;
-import Model.Team;
 import View.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -11,10 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class TreeTournamentPageTest {
     private TreeTournamentPage treeTournamentPage;
@@ -60,7 +58,7 @@ class TreeTournamentPageTest {
 
             // Vérification du résultat attendu
             assertEquals(8, treeTournamentPage.getRoot().getChildren().size());
-            assertTrue(treeTournamentPage.getRoot().getLeft() instanceof GridPane);//check pour liens
+            assertTrue(treeTournamentPage.getRoot().getLeft() instanceof GridPane);
 
             //re vérifie la taille du résultat attendu
             assertEquals(8, drawPane.getChildren().size());
