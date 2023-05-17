@@ -190,7 +190,7 @@ public class FormularyPlayer {
 
     
 
-    private Player validationFormulary(){
+    private Player validationFormulary() throws Exception {
         pseudoTextField.setStyle("-fx-border-color: transparent;");
         surnameAndNameTextField.setStyle("-fx-border-color: transparent;");
         nationalityTextField.setStyle("-fx-border-color: transparent;");
@@ -216,8 +216,14 @@ public class FormularyPlayer {
         } else {
             keyboardBit = 0;
         }
-        if (!pseudo.matches("[\\w+\\s?\\w+]{3,20}")) {
+
+        if (!pseudo.matches("[\\w+\\s?\\w+]{3,20}") ) {
             fieldEmpty.append("Error : the pseudo field isn't valid.\n");
+            pseudoTextField.setStyle("-fx-border-color: red;");
+            formularyError = true;
+        }
+        if(controller.getAllPseudo().contains(pseudo)){
+            fieldEmpty.append("Error : a player has already this pseudo.\n");
             pseudoTextField.setStyle("-fx-border-color: red;");
             formularyError = true;
         }

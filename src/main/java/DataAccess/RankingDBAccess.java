@@ -8,13 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import Exception.DataException;
 //endregion
 
 public class RankingDBAccess implements RankingDAO{
 
     private final Connection connection;
-    public RankingDBAccess () throws SQLException {
+    public RankingDBAccess () throws SQLException, DataException {
         connection = SingletonConnexion.getInstance();
     }
 

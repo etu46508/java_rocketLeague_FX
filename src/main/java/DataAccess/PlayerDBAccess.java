@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class PlayerDBAccess implements PlayerDAO {
     private final Connection connection;
-    public PlayerDBAccess ()throws SQLException {
+    public PlayerDBAccess () throws SQLException, DataException {
         connection = SingletonConnexion.getInstance();
     }
 
@@ -135,7 +135,7 @@ public class PlayerDBAccess implements PlayerDAO {
             statement.executeUpdate();
 
         }catch (Exception exception){
-            new ExceptionDisplay( new AddPlayerException(player));
+            throw new RuntimeException(exception);
         }
     }
 

@@ -10,12 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 //endregion
 
 public class PagePlayerCRUD  {
     private final StringBuilder listeningCRUD;
+    private Stage primaryStage;
     public PagePlayerCRUD(){
         listeningCRUD = new StringBuilder();
     }
@@ -40,8 +42,6 @@ public class PagePlayerCRUD  {
         contentPane.add(button3, 1, 3);
         contentPane.add(button4, 1, 4);
 
-
-
         Button listiningButton = buttonFactory.buttonCreation(null,null,"options","Listening actions");
 
         contentPane.add(listiningButton, 1, 5);
@@ -53,7 +53,8 @@ public class PagePlayerCRUD  {
         Button returnButton = buttonFactory.buttonCreation(primaryStage,menuScene,"menu return");
         eastPanel.setRight(returnButton);
 
-        Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
+        Image backgroundImage = new Image("C:\\Users\\Léonard\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
+        //Image backgroundImage = new Image("C:\\Users\\Robin\\OneDrive\\Documents\\GitHub\\java_rocketLeague_FX\\src\\images\\fondRocketLeagueCRUD.jpg");
         //Image backgroundImage = new Image("C:\\Users\\merlin\\Desktop\\iesn\\bloc 2\\java\\ProjetJavaFxV0\\ProjetJavaFxV0\\src\\images\\fondRocketLeagueCRUD.jpg");
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
@@ -132,7 +133,10 @@ public class PagePlayerCRUD  {
         BorderPane.setMargin( listeningText , new Insets(20));
 
         Scene displayScene = new Scene(contentDisplay,600,400);
+        displayStage.initModality(Modality.APPLICATION_MODAL);
         displayStage.setScene(displayScene);
+
+        displayStage.initOwner(primaryStage);
         displayStage.showAndWait();
     }
 

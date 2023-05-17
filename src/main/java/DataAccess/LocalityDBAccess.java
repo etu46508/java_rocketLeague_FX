@@ -14,7 +14,7 @@ import Model.Locality;
 public class LocalityDBAccess implements LocalityDAO{
 
     private final Connection connection;
-    public LocalityDBAccess ()throws SQLException {
+    public LocalityDBAccess () throws SQLException, DataException {
         connection = SingletonConnexion.getInstance();
     }
 

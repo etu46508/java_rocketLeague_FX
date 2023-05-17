@@ -12,7 +12,7 @@ import Exception.DataException;
 
 public class ClubDBAccess implements ClubDAO{
     private final Connection connection;
-    public ClubDBAccess () throws SQLException {
+    public ClubDBAccess () throws DataException, SQLException {
         connection = SingletonConnexion.getInstance();
     }
 

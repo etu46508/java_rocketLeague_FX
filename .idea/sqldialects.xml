@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/ad6db16c-e2d6-4c5a-8a5d-0db1d4c3254f/console_12.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/DataAccess/ClubDBAccess.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/DataAccess/LocalityDBAccess.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/DataAccess/PlayerDBAccess.java" dialect="GenericSQL" />

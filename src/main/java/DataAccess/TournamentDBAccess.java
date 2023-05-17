@@ -5,12 +5,13 @@ import Model.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import Exception.DataException;
 
 //endregion
 
 public class TournamentDBAccess implements TournamentDAO{
     private final Connection connection;
-    public TournamentDBAccess ()throws SQLException {
+    public TournamentDBAccess () throws SQLException, DataException {
         connection = SingletonConnexion.getInstance();
     }
 
